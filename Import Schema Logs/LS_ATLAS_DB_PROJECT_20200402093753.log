@@ -1,0 +1,85 @@
+4/2/2020 2:37:53 AM	This log contains information about the import schema operation into project 'LS_ATLAS_DB_PROJECT' on computer 'LAPTOP-FODRFLIS' by user 'ATUL'.
+4/2/2020 2:37:53 AM	Import of database schema has started.
+4/2/2020 2:38:25 AM	Gathering database credentials
+4/2/2020 2:38:25 AM	Gathering database options
+4/2/2020 2:38:25 AM	Gathering generic database scoped configuration option
+4/2/2020 2:38:25 AM	Gathering users
+4/2/2020 2:38:25 AM	Gathering roles
+4/2/2020 2:38:25 AM	Gathering application roles
+4/2/2020 2:38:25 AM	Gathering role memberships
+4/2/2020 2:38:25 AM	Gathering filegroups
+4/2/2020 2:38:25 AM	Gathering full-text catalogs
+4/2/2020 2:38:25 AM	Gathering assemblies
+4/2/2020 2:38:25 AM	Gathering certificates
+4/2/2020 2:38:25 AM	Gathering asymmetric keys
+4/2/2020 2:38:25 AM	Gathering symmetric keys
+4/2/2020 2:38:25 AM	Gathering encrypted symmetric keys
+4/2/2020 2:38:25 AM	Gathering schemas
+4/2/2020 2:38:25 AM	Gathering XML schema collections
+4/2/2020 2:38:25 AM	Gathering user-defined data types
+4/2/2020 2:38:25 AM	Gathering user-defined types
+4/2/2020 2:38:25 AM	Gathering table types
+4/2/2020 2:38:26 AM	Gathering unique keys for table types
+4/2/2020 2:38:26 AM	Gathering primary keys for table types
+4/2/2020 2:38:26 AM	Gathering indexes for table types
+4/2/2020 2:38:26 AM	Gathering check constraints for table types
+4/2/2020 2:38:26 AM	Gathering default constraints for table types
+4/2/2020 2:38:26 AM	Gathering partition functions
+4/2/2020 2:38:26 AM	Gathering partition schemes
+4/2/2020 2:38:26 AM	Gathering functions
+4/2/2020 2:38:26 AM	Gathering encrypted functions
+4/2/2020 2:38:26 AM	Gathering aggregates
+4/2/2020 2:38:26 AM	Gathering procedures
+4/2/2020 2:39:04 AM	Gathering encrypted procedures
+4/2/2020 2:39:04 AM	Gathering tables
+4/2/2020 2:39:21 AM	Gathering primary keys
+4/2/2020 2:39:22 AM	Gathering unique constraints
+4/2/2020 2:39:22 AM	Gathering foreign keys
+4/2/2020 2:39:22 AM	Gathering default constraints
+4/2/2020 2:39:23 AM	Gathering check constraints
+4/2/2020 2:39:23 AM	Gathering views
+4/2/2020 2:39:25 AM	Gathering encrypted views
+4/2/2020 2:39:25 AM	Gathering indexes
+4/2/2020 2:39:25 AM	Gathering statistics
+4/2/2020 2:39:25 AM	Gathering full-text index stoplists
+4/2/2020 2:39:25 AM	Gathering search property lists
+4/2/2020 2:39:25 AM	Gathering search properties
+4/2/2020 2:39:25 AM	Gathering full-text indexes
+4/2/2020 2:39:25 AM	Gathering column store indexes
+4/2/2020 2:39:25 AM	Gathering spatial indexes
+4/2/2020 2:39:25 AM	Gathering XML indexes
+4/2/2020 2:39:25 AM	Gathering Selective XML indexes
+4/2/2020 2:39:25 AM	Gathering encrypted triggers
+4/2/2020 2:39:25 AM	Gathering triggers
+4/2/2020 2:39:26 AM	Gathering encrypted and clr ddl triggers
+4/2/2020 2:39:26 AM	Gathering ddl triggers
+4/2/2020 2:39:26 AM	Gathering synonyms
+4/2/2020 2:39:26 AM	Gathering defaults
+4/2/2020 2:39:26 AM	Gathering data constraint uddt bindings
+4/2/2020 2:39:26 AM	Gathering rules
+4/2/2020 2:39:26 AM	Gathering data constraint uddt bindings
+4/2/2020 2:39:26 AM	Gathering message types
+4/2/2020 2:39:26 AM	Gathering queues
+4/2/2020 2:39:26 AM	Gathering contracts
+4/2/2020 2:39:26 AM	Gathering services
+4/2/2020 2:39:26 AM	Gathering event notifications
+4/2/2020 2:39:26 AM	Gathering remote service bindings
+4/2/2020 2:39:26 AM	Gathering broker priorities
+4/2/2020 2:39:26 AM	Gathering signatures
+4/2/2020 2:39:26 AM	Gathering data compression options
+4/2/2020 2:39:26 AM	Gathering sequence types
+4/2/2020 2:39:26 AM	Gathering security policies
+4/2/2020 2:39:26 AM	Gather column encryption keys
+4/2/2020 2:39:26 AM	Gathering column master keys
+4/2/2020 2:39:26 AM	Gathering external data sources
+4/2/2020 2:39:26 AM	Gathering external file formats
+4/2/2020 2:39:26 AM	Gathering external tables
+4/2/2020 2:39:26 AM	Gathering extended properties
+4/2/2020 2:39:41 AM	Gathering credentials
+4/2/2020 2:39:41 AM	Gathering logins
+4/2/2020 2:39:41 AM	Gathering server audits
+4/2/2020 2:39:56 AM	Scanning project for duplicate elements
+4/2/2020 2:39:56 AM	Finished duplicate element processing
+4/2/2020 2:40:09 AM	Finished importing database.
+4/2/2020 2:40:09 AM	A summary of the import was saved to the following location: E:\Project\DB\LS_ATLAS_DB_PROJECT\LS_ATLAS_DB_PROJECT\Import Schema Logs\LS_ATLAS_DB_PROJECT_20200402093753.log
+4/2/2020 2:40:09 AM	Click Finish to continue...

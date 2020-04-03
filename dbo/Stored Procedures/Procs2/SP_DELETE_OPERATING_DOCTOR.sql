@@ -1,0 +1,10 @@
+﻿CREATE PROCEDURE [dbo].[SP_DELETE_OPERATING_DOCTOR]
+@DomainId nvarchar(50),
+@DOCTOR_ID NVARCHAR(100)
+AS
+BEGIN
+
+UPDATE TbloperatingDoctor  SET Active = 0 WHERE DOCTOR_ID = @DOCTOR_ID and DomainId = @DomainId
+ 
+END
+

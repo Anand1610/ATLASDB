@@ -1,0 +1,2575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>LS_ATLAS_DB_PROJECT</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{81a91053-4259-44ce-bfd2-c35bab53741a}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>LS_ATLAS_DB_PROJECT</RootNamespace>
+    <AssemblyName>LS_ATLAS_DB_PROJECT</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="HangFire\" />
+    <Folder Include="HangFire\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Stored Procedures\Procs1\" />
+    <Folder Include="dbo\Stored Procedures\Procs2\" />
+    <Folder Include="dbo\User Defined Types\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\XN_Temp_Payment_Posting.sql" />
+    <Build Include="dbo\Tables\tblExhibitSequence.sql" />
+    <Build Include="dbo\Tables\tblClientReportMenu.sql" />
+    <Build Include="dbo\Tables\AFData.sql" />
+    <Build Include="dbo\Tables\tblFirms.sql" />
+    <Build Include="dbo\Tables\tbl_ip_tracker.sql" />
+    <Build Include="dbo\Tables\tblGroup.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_TABLE_DATA_MCCOLLUM.sql" />
+    <Build Include="dbo\Tables\tblTransactions.sql" />
+    <Build Include="dbo\Tables\tblImages.sql" />
+    <Build Include="dbo\Tables\tblTags.sql" />
+    <Build Include="dbo\Tables\InsertedCases.sql" />
+    <Build Include="dbo\Tables\tblDenialReasons.sql" />
+    <Build Include="dbo\Tables\tblImageTag.sql" />
+    <Build Include="dbo\Tables\tblImageTypes.sql" />
+    <Build Include="dbo\Tables\Tbl_Rules.sql" />
+    <Build Include="dbo\Tables\tblInsuranceCompany.sql" />
+    <Build Include="dbo\Tables\RFA_JL_PROVIDERID_MAPPING.sql" />
+    <Build Include="dbo\Tables\XN_AMT_CASE_CPT_DATA.sql" />
+    <Build Include="dbo\Tables\AMT6.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_DK.sql" />
+    <Build Include="dbo\Tables\tblAttorney_Case_Assignment.sql" />
+    <Build Include="dbo\Tables\tblInsuranceGroups.sql" />
+    <Build Include="dbo\Tables\tbl_FinalStatus.sql" />
+    <Build Include="dbo\Tables\AMT7.sql" />
+    <Build Include="dbo\Tables\tblPacket.sql" />
+    <Build Include="dbo\Tables\BarcodeScan.sql" />
+    <Build Include="dbo\Tables\tbl_Forum.sql" />
+    <Build Include="dbo\Tables\tbllog.sql" />
+    <Build Include="dbo\Tables\dkdbs.sql" />
+    <Build Include="dbo\Tables\tblTransactionType.sql" />
+    <Build Include="dbo\Tables\tblLogs.sql" />
+    <Build Include="dbo\Tables\MergedCasesFiles.sql" />
+    <Build Include="dbo\Tables\tblMenu.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_AMT_5.sql" />
+    <Build Include="dbo\Tables\tblInvoicePayment_Documents.sql" />
+    <Build Include="dbo\Tables\AdminNotes.sql" />
+    <Build Include="dbo\Tables\DAILYSUMMONS.sql" />
+    <Build Include="dbo\Tables\tblInsuranceGroup_Type_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tbl_AttorneyFirm.sql" />
+    <Build Include="dbo\Tables\tblMotion_Status.sql" />
+    <Build Include="dbo\Tables\deflist.sql" />
+    <Build Include="dbo\Tables\tblInsuranceCompany_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\mst_ticket_priority.sql" />
+    <Build Include="dbo\Tables\tblMotions.sql" />
+    <Build Include="dbo\Tables\DK_OLD_DATA.sql" />
+    <Build Include="dbo\Tables\tblInsuranceGroup_Type.sql" />
+    <Build Include="dbo\Tables\tblInsuranceCompany_rfa_import_temp1.sql" />
+    <Build Include="dbo\Tables\tbl_Location.sql" />
+    <Build Include="dbo\Tables\tblApplicationSettings.sql" />
+    <Build Include="HangFire\Tables\Schema.sql" />
+    <Build Include="dbo\Tables\dmv.sql" />
+    <Build Include="dbo\Tables\tblDefendant_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\docs.sql" />
+    <Build Include="dbo\Tables\Adjusters_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tbl_Program.sql" />
+    <Build Include="dbo\Tables\tbl_template_word.sql" />
+    <Build Include="dbo\Tables\tblMenu_Access.sql" />
+    <Build Include="HangFire\Tables\Job.sql" />
+    <Build Include="dbo\Tables\tblNotes_Deleted.sql" />
+    <Build Include="dbo\Tables\tblClientaccount_11_27_2018.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_GBB_ALL_RFA_JL.sql" />
+    <Build Include="dbo\Tables\tblCourt_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\mst_ticket_status.sql" />
+    <Build Include="dbo\Tables\ECMC.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_McCollum.sql" />
+    <Build Include="dbo\Tables\tblAttorney_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tbl_TypeOfPractice.sql" />
+    <Build Include="HangFire\Tables\State.sql" />
+    <Build Include="dbo\Tables\tblNotesType.sql" />
+    <Build Include="dbo\Tables\FIELDNAMES.sql" />
+    <Build Include="dbo\Tables\tblNotary_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tblOperatingDoctor.sql" />
+    <Build Include="dbo\Tables\tblStatus.sql" />
+    <Build Include="dbo\Tables\TblArbitrator_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tblPayment.sql" />
+    <Build Include="dbo\Tables\Files1.sql" />
+    <Build Include="dbo\Tables\StatusMapping.sql" />
+    <Build Include="dbo\Tables\MST_Service_Rendered_Location_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\MST_TEMPLATES_COLUMN.sql" />
+    <Build Include="dbo\Tables\mst_ticket_type.sql" />
+    <Build Include="HangFire\Tables\JobParameter.sql" />
+    <Build Include="dbo\Tables\TblPending_Audit.sql" />
+    <Build Include="dbo\Tables\PortFolioProviderMapping.sql" />
+    <Build Include="dbo\Tables\Files2.sql" />
+    <Build Include="dbo\Tables\tblRFA_JL_LOGS.sql" />
+    <Build Include="dbo\Tables\mst_ticket_sub_status.sql" />
+    <Build Include="dbo\Tables\tblUserStatus.sql" />
+    <Build Include="dbo\Tables\tblPom.sql" />
+    <Build Include="dbo\Tables\Files3.sql" />
+    <Build Include="dbo\Tables\tblOperatingDoctor_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tblCourt.sql" />
+    <Build Include="dbo\Tables\geico _table.sql" />
+    <Build Include="dbo\Tables\TblReviewingDoctor_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\mst_ticket_resource.sql" />
+    <Build Include="HangFire\Tables\JobQueue.sql" />
+    <Build Include="dbo\Tables\tblPomCase.sql" />
+    <Build Include="dbo\Tables\geico_temp_table.sql" />
+    <Build Include="dbo\Tables\tblDenialReasons_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tblPrintDocs.sql" />
+    <Build Include="dbo\Tables\GreenBillsCases.sql" />
+    <Build Include="dbo\Tables\mst_denial_category_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\mst_ticket.sql" />
+    <Build Include="HangFire\Tables\Server.sql" />
+    <Build Include="dbo\Tables\Task_Priority.sql" />
+    <Build Include="dbo\Tables\tblcase_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\JLALLDATA.sql" />
+    <Build Include="dbo\Tables\tblPrintJobs.sql" />
+    <Build Include="dbo\Tables\tblAdjusters.sql" />
+    <Build Include="dbo\Tables\tblTreatment_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\H_tblNotes.sql" />
+    <Build Include="dbo\Tables\TXN_tblTreatment_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tblProcess.sql" />
+    <Build Include="dbo\Tables\H_TXN_DOCUMENT_UPLOAD.sql" />
+    <Build Include="dbo\Tables\Task_Status.sql" />
+    <Build Include="dbo\Tables\tblClientAccount_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tbl_client_other_details.sql" />
+    <Build Include="HangFire\Tables\List.sql" />
+    <Build Include="dbo\Tables\tbl_CPT_Payment_Details.sql" />
+    <Build Include="dbo\Tables\Rebuttal_Status.sql" />
+    <Build Include="dbo\Tables\InsField.sql" />
+    <Build Include="dbo\Tables\tblTransactions_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tblprocessserver.sql" />
+    <Build Include="dbo\Tables\IssueTracker_Roles.sql" />
+    <Build Include="dbo\Tables\tblsettlement_type_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\txn_ticket_assign_history.sql" />
+    <Build Include="HangFire\Tables\Set.sql" />
+    <Build Include="dbo\Tables\tblSettlements_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\tblStatusHierarchyAccessAtlas.sql" />
+    <Build Include="dbo\Tables\ChangedCaseID.sql" />
+    <Build Include="dbo\Tables\txn_ticket_documents.sql" />
+    <Build Include="dbo\Tables\IssueTracker_Users.sql" />
+    <Build Include="dbo\Tables\tbltags_rfa_import_temp.sql" />
+    <Build Include="dbo\Tables\XN_AMT_NorthShore1.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_GBB_ALL.sql" />
+    <Build Include="dbo\Tables\JL_DATA_2019.sql" />
+    <Build Include="dbo\Tables\tblAFData.sql" />
+    <Build Include="dbo\Tables\txn_ticket_has_unseen_notes.sql" />
+    <Build Include="dbo\Tables\IssueTracker_Users_LoginTime.sql" />
+    <Build Include="dbo\Tables\JL_in_system.sql" />
+    <Build Include="dbo\Tables\TblAFData_2.sql" />
+    <Build Include="dbo\Tables\txn_ticket_note_seen_tracker.sql" />
+    <Build Include="HangFire\Tables\Counter.sql" />
+    <Build Include="dbo\Tables\tblProviderBoxDetails.sql" />
+    <Build Include="dbo\Tables\tblTriggerCC.sql" />
+    <Build Include="dbo\Tables\keys.sql" />
+    <Build Include="dbo\Tables\tblMenu_Report_Access.sql" />
+    <Build Include="dbo\Tables\JL_Not_In_System.sql" />
+    <Build Include="dbo\Tables\tbl_Case_Status_Hierarchy.sql" />
+    <Build Include="dbo\Tables\txn_ticket_note_seen_tracker_history.sql" />
+    <Build Include="HangFire\Tables\Hash.sql" />
+    <Build Include="dbo\Tables\tblNotes.sql" />
+    <Build Include="dbo\Tables\tblProviderFinancial.sql" />
+    <Build Include="dbo\Tables\tblTriggerTemplate.sql" />
+    <Build Include="dbo\Tables\MCR_TXN_FILE_UPLOAD.sql" />
+    <Build Include="dbo\Tables\tblMailConfigartion.sql" />
+    <Build Include="dbo\Tables\tbl_Portfolio.sql" />
+    <Build Include="dbo\Tables\tblcase.sql" />
+    <Build Include="dbo\Tables\tblProvider-JUNE12006.sql" />
+    <Build Include="dbo\Tables\MST_DENIAL_CATEGORY.sql" />
+    <Build Include="dbo\Tables\txn_ticket_notes.sql" />
+    <Build Include="HangFire\Tables\AggregatedCounter.sql" />
+    <Build Include="dbo\Tables\tblProvListBoxDetails.sql" />
+    <Build Include="dbo\Tables\tbl_Voluntary_Payment.sql" />
+    <Build Include="dbo\Tables\XN_POMDetails.sql" />
+    <Build Include="dbo\Tables\tblCaseWorkflowAttachments.sql" />
+    <Build Include="dbo\Tables\MST_DenialReasons.sql" />
+    <Build Include="dbo\Tables\Task_Type.sql" />
+    <Build Include="dbo\Tables\tblInsurance_TPA_Group.sql" />
+    <Build Include="dbo\Tables\txn_ticket_reminder.sql" />
+    <Build Include="dbo\Tables\tblrecon_file.sql" />
+    <Build Include="dbo\Tables\tblREJECTION_REQUEST.sql" />
+    <Build Include="dbo\Tables\MST_DIAGNOSIS_CODE.sql" />
+    <Build Include="dbo\Tables\Billing_Packet.sql" />
+    <Build Include="dbo\Tables\tblreportsettlement.sql" />
+    <Build Include="dbo\Tables\tbl_AttorneyUser.sql" />
+    <Build Include="dbo\Tables\txn_ticket_sub_status_history.sql" />
+    <Build Include="dbo\Tables\TblReviewingDoctor.sql" />
+    <Build Include="dbo\Tables\MST_DOCUMENT_NODES.sql" />
+    <Build Include="dbo\Tables\tbl_verification_response_fax_attachments.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_JL_233.sql" />
+    <Build Include="dbo\Tables\txn_ticket_thread.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_TABLE_GBB_DATA_GoGYB_ALL.sql" />
+    <Build Include="dbo\Tables\TblReviews.sql" />
+    <Build Include="dbo\Tables\MST_PROCESS.sql" />
+    <Build Include="dbo\Tables\tblTransactions_Details.sql" />
+    <Build Include="dbo\Tables\tbl_verification_response_fax_queue.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_AMT_6.sql" />
+    <Build Include="dbo\Tables\tblRTFNotes.sql" />
+    <Build Include="dbo\Tables\tbl_verification_type.sql" />
+    <Build Include="dbo\Tables\tblscrewed_cases.sql" />
+    <Build Include="dbo\Tables\MST_REQUEST_REJECTION_MASTER.sql" />
+    <Build Include="dbo\Tables\Task.sql" />
+    <Build Include="dbo\Tables\tblscrewed_cases2.sql" />
+    <Build Include="dbo\Tables\MST_Service_Rendered_Location.sql" />
+    <Build Include="dbo\Tables\tbl_State.sql" />
+    <Build Include="dbo\Tables\tblServed.sql" />
+    <Build Include="dbo\Tables\MST_STATUS_LOG.sql" />
+    <Build Include="dbo\Tables\tbl_City.sql" />
+    <Build Include="dbo\Tables\Assigned_Attorney.sql" />
+    <Build Include="dbo\Tables\MST_TEMPLATES.sql" />
+    <Build Include="dbo\Tables\tbl_Country.sql" />
+    <Build Include="dbo\Tables\XN_TEMP1.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_GBB_ALL_temp_12_12_2019.sql" />
+    <Build Include="dbo\Tables\tblSettlements.sql" />
+    <Build Include="dbo\Tables\NotaryPublic.sql" />
+    <Build Include="dbo\Tables\objs.sql" />
+    <Build Include="dbo\Tables\Mccollum_02-12-2018.sql" />
+    <Build Include="dbo\Tables\Tblsettlements_Bulk_Figures.sql" />
+    <Build Include="dbo\Tables\tblTriggerTypeErrorNotificationUsers.sql" />
+    <Build Include="dbo\Tables\tbl_AttorneyRoles.sql" />
+    <Build Include="dbo\Tables\tblStates.sql" />
+    <Build Include="dbo\Tables\pdfs.sql" />
+    <Build Include="dbo\Tables\tblTriggerTypeErrorLog.sql" />
+    <Build Include="dbo\Tables\tbl_Client.sql" />
+    <Build Include="dbo\Tables\pges.sql" />
+    <Build Include="dbo\Tables\CaseAttorneyMapping.sql" />
+    <Build Include="dbo\Tables\DailyAdditional_Case_Details.sql" />
+    <Build Include="dbo\Tables\MasterNew.sql" />
+    <Build Include="dbo\Tables\Auto_Packet.sql" />
+    <Build Include="dbo\Tables\ProviderCleanUP.sql" />
+    <Build Include="dbo\Tables\TypeOfBatchPrint.sql" />
+    <Build Include="dbo\Tables\tbltemplatePriority.sql" />
+    <Build Include="dbo\Tables\RelationProv_BatchNo.sql" />
+    <Build Include="dbo\Tables\Auto_Billing_Packet_Info.sql" />
+    <Build Include="dbo\Tables\Financial_Report_Track.sql" />
+    <Build Include="dbo\Tables\RelationUser_BatchNo.sql" />
+    <Build Include="dbo\Tables\Auto_Packet_Info.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_ANT_3.sql" />
+    <Build Include="dbo\Tables\Temp_tblClientAccount.sql" />
+    <Build Include="dbo\Tables\t1.sql" />
+    <Build Include="dbo\Tables\tblBasePath.sql" />
+    <Build Include="dbo\Tables\tblTrials.sql" />
+    <Build Include="dbo\Tables\tblMenu_Report.sql" />
+    <Build Include="dbo\Tables\CasesList2.sql" />
+    <Build Include="dbo\Tables\CasesList3.sql" />
+    <Build Include="dbo\Tables\tblUserDesk.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_TABLE_GBB_DATA_GoGYB_ALL_CLO.sql" />
+    <Build Include="dbo\Tables\CasesList5.sql" />
+    <Build Include="dbo\Tables\tblworddocs.sql" />
+    <Build Include="dbo\Tables\CasesList6.sql" />
+    <Build Include="dbo\Tables\tblProviderCase.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_Maccolum.sql" />
+    <Build Include="dbo\Tables\TEMP.sql" />
+    <Build Include="dbo\Tables\MedClaimMaster.sql" />
+    <Build Include="dbo\Tables\tbl_Case_Denial.sql" />
+    <Build Include="dbo\Tables\tblServiceType.sql" />
+    <Build Include="dbo\Tables\toBeCollected.sql" />
+    <Build Include="dbo\Tables\TBL_CHAR.sql" />
+    <Build Include="dbo\Tables\toBeCollectedNew.sql" />
+    <Build Include="dbo\Tables\Auto_Case_Rules.sql" />
+    <Build Include="dbo\Tables\Case_Packet_Status.sql" />
+    <Build Include="dbo\Tables\tbl_document_log.sql" />
+    <Build Include="dbo\Tables\TOTAL_VALUE.sql" />
+    <Build Include="dbo\Tables\tbl_ImageTag_Modifiedby.sql" />
+    <Build Include="dbo\Tables\tblProviderCaseBillDetail.sql" />
+    <Build Include="dbo\Tables\GreenBillsDenial.sql" />
+    <Build Include="dbo\Tables\TXN LATES_ACCESS.sql" />
+    <Build Include="dbo\Tables\XN_JD_Documents.sql" />
+    <Build Include="dbo\Tables\tblAction.sql" />
+    <Build Include="dbo\Tables\Provider_Document_Type.sql" />
+    <Build Include="dbo\Tables\DK_temp_1.sql" />
+    <Build Include="dbo\Tables\tblCaseStatus.sql" />
+    <Build Include="dbo\Tables\tblClient_Shared_Report_Details.sql" />
+    <Build Include="dbo\Tables\DK_temp_2.sql" />
+    <Build Include="dbo\Tables\Case_Delete_Log.sql" />
+    <Build Include="dbo\Tables\TXN_ASSIGN_SETTLED_CASES.sql" />
+    <Build Include="dbo\Tables\tblClient_Network_Details.sql" />
+    <Build Include="dbo\Tables\JL_temp.sql" />
+    <Build Include="dbo\Tables\tbl_batch_print_offline_queue.sql" />
+    <Build Include="dbo\Tables\GreenBillsInsurance.sql" />
+    <Build Include="dbo\Tables\TXN_CASE_ASSOCIATED_DIAGNOSIS_CODE.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_AMT_4.sql" />
+    <Build Include="dbo\Tables\TXN_CASE_PEER_REVIEW_DOCTOR.sql" />
+    <Build Include="dbo\Tables\tblArbitrationCases.sql" />
+    <Build Include="dbo\Tables\tblTempNodeDone.sql" />
+    <Build Include="dbo\Tables\TblArbitrator.sql" />
+    <Build Include="dbo\Tables\Mcc2020.sql" />
+    <Build Include="dbo\Tables\GreenBillsProviders.sql" />
+    <Build Include="dbo\Tables\TXN_CASE_Treating_Doctor.sql" />
+    <Build Include="dbo\Tables\Mcc2020_1.sql" />
+    <Build Include="dbo\Tables\tblGbbDocuments.sql" />
+    <Build Include="dbo\Tables\TXN_DOCUMENT_UPLOAD.sql" />
+    <Build Include="dbo\Tables\tblAttorney.sql" />
+    <Build Include="dbo\Tables\XN_AF_RESub.sql" />
+    <Build Include="dbo\Tables\tblGbbDocuments_transfferd.sql" />
+    <Build Include="dbo\Tables\TXN_EXHIBIT.sql" />
+    <Build Include="dbo\Tables\CC_CaseData1.sql" />
+    <Build Include="dbo\Tables\TXN_EXHIBIT_SEQUENCE.sql" />
+    <Build Include="dbo\Tables\tblBarcodes.sql" />
+    <Build Include="dbo\Tables\deletedInsuranceCompanies.sql" />
+    <Build Include="dbo\Tables\tblCasePacket.sql" />
+    <Build Include="dbo\Tables\TXN_EXHIBIT_SEQUENCE_FOR_ARBITRATION.sql" />
+    <Build Include="dbo\Tables\tblBatchMailSend.sql" />
+    <Build Include="dbo\Tables\CCPortfolio.sql" />
+    <Build Include="dbo\Tables\Email_Server.sql" />
+    <Build Include="dbo\Tables\TXN_EXHIBIT_SEQUENCE_FOR_RESPONSES.sql" />
+    <Build Include="dbo\Tables\TBLBILLING_DATA.sql" />
+    <Build Include="dbo\Tables\TXN_LIST_EMAIL_FILES.sql" />
+    <Build Include="dbo\Tables\TXN_PROVIDER_LOGIN.sql" />
+    <Build Include="dbo\Tables\tblMotionType.sql" />
+    <Build Include="dbo\Tables\ProcedureCodeConfiguration.sql" />
+    <Build Include="dbo\Tables\TXN_REPOSITORY_UPLOAD.sql" />
+    <Build Include="dbo\Tables\MedClaimMasterNew.sql" />
+    <Build Include="dbo\Tables\tblCaseDesk.sql" />
+    <Build Include="dbo\Tables\tbl_domain_master.sql" />
+    <Build Include="dbo\Tables\tblMenu_Report_Domain_Access.sql" />
+    <Build Include="dbo\Tables\TXN_SET_ORDER.sql" />
+    <Build Include="dbo\Tables\tbl_Investor.sql" />
+    <Build Include="dbo\Tables\tblCaseDeskHistory.sql" />
+    <Build Include="dbo\Tables\tblCaseDateMotionMapping.sql" />
+    <Build Include="dbo\Tables\TXN_tblTreatment.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_TABLE_GBB_DATA_GYB_ALL_Dion.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_GBB_ALL_DELETED.sql" />
+    <Build Include="dbo\Tables\tblCaseDiagnosis.sql" />
+    <Build Include="dbo\Tables\tblSettlement_Type.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_JL_BRICH.sql" />
+    <Build Include="dbo\Tables\TXN_TEMPLATE_COLUMNS.sql" />
+    <Build Include="dbo\Tables\BILLS_WITH_PROCEDURE_CODES_temp.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_JL_PREFARRED.sql" />
+    <Build Include="dbo\Tables\TXN_TEMPLATES_ACCESS.sql" />
+    <Build Include="dbo\Tables\tblcaserecon.sql" />
+    <Build Include="dbo\Tables\GYBWithdrawnCase.sql" />
+    <Build Include="dbo\Tables\tblCaseWitnessList.sql" />
+    <Build Include="dbo\Tables\UserSession.sql" />
+    <Build Include="dbo\Tables\tbl_InvestorPortfolio.sql" />
+    <Build Include="dbo\Tables\TXN_VERIFICATION_REQUEST.sql" />
+    <Build Include="dbo\Tables\tblClaimRep.sql" />
+    <Build Include="dbo\Tables\tblTriggerType.sql" />
+    <Build Include="dbo\Tables\tblDateFields.sql" />
+    <Build Include="dbo\Tables\tblClient.sql" />
+    <Build Include="dbo\Tables\tblCase_additional_info.sql" />
+    <Build Include="dbo\Tables\tblBasePathAtlasGybMap.sql" />
+    <Build Include="dbo\Tables\tblClientAccount.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Tables\tblProvider_Slabs.sql" />
+    <Build Include="dbo\Tables\tblCaseWorkflowTriggerQueue.sql" />
+    <Build Include="dbo\Tables\tblMenu_Domain_Access.sql" />
+    <Build Include="dbo\Tables\tblclientaccount_deleted.sql" />
+    <Build Include="dbo\Tables\tblCase_Date_Details.sql" />
+    <Build Include="dbo\Tables\TblProvider_Groups.sql" />
+    <Build Include="dbo\Tables\xn_temp9.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_TABLE_DATA_MCCOLLUM_2.sql" />
+    <Build Include="dbo\Tables\tblClientPayment.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_2.sql" />
+    <Build Include="dbo\Tables\CHIRS CASES DATA ENTRY.sql" />
+    <Build Include="dbo\Tables\BILLS_WITH_PROCEDURE_CODES.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_TABLE_DATA_MCCOLLUM_3.sql" />
+    <Build Include="dbo\Tables\tblDomainEmailSettings.sql" />
+    <Build Include="dbo\Tables\Report_Send_Details.sql" />
+    <Build Include="dbo\Tables\Ziplist.sql" />
+    <Build Include="dbo\Tables\tblCPT.sql" />
+    <Build Include="dbo\Tables\tblAttorney_Master.sql" />
+    <Build Include="dbo\Tables\tempGYBBills.sql" />
+    <Build Include="dbo\Tables\tbldates_lookup.sql" />
+    <Build Include="dbo\Tables\Provider_Documents.sql" />
+    <Build Include="dbo\Tables\tblAttorney_Type.sql" />
+    <Build Include="dbo\Tables\tblBatchOrientDocs.sql" />
+    <Build Include="dbo\Tables\tblNotesAAACases.sql" />
+    <Build Include="dbo\Tables\tbl_batch_type.sql" />
+    <Build Include="dbo\Tables\tblTreatment.sql" />
+    <Build Include="dbo\Tables\tblAutoEmailReportType.sql" />
+    <Build Include="dbo\Tables\Required_Documents.sql" />
+    <Build Include="dbo\Tables\tblDefendant.sql" />
+    <Build Include="dbo\Tables\CaseTransferNotificationTimeStamp.sql" />
+    <Build Include="dbo\Tables\tbl_batch_entity_type.sql" />
+    <Build Include="dbo\Tables\tblAutoEmailRecipients.sql" />
+    <Build Include="dbo\Tables\tbldelcase.sql" />
+    <Build Include="dbo\Tables\tblClientPriorityLevel.sql" />
+    <Build Include="dbo\Tables\MST_PROCEDURE_CODES.sql" />
+    <Build Include="dbo\Tables\tblInsuranceCompanyGroup.sql" />
+    <Build Include="dbo\Tables\XN_TEMP_TABLE_GBB_DATA_GoGYB_ALL_Dion.sql" />
+    <Build Include="dbo\Tables\tblWitnessType.sql" />
+    <Build Include="dbo\Tables\tbl_batch_print_offline_email_fax_status.sql" />
+    <Build Include="dbo\Tables\tblcase_SA_OLD.sql" />
+    <Build Include="dbo\Tables\tblDesk.sql" />
+    <Build Include="dbo\Tables\tblWorkflowDailyReport.sql" />
+    <Build Include="dbo\Tables\case_search_saved_query.sql" />
+    <Build Include="dbo\Tables\tblNotes_SA_OLD.sql" />
+    <Build Include="dbo\Tables\tblDiagnosis.sql" />
+    <Build Include="dbo\Tables\tblTemp.sql" />
+    <Build Include="dbo\Tables\tbl_display_column.sql" />
+    <Build Include="dbo\Tables\tbl_batch_print_fax_queue.sql" />
+    <Build Include="dbo\Tables\Auto_Billing_Packet.sql" />
+    <Build Include="dbo\Tables\DomainAccounts.sql" />
+    <Build Include="dbo\Tables\tblDocImages.sql" />
+    <Build Include="dbo\Tables\tblDocs.sql" />
+    <Build Include="dbo\Tables\BillServiceTypes.sql" />
+    <Build Include="dbo\Tables\MST_PacketCaseType.sql" />
+    <Build Include="dbo\Tables\tblDocumentType.sql" />
+    <Build Include="dbo\Tables\tblclientaccountMappingOld.sql" />
+    <Build Include="dbo\Tables\tblEmail.sql" />
+    <Build Include="dbo\Tables\tblEmailSend_Info.sql" />
+    <Build Include="dbo\Tables\tblEvent.sql" />
+    <Build Include="dbo\Tables\tblEventStatus.sql" />
+    <Build Include="dbo\Tables\AMT.sql" />
+    <Build Include="dbo\Tables\tbl_template_column.sql" />
+    <Build Include="dbo\Tables\tblEventType.sql" />
+    <Build Include="dbo\Tables\tblProvider.sql" />
+    <Build Include="dbo\Tables\MCCOLLUM_New_Data_Insert.sql" />
+    <Build Include="dbo\Tables\tbl_template_word_offline_queue.sql" />
+    <Build Include="dbo\Views\SJR-PAYMENT_COMPLETED.sql" />
+    <Build Include="dbo\Views\SJR-PENDINGS.sql" />
+    <Build Include="dbo\Views\SJR-PreCollected.sql" />
+    <Build Include="dbo\Views\View_Overall_check.sql" />
+    <Build Include="dbo\Views\CaseSearchDetails_Doctor.sql" />
+    <Build Include="dbo\Views\changeordergrp.sql" />
+    <Build Include="dbo\Views\VW_PreCollected.sql" />
+    <Build Include="dbo\Views\vw_tritech_all.sql" />
+    <Build Include="dbo\Views\vw_Unfiled_Cases.sql" />
+    <Build Include="dbo\Views\LCJ_VW_CaseDetails.sql" />
+    <Build Include="dbo\Views\Insurance.sql" />
+    <Build Include="dbo\Views\Provider.sql" />
+    <Build Include="dbo\Views\SJR_Bill_Report.sql" />
+    <Build Include="dbo\Views\SJR_Provider_Credentials.sql" />
+    <Build Include="dbo\Views\SJR-CaseSummary2.sql" />
+    <Build Include="dbo\Views\SJR-PAYMENT_BALANCE.sql" />
+    <Build Include="dbo\Views\SJR-PreLitigation.sql" />
+    <Build Include="dbo\Views\SJR-CaseSummary3.sql" />
+    <Build Include="dbo\Views\SJR-CaseSummary5.sql" />
+    <Build Include="dbo\Views\SJR-CaseSummary6.sql" />
+    <Build Include="dbo\Views\LCJ_VW_CaseSearchDetails_DiscoveryMotion.sql" />
+    <Build Include="dbo\Views\LCJ_VW_CaseSearchDetails_RTF.sql" />
+    <Build Include="dbo\Views\SJR-SETTLEMENTS.sql" />
+    <Build Include="dbo\Views\SJR-SETTLEMENTS_FULL.sql" />
+    <Build Include="dbo\Views\SJR-Transactions_Provider_Tracker.sql" />
+    <Build Include="dbo\Views\VW_CaseDetails_For_Arb.sql" />
+    <Build Include="dbo\Views\vw_DateOpenedUnfiled.sql" />
+    <Build Include="dbo\Views\ANSWER_EXPECT_ACTION_1.sql" />
+    <Build Include="dbo\Views\BALANCE_AGING.sql" />
+    <Build Include="dbo\Views\SJR-Case_report_Extended.sql" />
+    <Build Include="dbo\Views\SJR_Treatment_view.sql" />
+    <Build Include="dbo\Views\SJR-ANSWER_EXPECT.sql" />
+    <Build Include="dbo\Views\LCJ_VW_CaseSearchDetails.sql" />
+    <Build Include="dbo\Views\SJR-Unsigned Stips.sql" />
+    <Build Include="dbo\Views\SJR-View_Notes.sql" />
+    <Build Include="dbo\Views\SJR-View_Settlements.sql" />
+    <Build Include="dbo\Views\Adjusters.sql" />
+    <Build Include="dbo\Views\LCJ_VW_IssueResolvedCases.sql" />
+    <Build Include="dbo\Views\LCJ_VW_ManageDesk.sql" />
+    <Build Include="dbo\Views\LCJ_VW_PaymentsGrid.sql" />
+    <Build Include="dbo\Views\SJR-Image Tracker.sql" />
+    <Build Include="dbo\Views\SJR-ImageTracker_recent.sql" />
+    <Build Include="dbo\Views\SJR-OLD_CASE_PAYMENTS.sql" />
+    <Build Include="dbo\Views\vw_ECMC_ALL.sql" />
+    <Build Include="dbo\Views\vw_nslij_all.sql" />
+    <Build Include="dbo\Views\VW_OPEN_ALL_Providers.sql" />
+    <Build Include="dbo\Views\SJR-ANSWER-RCVD-LATE.sql" />
+    <Build Include="dbo\Views\SJR-Case_report.sql" />
+    <Build Include="dbo\Views\SJR_COLLECTION_TRACKER_DETAILS.sql" />
+    <Build Include="dbo\Views\COLLECTIONS_TRACKER_SUMMARY.sql" />
+    <Build Include="dbo\Views\LCJ_VW_DDL_AdjusterNames.sql" />
+    <Build Include="dbo\Views\LCJ_VW_CaseDetailsForClientReport.sql" />
+    <Build Include="dbo\Views\SJR-SETTLED_PAYMENTS.sql" />
+    <Build Include="dbo\Views\SJR-SETTLED_PAYMENTS_FULL.sql" />
+    <Build Include="dbo\Views\View1.sql" />
+    <Build Include="dbo\Views\vw_AAA_Incomplete.sql" />
+    <Build Include="dbo\Functions\funTreateamtTable.sql" />
+    <Build Include="dbo\Functions\fncGetReviewingDoctor.sql" />
+    <Build Include="dbo\Functions\handleMoneyNULL.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Functions\ProperCase.sql" />
+    <Build Include="dbo\Functions\fncGetInvoiceID.sql" />
+    <Build Include="dbo\Functions\fncGetNotesDesc.sql" />
+    <Build Include="dbo\Functions\fncGetnotesdesc1.sql" />
+    <Build Include="dbo\Functions\fncGetStatus.sql" />
+    <Build Include="dbo\Functions\fncISAOB.sql" />
+    <Build Include="dbo\Functions\fncTreatmentData.sql" />
+    <Build Include="dbo\Functions\FUNC_Case_Images.sql" />
+    <Build Include="dbo\Functions\fncGetOperatingDoctor.sql" />
+    <Build Include="dbo\Functions\f_GetTreatmentDOS.sql" />
+    <Build Include="dbo\Functions\fnc_Case_Bill_Count.sql" />
+    <Build Include="dbo\Functions\FNC_GET_CASE_AGE.sql" />
+    <Build Include="dbo\Functions\udfSplit_First.sql" />
+    <Build Include="dbo\Functions\FUNC_Case_Processor.sql" />
+    <Build Include="dbo\Functions\FUNC_Case_Provider_Note.sql" />
+    <Build Include="dbo\Functions\FUNC_Date_Answer_Expected.sql" />
+    <Build Include="dbo\Functions\FUNC_GET_FILING_FEES.sql" />
+    <Build Include="dbo\Functions\funTreateamtTable_RTF.sql" />
+    <Build Include="dbo\Functions\fncGetAccountNumber.sql" />
+    <Build Include="dbo\Functions\fncGetBillNumber.sql" />
+    <Build Include="dbo\Functions\fncGetPeerReviewDoctor.sql" />
+    <Build Include="dbo\Functions\fncGetRejectionList.sql" />
+    <Build Include="dbo\Functions\fncGetRequestList.sql" />
+    <Build Include="dbo\Functions\fncGetServiceType.sql" />
+    <Build Include="dbo\Functions\returnArrayIndexvalue.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Functions\udfSplit.sql" />
+    <Build Include="dbo\Functions\CheckStatusHierarchy.sql" />
+    <Build Include="dbo\Functions\fncGetDenialReasons.sql" />
+    <Build Include="dbo\Functions\fncGetDenialReasonsBYid.sql" />
+    <Build Include="dbo\Functions\GetDateDifferenceInYearsMonthsDays.sql" />
+    <Build Include="dbo\Functions\SplitStringInt.sql" />
+    <Build Include="dbo\Functions\STRING_SPLIT.sql" />
+    <Build Include="dbo\Functions\ufn_CSVToTable.sql" />
+    <Build Include="dbo\Functions\FunctionName.sql" />
+    <Build Include="dbo\Functions\SJR-ENTRY_PROD.sql" />
+    <Build Include="dbo\Functions\SJR-ENTRY_PROD_2.sql" />
+    <Build Include="dbo\Functions\Settlement_editor.sql" />
+    <Build Include="dbo\Functions\FUNC_COLLECTIONS_REPORT.sql" />
+    <Build Include="dbo\Functions\SJR-ANSWER_EXPECT_ACTION.sql" />
+    <Build Include="dbo\Functions\SJR_Case_Info.sql" />
+    <Build Include="dbo\Functions\SJR_CASE_PROCESSOR.sql" />
+    <Build Include="dbo\Functions\SJR_View_notes.sql" />
+    <Build Include="dbo\Functions\SplitString.sql" />
+    <Build Include="dbo\Functions\TRANSACTIONXTS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\AAA_PPO_OPEN_Cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ActiveDelay_Case_Status_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ActiveUserName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_Case_Date_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_caseid_test.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_Cases_For_WorkFlow_Email_Queue.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ADD_CLIENT_LETTER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_Communication_Document.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\ADD_MST_DIAGNOSIS_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_prov_BatchNo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_ProviderBoxDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_Request_Response_List.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ADD_RTF_TEMPLATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ADD_RTF_TEMPLATE_Notes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_SendMail_Info.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_TriggerTypeErrorLog.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_Update_Delete_AttorneyUser.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_Update_Delete_InvestorPortfolioMapping.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_Update_Delete_InvestorUser.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_Update_Delete_Portfolio.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Add_User_BatchNo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\AddDelete_AttorneyRole.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Additional_Case_Details_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Additional_Case_Details_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Adjuster_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Adjuster_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Adjuster_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\affidavitsNote.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\app_user_login_check.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\applicationsettings_retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ArbitrationNote.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Arbitrator_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Arbitrator_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Arbitrator_Name_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Arbitrator_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ASSIGN_ANSWER_RECD.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ASSIGN_PENDINGCASES_TO_CASE_OPENER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Assigned_Attorney_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Assigned_Attorney_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Assigned_Attorney_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Assigned_Attorney_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Case_Assignment_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Case_Assignment_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Case_Assignment_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Master_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Master_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Master_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Names_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Type_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Type_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Type_DLL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Attorney_Type_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Auto_Billing_Case_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Auto_Billing_Packet_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Auto_Case_Rules_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Auto_Packet_Case_Counts.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Auto_Packet_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Auto_Update_Denial.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\autocaseclosedwithdrawn.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Available_AttorneyFirm.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Available_AttorneyNamesForFirm.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Available_AttorneyRoles.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Available_Country_State_City.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Available_InvestorRoles.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Available_Program.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\BarcodeScan_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\BarcodeScan_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\BarcodeScan_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_fax_queue_failure_count_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_fax_queue_failure_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_fax_queue_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_email_acknowledgement_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_email_failed_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_email_fax_status_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_email_or_fax_processed_cases_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_email_status_save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_fax_failed_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_fax_queue_insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_fax_queue_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_fax_queueId_or_ackImageId_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_fax_status_save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_queue_insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_queue_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_queue_retrieve_all.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_offline_queue_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\batch_print_scheduled_fax_queue_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Billing_Packet_Case_Counts.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Billing_Packet_Create.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Billing_Packet_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Billing_Packet_DeleteCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Billing_Packet_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\BillsProcedure_CPT_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\BillsProcedure_CPT_Update_LIT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Bulk_Payment_Posting_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\bulk_print_offline_queue_delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Bulk_Update_Hearing_and_status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Bulk_Update_Index_Number.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Bulk_Update_Index_Number_and_status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Bulk_Update_Index_Number_and_status_new.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\BulkImportCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Calendar_Report_Show_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Calendar_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Date_Details_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Date_Details_Notes_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Date_Motion_Mapping_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Date_Motion_Mapping_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_entity_emailids_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_advance.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_advance_JL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_advance_New.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_advance_OptV.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_advance_OPTV2.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_advance_optv3.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_advance_test.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Search_Billing_Packet.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Search_Billing_Packet_OPTV1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Search_Billing_Packet_Optv2.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Search_DataEntryList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Search_GLF_Packet.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Search_Packet.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Search_POM.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_saved_query_delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_saved_query_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\case_search_saved_query_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Search_Simple.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Soft_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Soft_Delete_List.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Status_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Case_Workflow_Trigger_Queue_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CaseData_Retrive_By_CaseId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Cases_by_Carrier.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Cases_By_CloseOutDate.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Cases_By_Final_Settlement_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CaseSettlementViewForClient.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CaseStatus_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CaseStatus_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CaseStatus_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\casestatusgroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Change_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ChangeBillStatusToImported.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\check_batch_print_queue_delay.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\check_bill_number_exists.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Check_Case_Claim_Amount.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\check_case_entity_email_or_fax_number_exists.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CHECK_CASE_EXIST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\check_case_ids_exists.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\check_transaction_type_exists.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CHECK_USER_LOGIN.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CheckCaseIsValid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CheckCaseIsValidForInvestor.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\checkId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\checkIdForAAA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\checkIdForBatchMailSend.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\checkimage.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CheckPomCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CheckReportSentValueForDomain.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CheckSessionID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CheckUserSession.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CLIENT_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Client_Details_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Client_Details_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Client_Report_Delay.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Client_Report_Delay_Alert_Sent.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Client_Report_Menu_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ClientMonthTrans_ByMonth.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\ClientPayment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ClientPayments_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ClientPayments_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ClientProviders.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\CloseCasesPaid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CM_IsFillingFeeAppliedOnGroup.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\Complaint_Print_Date_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\countuserbatchNumber.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Court_Type_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Court_Type_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Court_Type_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\courtgroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPT_Details_For_Payment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPT_Details_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPT_Payment_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPT_Payment_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPT_Payment_Insert_LIT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPT_Payment_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPT_Payment_Update_LIT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPTCode_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPTCode_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CPTCode_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\cr_getPageDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\cr_getsETTLEMENTDates.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\cr_getSummonsFiledDates.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\cr_getSummonsFiledDatesByYear.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\cr_settlednopaid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Create_Case_Date_Details_If_Not_Exists.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\create_doc_raf_to_jl.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\create_node_raf_to_jl.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CreateClosedReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DAILY_REPORT.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\DAILY_REPORT1.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\dailyReport_LawSpades.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DDL_FinalStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DDL_Forum.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DDL_Role_For_Funding.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Defendant_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Defendant_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Defendant_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Delete_Denial_Reasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Delete_ExistingAttorney.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DELETE_MST_DIAGNOSIS_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Delete_Node_Document.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Delete_Request_Response_List.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\delete_Service_render_location.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\deletepopupnote.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DeleteProvand_Users.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Deleteproviders_of_userid.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\Deleteuser.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\delImageFile.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DemandsNote.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DEMANDSUPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DenialReason_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DenialReason_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DenialReason_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DiscConfNote.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\display_column_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\document_manager_master_nodes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DOCUMENT_NODES_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DocumentManager.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Documents2Print.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\DocumentsPrinted.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\DomainEmailSettings_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Downlaod_Documents.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\DSP_SelectAzureBasePathId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_addtosourcecontrol.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_addtosourcecontrol_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_adduserobject.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_adduserobject_vcs.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_checkinobject.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_checkinobject_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_checkoutobject.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_checkoutobject_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_displayoaerror.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_displayoaerror_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_droppropertiesbyid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_dropuserobjectbyid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_generateansiname.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_getobjwithprop.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_getobjwithprop_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_getpropertiesbyid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_getpropertiesbyid_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_getpropertiesbyid_vcs.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_getpropertiesbyid_vcs_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_isundersourcecontrol.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_isundersourcecontrol_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_removefromsourcecontrol.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_setpropertybyid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_setpropertybyid_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_validateloginparams.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_validateloginparams_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_vcsenabled.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_verstamp006.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_verstamp007.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_whocheckedout.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\dt_whocheckedout_u.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Earliest_Services.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ECMC_Ac_Type.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ECMC_Insurance.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ECMC_List.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\EDIDATA.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\EMAIL_GET_STATUS_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Email_Server_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Email_Server_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Email_Server_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\eomBalances.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ErrorLogCasesWithoutEmailAndFax.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\EventStatus_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\EventStatus_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\EventStatus_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\EventType_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\EventType_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\EventType_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_AAAOpenCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_AAAPendingCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Add_Activity_Notes.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_AdminNotes_Add.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_advanced_search_saved_query_delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_advanced_search_saved_query_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_ArbFiledCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_AUTOMATIC_CASE_REPORT_1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_AAADecisions_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Activity_ADD.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Activity_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Date_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Date_Update_new.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Date_Update_new_AAIndex.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_DateOfAccident_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_DenialReasons_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_DenialReasons_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Event_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Event_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Event_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_IndexNo_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_InjuredCaption_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_InsClaimNo_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_PolicyNo_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_ProviderCaption_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Search.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Search_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_SearchSimple.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Settlement_Reset.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Settlements_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Settlements_Retrive.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Treatment_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Treatment_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Treatment_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_ArbitratorName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_Court.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_DefAttorney.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_DefendantName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_InitialStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_InjuredName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_InsuranceCompany.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_InsuredName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_Provider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_SRL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Case_Update_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_CaseData_Retrive_By_CaseId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_CaseData_Update_By_CaseId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_CaseDeskHistory_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_CaseDeskHistory_Delete_Bulk.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_CaseDeskHistory_Reassign.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_CaseDeskHistory_Retrive_By_UserId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_CaseOpen_Last3_Years.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Adjuster_For_Settlements.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Arbitrator.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Attorney_For_Settlements.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Closed_Reasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Court.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Defendant.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_DefendantNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_DenialReasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_ECMC_InsuranceCompany.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_EventStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_EventType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Group.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_InitialStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Insurance_TPA_Group.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_InsuranceCompany.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_M_DenialReasons.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_NotesType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_OperatingDoctor.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_PacketCaseType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Provider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_ProviderGroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_ReviewingDoctor.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Role.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Service_Rendered_Location.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_ServiceType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Settlement_Type.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_States.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_TEMPLATES_BYUSERID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_USER_ACTIVE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DDL_USER_FOR_EVENT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DenialReasons_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DenialReasons_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_DM_File_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_ECMC_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_ECMC_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_ECMC_TRANSFER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Email_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_AnswerExpected_Sheet.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_ARBAWARD.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_ARBFILED.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_ARBFILEDSEARCH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_Daily_Fhkp_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_Images.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_GET_LIT_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_GET_NAM_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_PaymentProRpt.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_GET_PEER_REVIEW_DOCTOR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_ProductionDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_PROVIDERDETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_GET_RANDOM_ATTORNEY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_Settlement_Payment_Info.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_SettlementRpt.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_Status_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_StatusBreakDown.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_TiffImages_by_Case_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Get_USERDETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_GetNotesDetails.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_IssueTracker_User_Authenticate.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_IssueTracker_User_LogOff.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Adjuster.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Adjuster_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Adjuster_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Adjuster_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Attorney.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Attorney_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Attorney_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Attorney_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Closed_Reasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Defendant.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Defendant_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Defendant_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Defendant_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_DenialReason_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_DenialReasons_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_STATUS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_Undetermined_Reasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_User_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_User_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_M_User_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_MST_GetRoleMenuList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Notes_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Notes_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Packet_Add_New_Cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Packet_CaseType_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Packet_Create.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Packet_Create_WithType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Packet_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Packet_Remove_Cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Report_AAA_HearingSet_DatePassed.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Report_Case_Data_Entry.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Report_Case_Processing_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Report_Collection_OverDue.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Report_Provider_Cases_Pivot.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Report_Provider_Claim_Pivot.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_SettlementDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Temp_DM_FileMoved.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Template_Case_Data.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Template_Column_Name_And_Case_Data.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Template_Column_Name_And_Case_Data_OK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Template_Default_Node_Id_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_Template_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\F_ZipList_Retrieve.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_AddNotes.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_DDL_DefendantNameList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_DDL_ReviewingDoctor_All.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_DDL_SettlementScreen_AdjusterNames_By_InsCompany.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_Get_Service_Type.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_getSettlementAmt.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_Reviews_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_Reviews_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_Reviews_Search.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_FinalizeSettlements.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_GetSettlementPctg.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_IsCaseSettled.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_NewSettlements_UpdateFees.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_ResetExistingSettlement.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_ResetOldValues.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_SettledCauses.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_SettlementBillGrid.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_SettlementDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\FHA_WorkArea_UpdateSettlementPctg.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\Financial_Report_Track_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\fixCosts.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GbbFiles.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GbbFiles_Transfferd.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Generate_Claim_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Generate_Claim_Report_1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Generate_Claim_Report_2.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Generate_Claim_Report_3.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Generate_Claim_Report_4.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Generate_Claim_Report_Header.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_AAA_NODES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Action_List.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_ACTIVE_PROVIDER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_All_CaseId_Or_PacketedCaseID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_ALL_Client_Letter.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_All_Reports.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_ALL_TEMPLATES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_AllActionList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_ARB_BatchCode.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_Arbitration_images.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_ARBITRATION_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_ARBITRATION_REPORT1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Associated_PDF_Notes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Base_Active_Path.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_batch_entity_type.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_batch_print_images.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_batch_print_summons_images.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_batch_type.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_BatchBreakDownDetail.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_BatchBreakDownDetail_ProvGroupNm.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_BatchNum.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_BatchPrinting_Reports.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_BatchReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_BILL_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Case_Date_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Case_Date_Motion_Mapping.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Case_Date_WorkFlow_History.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Case_NodeId_From_NodeName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Case_Workflow_Trigger_Queue.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Case_Workflow_Trigger_Templates.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_CaseId_From_Bill_Number.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_CaseIds.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Cases_By_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_CaseSearchDetails_Doctor.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_ClientCompany_Type.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Communication_Document.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Complaint_Template_Name.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Court_Detail.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Daily_Report_Recipients.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Denial_Data.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Denial_Reasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_DIAGNOSIS_CODE_LIST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_docs_for_azure_delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_docs_for_azure_upload.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Document_Node_FilePath.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_domain_names.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_DomainEmailSettings.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Error_Notification_Users.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_FileRecon_report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_grid_cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_grid_cases_ExportToExcel.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Host_details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Image_Physical_Path.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_INACTIVE_InsComp.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_INSERT_CASE_ASSIGNMENT_FOLDER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_INSERT_CASE_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_INSERT_CASE_DETAILS_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_INSERT_DEFENDANT_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_INSERT_DENIAL_REASONS_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_INSERT_INSURANCE_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_INSERT_PROVIDER_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_InvestorPortFolio_Pending_Task_Count.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_InvestorPortfolioMapping.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_InvoicePayment_Documents.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_MEDICALTABLE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_MotionType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Nodes_Documents.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Not_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_NoticeofTrial_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_Packet_Supplemental_Information.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_PacketDetail.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Packeted_Cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Patient_Name.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_PeerReviewDoctor.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Pending_Task_Count.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_POM_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_pom_details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Previous_Posting_All.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Previous_Posting_By_Invoice.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_Provider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Provider_Document.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Provider_Pending_Task_Count.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_ProviderBatch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_ProviderBoxDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Providerwise_Cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Quick_Search_Result.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Request_Response_List.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Scanned_Docs_Tiff.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_SELECTED_ATTACHMENTFILE_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_SELECTED_PDF_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Service_Render_location.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Settlement_PivotReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Similar_CaseIds.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Summon_Processed_Cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_summons_images.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_SUMMONS_SENT_NO_INDEX.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_TEMPLATE_BYUSERID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Template_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_TEMPLATE_NAME.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Template_Tags.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\get_template_tags_for_a_template.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_TEMPLATES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_TEMPLATES_BY ID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_TEMPLATES_BY_TEMPID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Total_Client_Payment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_TransactionDetail.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_Treatment_Data.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_Treatment_Supplemental_Table.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_TriggerType_Error_QueueIds.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_TriggerType_ErrorLog.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_TypeOfBatchPrint.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_VALUE_LIST_FOR_SEARCH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Verification_Data.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Verification_Type.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_VerificationSent_Data.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Witness_List.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_WitnessType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_WORKDESK_CASES_COUNT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Workflow_Daily_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Workflow_Email_Detail.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetAllCases_ByPassing_Bills.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetAllCases_ByPassing_CaseId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetAllCases_ByPassing_CompanyNo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetAllInvetorsName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetAllNodes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getArbitrationAward.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetAttachmentsPath.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getAttorneyChecksIDForScan.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetBatchInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetBillPrintInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getBillProcedure.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetBillsPendingTransferProcess.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETCAL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetCaseCalculation.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getCaseData.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetCaseDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetCasesToDownloadDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetCaseTreatmentDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetClientInvoicesForProvider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getclientpaymentForProvider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getCptCodes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getCurrentDesk.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\GetDocumentReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetDocumentReportForCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETFIELD.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETFIELD_TEMPLATES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getImageDumpCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETINSURANCE_ALLSETTLEMENTS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETINSURANCE_BYVENUE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETINSURANCE_NOTFILED.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETINSURANCE_STATISTICS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETINSURANCE_TOP10INSURANCE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETINSURANCEGROUPS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETINSURANCESPECIALITY_INDEXSUMMARY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETINSURANCESPECIALITY_SETTLEMENTSUMMARY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetLawfirDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetLawFirms.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetMedicalReports.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getNewSettlementReportUser.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetNodeDocuments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getnote.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getPacketedSummonsReport.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\getPacketedSummonsReport2.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetPhysicalFile.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetPOMPrintInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetPOMPrintInfo_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetPortfolio_By_UserId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetPrintInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetProcedureConfiguration.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDER_NOTESCASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetProviderByInvoiceType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getProviderChecks.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getProviderChecksIDForScan.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getProviderDetaisForInvoice.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_DENIALREASONS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_INITIALSTATUS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_MONEYVALUE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_NEWCASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_PRELIT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_SETT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_SETT_FORBILL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_SETTLEDANDPAID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_SETTLEMENTDATES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_SPECIALITY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_STATUS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_STATUSAGE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_SUMMARYDATA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_SUMMONSFILEDDATES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GETPROVIDERS_WITHDRAWN.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetRoleNodes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getSerivceType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetServiceInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetServiceInfoSuper.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getSettlementReportUser.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getSummonsReport.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\getSummonsReportbu322.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\getSummonsReportNew.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\GetSystemParameters.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetTransferredCaseDataUpdates.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GetTransferredCaseForReconcillation.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillsDataReconciliation.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillsDenial_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillsDenial_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillServiceType_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillsInsurance_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillsInsurance_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillsProviders_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillsProviders_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GreenBillsServiceType_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\I_ProviderBoxDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ImportRFAMasterTable.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\ImportRFATransactionTable.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InPlayAndSettledClosedCasesByOpenedAndSettlementYear.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InPlayAndSettledClosedCasesByYearOpened.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Insert_Associated_Pdf_Notes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\INSERT_BILLING_DATA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Insert_Denial_Reasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\INSERT_ECMC_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\INSERT_ECMC_Denial_PDF.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\INSERT_NEW_DEFAULT_NODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\INSERT_POM_CASE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\INSERT_POM_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Insert_Service_Render_Location.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\INSERT_TXN_LIST_EMAIL_FILES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\INSERT_TXN_SET_ORDER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InsertAdminNode.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InsertLoginData.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InsertProvList.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\insff.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Inslist.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\insPayment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Insurance_TPA_Group.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InsuranceCompanyGroup_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InsuranceCompanyGroup_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InsuranceCompanyGroup_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InsuranceCompanyGroup_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InsuranceCompanyList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\insurergroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\InvoicePayment_Documents_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_GetUserIDByName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_Role_GetAllRoles.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_User_Authenticate.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_User_CreateNewUser.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_User_GetAllUsers.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_User_GetAllUsersByRoleName.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_User_GetUserById.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_User_GetUserByUsername.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_User_LogOff.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\IssueTracker_User_UpdateUser.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\Law_Firm_Details_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LawFirm_Details_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddAction.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddAdjuster.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddAttorney.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddCase.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddCaseDiagnosis.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\lcj_addcasetogroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddClaimRep.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddClient.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddCourt.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddCPTCode.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddDataEntry.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddDataEntry1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddDataEntryNotes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddDefendant.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddDenialReasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddDiagnosis.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddDocumentType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddEvent.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddEventStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddEventType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddFirm.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddImageType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddInsuranceCompany.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddInsurer.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddMatter.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddMotions.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddNotes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddNotesType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddPaymentsTransactions.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddPersonServed.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddProvider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_ADDROLE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddServiceType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddSettlements.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddSettlementType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddStatus.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddTreatments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AddTrials.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AdjusterDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Admin_DeleteDesks.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Admin_GetAllUsers.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_ADMIN_GETINSURANCECOMPANY.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_ADMIN_GETPROVIDERS.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_ADMIN_GETSTATUS.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Admin_ShowDesks.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_ADMIN_USERS.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_AttorneyDetails.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_CalendarReport.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_CaseDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_CreateCaption.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_CreateDeskInsuranceCompany.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_CreateDeskProvider.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_CreateDeskStatus.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_AAASearch_Arbitrator.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_AdjusterNames.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Arbitrator.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Assign_To_Work_Desk.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Assign_Work_Desk.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Attorney.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_AttorneyNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Case_Type.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Cases.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ClientNames.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Court.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Court_ForCalendarReport.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_CPTCode.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DateFields.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DbCombo_ProviderNames.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DefendantNameList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DefendantNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DefendantNames_ForCalendarReport.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DefendantNames_ForHearings.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DenialReasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Diagnosis.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DocumentType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DocumentType_ScanedDocs.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_DocumentTypeAll.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_EventType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_FirmNames.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Initial_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsuranceCompanyGroupNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsuranceCompanyNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsuranceCompanyNames_ForCalendarReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsuranceCompanyNames_ForHearings.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsuranceCompanyNames_Reports.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsuranceCompanyNamesByUserTypeLogin.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsuranceCompanyNamesByUserTypeLogin_DE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsuranceCompanyNamesedit.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_InsurerNames.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Location.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_LocationAdd.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Nodes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_NotesType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_NotesTypeFilter.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Our_Discovery_Demands.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Our_Discovery_Responses.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Our_SJ_Motion_Activity.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ProviderNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ProviderNames_ForCalendarReport.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ProviderNames_ForHearings.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ProviderNamesByUserTypeLogin.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ProviderNamesForClientReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ReviewingDoctor_Active.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_RoleNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ServedTo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_ServiceType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_SettlementScreen_AdjusterNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_SettlementScreen_AttorneyNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_SettlementType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_States.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Status_ForCalendarReport.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Status_ForHearings.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_statusname.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Their_SJ_Motion_Activity.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Transfer_To.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_TreatingDoctor_Active.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_Unique_UserNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_uniqueProviderNames.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_UPDATE_ASSIGN_TO_WORK_DESK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_UserListNames.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_UserName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_UserName1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_UserRoleNames.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DDL_WorkArea_AssignTo.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DefendantDetails.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteAction.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteAdjuster.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteCourt.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteCPTCode.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteDenialReasons.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteDiagnosis.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteDiagnosisForCase.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteDocumentType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteEventStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteEventType.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteImageType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteInsuranceCompany.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteMotion.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteNotesType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteProvider.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteRole.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteServerTo.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteServiceType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteSettlementType.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteStatus.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteTransactions.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteTreatment.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DeleteTrial.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_DenialReasons_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\lcj_freezereport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_FREEZETRANSACTIONS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_FREEZETRANSACTIONS_TYPE1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_FullInventoryByCaseStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Get_Existing_Bills.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Get_Last_Invoice_Date.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETAdminDetailReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetAdminNotesDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETAdminReports.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTACCOUNTDETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTDETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTDETAILS_GROUP.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTDETAILS_INVOICEALL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTFEEDETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTFEEDETAILS_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREBUTTALFEES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCE_APPLIED_TO_PROVIDER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCECLIENTCREDIT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCECLIENTCREDIT_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCECOST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCECOST_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCECREDIT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCECREDIT_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEDIRECT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCE-fhkp.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_BY_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_Closed_L.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_GLF.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_New.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_PRELITTOPROV.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_PRELITTOPROV_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_Type1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_Type1_bkup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_Type1_Last.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTREMITTANCEREPORT_Type1_New .sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTSUMMERYPAYMENTREPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCOSTBALANCE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetDiagnosisForCase.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetEditedDocs.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetExistingSettlements.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetFieldsByZip.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETFILINGFEECASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETfirmchecks.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETGROUPCASEInformation.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_getGroupCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetImgPath.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetNotesDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetNotesDetails_New.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_getPaymentTreatments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETREMITTANCECHECKS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETREMITTANCECHECKS_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetRoleMenuList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetSelectedDocs.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetSessionUserDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetSessionUserDetailsByID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetSettlements.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GetUserNameIfExists.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GroupCasesList.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_IfExistsSettlement.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_INSERT_IMAGE_COPY.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_INSERTINTODAILYSUMMONS.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_InsertInToPrintDocs.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_insertsettlement.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_InventoryByYear.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_isSettled.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_MenuToRole.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Motion_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Notes_Viewed.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_OpenInventoryByCaseStatus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_OpenInventoryByYearOpened.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Payments_DataGrid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_PopWAEditInsuranceCompany.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_PopWAEditProvider.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_procinsertinvoice.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_procRemoveGroupCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_RemoveCaseFromGroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Report_Hearings.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_ResetExistingSettlement.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_ResolvedInventoryByYear.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_saveCaption.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SAVEGROUPCASEInformation.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_saveMemo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SaveSelectedDoc.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SaveSelectedMenus.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SearchCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SearchCaseReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_setTable.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_setTable_SUM.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SettlementBillGrid.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SettlementDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SettlementReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_SettlementReport_ProvGroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblClientDetails.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblClientUpdate.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblInsuranceCompanyDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblInsuranceCompanyUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblInsurerDetails.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblInsurerUpdate.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblProviderDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblProviderUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_tblServedDetails.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Update_Case_DateDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UPDATE_DESK_REASON.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UPDATE_DOCUMENT_DATA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UPDATE_ROLE_NODES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Update_status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_Update_Status_Description.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateAdjusters.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateAttorneys.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateCaseDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateClientDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateCourt.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateDefendant.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateDenialReasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateFinancialListDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateFinancialListDirectTypeDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdatePaymentsTransactions.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdatePaymentTreatments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateServed.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateSettlementPctg.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_AAASearch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_CaseInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_CaseInfo_Test.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_Change_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_DisplaySettlements.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_Pop_DeskAssignToInsert.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_SearchCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_SearchCase_for_provider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCase_Old.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCaseprovider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCaseSimple.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCaseSimple_Orignal.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCaseSimpleOnAwardedAmount.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchMassUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WORKAREA_SETTLEMENTS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkAreaPaymentSummary.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkAreaPaymentSummaryInforamtion.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkDesk_RemoveCases.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkDeskCase.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkDeskCaseAxpGrid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LGT_GroupCasesLinks.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\LIST_VENDOR_SLABS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\ManinReasonTypeRetrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\MassSearch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Menu_Access_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Menu_Access_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Menu_Report_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\OPENArbOpenCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\OpenCasesAssociated.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\OPENCASESTOBEPRINTED.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\OperatingDoctor_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\OperatingDoctor_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\OperatingDoctor_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\PacketType_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\PacketType_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\PacketType_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Payment_Cleared_Date_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Payment_Freeze.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Peer_Review_Doctor_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Peer_Review_Doctor_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Peer_Review_Doctor_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\POM_BillDate_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\POM_Details_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Pom_Packet_Details_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\POM_Packet_Documents_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\PortfolioSettlementForClient.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\PortfolioSettlementViewForClient.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Post_Billing_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcPOPUP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcPrintCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcPrintedCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcRfundProviderSearch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcRfundSettlementsSearch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcRfundSettlementUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcSelectPrintedCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcSelectProcessMotion.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcSelectProcessMotionNoCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\prcUpdateRfundBatch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\printdailysummons.sql">
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\PRINTSUMMONS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Proc_get_email_configuration.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\proc_get_paymets.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\proc_test.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\proc_test1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\PROC_UPDATECOSTBALANCE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\PROC_UPDATEexpCOSTBALANCE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procClientPayments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procCLIENTREPORTsettlementtreatment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\proccreateuserdeskrelation.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\procgetDesks.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\procimagelist.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procimagelist_for_arbitration.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procimagelist_for_arbitration_dmi.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procimagelist_for_arbitration_New.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procimagelist_initialbilling.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procimagelist_initialbilling_noaob.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procimagelist_jaffeNnova.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procimagelist_missing_AOB.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procInsCaseDesk.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procInsertCopyImage.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procInsertDesks.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procInsertImage.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procInsertPOMImage.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procInsUserDesk.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\procLoginValidate.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procProviderdetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procSettlementIdReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procsettlementtreatment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\proctest2.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\proctest3.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procUpdatePrintFlag.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\procUserDesk.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Document_Type_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Document_Type_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Document_Type_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Document_Type_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Documents_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Documents_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Group_Name_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Group_Name_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Group_Name_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\PROVIDER_MONTHLY_STATEMENT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\provider_monthly_statement_feescost_received.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\ProviderandInsuranceListAccess.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\providergroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\providerinslist.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\ProviderList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\ProviderListAccess.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\providerstatuslist.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Reason_Type_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Reason_Type_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Reason_Type_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\REASSIGN_CASE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\REASSIGN_CASE_AUTOMATICALLY_ONSTATUS_CHANGED.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\REASSIGN_CASE_DOCTOR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Rebuttal_Status_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Rebuttal_Status_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Rebuttal_Status_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Rebuttal_Status_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_AAA_Docs_Delay.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_AAA_Docs_Delay_CaseCount.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Active_Delay.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Active_Delay_CaseCount.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_CaseDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Denial_For_AF.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_GP_Reconcilation.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_GP_Reconcilation_TEST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_LawSpades.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Litigated_Payment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Litigated_Payment_Undeposited.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Litigated_Payment_Unmatched.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Menu_Access_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Menu_Access_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Menu_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Open_Case.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_OpenCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Over_Due.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Payment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Payment_Summary.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Purchase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Purchase_Test.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Refund.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Send_Details_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_UserActivity.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Verification.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Voluntary_Payment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Voluntary_Payment_Undeposited.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Report_Voluntary_Payment_Unmatched.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\ReportType_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_DLL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_Reminder_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_Report_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_Report_Pivot.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Required_Documents_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\reset_all_batchprint_in_progress_queue.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Resolved_Cases_by_Carrier.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Retrive_Amount_Provider_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Retrive_CaseDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Retrive_Provider_Billing.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Retrive_Provider_By_Transaction_LastMonth.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Retrive_Provider_Inventory.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Retrive_Provider_Inventory_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\reverseInvoice.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\RPT_PROVIDER_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\S_BatchBoxDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Save_SelectedAttorney.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\saveDenialReasonsId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\saveImegnotes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SaveSessionID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SaveUpdateProcedureCode.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SaveUploadFileEntry.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\ScanCountAll.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SearchAndReplace.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\select_All_data.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\SelectAllProvider_Name.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SelectAllProviders.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\selectAlluserName.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\selectBAtchNumbers.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Selected_AttorneyNamesForFirm.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Selectuniqueusername.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Service_Type_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Service_Type_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Service_Type_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\set_ProviderBoxDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Settlement_Type_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Settlement_Type_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Settlement_Type_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Shared_Report_Details_Save.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Shared_Report_Details_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\shtemp.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_ARB_WON_UPDATER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_BulkUpdateStatus.sql">
+      <AnsiNulls>Off</AnsiNulls>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_COLLECTION_TRACKER_SUMMARY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_Collections_Updater.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_PENDING_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_PROCESSING_PAYMENTS_RPT1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_PROCESSING_RPT1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_PROVIDER_PROGRESS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_PROVIDER_PROGRESS_SETTLEMENT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR-COLLECTION_TRACKER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_add_arbitrator.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ADD_DENIAL_CATEGORY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ADD_PROCESSTYPE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ADD_REJECTION_REQUEST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ADD_tblOpeartingDoctor.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ADD_tblReviewingDoctor.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_Add_TblRules.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ADD_VERIFICATION_REQUEST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_AllClaim.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_AllStatus_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_AllStatus_Details_New.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_assign_pending_work_desk.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ASSIGN_REDCAT_DENIAL_REASONS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ASSIGN_WORK_DESK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ASSIGNED_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_billing_report_DK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_billing_report_DK_new.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_case_and_library_documents_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_CHANGE_FILENAME.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_Change_StatusAge_limit.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_CHECK_COPY_TO_CASE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_CHECK_DISCOVERY_MOTION.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_closed_cases_billing_report_DK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_create_new_node.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_create_new_node_for_DMS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_create_new_node_not_tobeused.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_create_newnode_allcase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_CREATE_SAVEDOC_NODES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_createDefaultDocTypesForTree.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_CreateMergeList.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DDL_ATTORNEY_FILL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_FILE_NODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_NODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_NODE_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_OPERATING_DOCTOR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_PEER_REVIEW_DOCTOR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_PROCESS_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_TREATINGDOCTOR_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_TREATMENT_DOCTOR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_VERIFICATION_REQUEST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_WORKDESK_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DELETE_WORKDESK_CASES_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DIAGNOSIS_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DM_FILE_RENAME.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_document_log_insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_document_manager_nodes_for late_new.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_document_manager_nodes_for_template.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_document_manager_nodes_for_template_new.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_DOCUMENT_SEARCH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_EXCLUSION_GET_AGE_NON_SETTLED_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_EXCLUSION_GET_AGE_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_EXCLUSION_GET_DENIALREASONS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_EXCLUSION_GET_DENIALREASONS_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_EXCLUSION_GET_MONEY_VALUE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_EXCLUSION_GET_MONEYVALUE_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_Field_cases_billing_report_DK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_Field_cases_billing_report_JL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_Field_cases_billing_report_RLF.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_Field_cases_billing_report_SG.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_FILL_DROPDOWN.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_generate_inserts.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_AGE_NON_SETTLED_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_AGE_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_get_atlas_verification.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_BASEPATHID_Of_File.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_CASE_LIST_XML.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_Color_cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_COLUMN_NAME_AND_CASE_DATA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_DENIALREASONS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_DENIALREASONS_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_DMS_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_DOCTYPE_EXHIBITS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_DOCTYPE_EXHIBITS_FOR_ARBITRATION.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_DOCTYPE_EXHIBITS_FOR_RESPONSES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_Get_Document_For_Edit.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_Get_Document_For_Grid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_DOCUMENT_TYPES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_EMAIL_ID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_EVENTS_FOR_DATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_EXHIBITS_FOR_DISCOVERY_MOTION.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_FILE_PATH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_FILE_PATH_FOR_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_FILE_PATH_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_FULL_PATH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_MONEY_VALUE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_MONEYVALUE_REPORT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_NODE_ID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_NODENAME_USING_NODEID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_NON_SETTLED_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_POMID_AND_CASEID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_POPUP_NOTES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_REJECTION_REQUEST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_Get_Search_Result.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_SERVICE_TYPES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_SETTLED_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_TREATINGDOCTOR_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_TREATMENT_DOCTOR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_Get_Use_Role_By_UserId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GET_VERIFICATION_REQUEST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GETDOSTABLE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_GetProviderEmailDetail.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_insert_arbitration_cases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_insert_Batch_Mail_Send.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_INSERT_MST_DOCUMENT_NODES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_INSERT_TREATINGDOCTOR_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_INSERT_TREATMENT_DOCTOR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_InsertImage.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_insertPDF.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_IP_Details_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_LCJ_CopyEvents.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_LCJ_DeleteEvent.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_LCJ_GetEvents.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_LCJ_GetEvents_Caseid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_LCJ_GetEvents_userid.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_LCJ_GetMotions.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_LIST_BILLSGRID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_LIST_BILLSGRIDFOREXCEL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_LIST_DENIAL_CATEGORY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_Litigationfiled_cases_billing_report_DK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_MANAGE_FILE_UPLOAD.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_MSobjsearch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_MST_CASE_STATUS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_MST_CASE_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_MULTIPLE_FILE_INSERT_TEMPLATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_NEW_FILE_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_NEW_FILE_INSERT_ASSOCIATION.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_NEW_FILE_INSERT_ASSOCIATION_WITH_RETURN_IMAGEID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_NEW_FILE_INSERT_TEMPLATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_NEW_FILE_INSERT_TEMPLATE1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_NEW_NODE_TO_CASE_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_NODE_MASTER_NODE_NAME_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_open_cases_billing_report_DK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_open_cases_billing_report_JL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_open_cases_billing_report_RLF.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_open_cases_billing_report_SG.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_PaymentBilling_report_DK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_PaymentBilling_report_MCM.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_ProcessGYBWithdrawnCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_RECORD_FOR_RESPONSE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_SandCGENERATED_cases_billing_report_DK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SAVE_MERGED_PDF_IN_MGR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SAVE_PACKET_DOCUMENT_IN_MGR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SAVE_PACKET_IN_MGR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SAVE_PDF.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SAVE_PDF_IN_MGR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_save_ticket_documents.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SAVEDOC_IN_MGR.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SCHEDULER_ASSIGN_SETTLED_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SCHEDULER_STATUS_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_SEARCH_REPOSITORY_DOCUMENT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_TBL_TAGS_NEW_CASE_NODE_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_TblRules_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_TXN_CASE_ASSOCIATED_DIAGNOSIS_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_UPDATE_ASSIGN_WORK_DESK.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_UPDATE_DOCUMENT_MANAGER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_Update_TblRules.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_UPLOAD_DOCUMENT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_UPLOAD_DOCUMENT_FOR_DELETE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_UPLOAD_REPOSITORY_DOCUMENT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_UserStatus_CriticalCases_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_UserStatus_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\sp_view_edit_modified_date_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_WS_CHECK_LOGIN.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_WS_GET_FULL_PATH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_WS_UPLOAD_DOCUMENT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\spDeleteFileName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SpGetCasesFiles.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SPGetClientInvoiceReportElementTag.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\spgetFileName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SpGetMergedCasesFilesDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SpInsertMergedCasesFilesDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\spSearchContacts.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SpUpdateMergedCasesFilesDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\States_DDL.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\Status_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Status_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Status_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\statusgroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\statuslist.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\stips_notes.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_CheckPacketedCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_APPLICATION_SETTINGS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_BULKIMAGEFILEPATH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GET_CASEDOCUMENTNODELIST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GET_CASEDOCUMENTNODELIST_EX1_NEW1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GET_CASEDOCUMENTNODELIST_LEAFED_NODES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GET_CASEDOCUMENTNODELIST_LEAFED_NODES_EX1_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GET_CASEDOCUMENTNODELIST_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GET_CASEDOCUMENTNODELIST_NEW1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GET_CASEDOCUMENTNODELIST_SCANNER.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GET_CASEDOCUMENTNODELIST_WINAPP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_GETMOVINGNODESLIST.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_IMAGEFILEPATH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_IMAGEPHYSICALFILEPATH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_IMAGEPHYSICALFILEPATH_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_NODEROOTPATH.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_DSP_TREEVIEWCASEID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_GET_APPLICATION_SETTINGS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_GET_DEFAULTDOCUMENTTYPE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_GETCHILDDOCSFORMOVEORCOPY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_GETCHILDFOLDERTOCOPY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_GETIMAGEDATA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_GETROOTFOLDERTOCOPY.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_InsertCaseandImagesWhileCopying.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_UID_APPLICATIONSETTING.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_UID_ASSOCIATESCANNEDIMAGES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_UID_DELETEIMAGE_NODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_UID_IMAGES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_UID_IMAGESTAGS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\STP_UID_UPLOADIMAGES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\summonsNote.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Get_UserEmailId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Insert_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Mark_Competed.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Priority_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Report_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Status_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Type_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Type_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Type_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Task_Type_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Template_Case_Details_Retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_column_name_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Template_Word_DefaultNodeRetrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_generate_offline_queue_delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_generate_offline_queue_insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_generate_offline_queue_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_generate_offline_queue_retrieve_all.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_generate_offline_queue_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_retrieve.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\template_word_tag_array_update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TEST.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\test1.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\test2.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Test22.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Test5.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Testing.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_add_ticket_thread.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_add_trouble_ticket.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_ddl_priority.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_get_ticket_for_id.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_get_ticket_thread.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_get_trouble_tickets.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_get_trouble_tickets_for_status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_search_tickets.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\tickets_sp_search_trouble_tickets.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TransactionType_DDL.sql">
+      <AnsiNulls>Off</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="dbo\Stored Procedures\Procs2\TransferCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TransferCasesLogic.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TransferCasesLogicMcCollum.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TransferCasesLogicRFA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TransferCasesReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TransferPayment.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TriggerTypeErrorLog_Resolved.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\u_BatchBoxDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update late_Name.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UPDATE_ACTIVE_BILLING_STATUSES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Arbitration.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_batch_print_email_fax_status_progress.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_batch_print_progress.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Case_Workflow_progress.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Cases_Assigned_Attorney.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Cases_Current_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Cases_Current_Status_New.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Cases_Current_Status_New_AAA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Cases_Current_Status_New_Case.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Cases_Initial_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Cases_Status_By_UserID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Cases_Transferred_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Client_Account_Print_Date.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Client_Report_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Denial_Case.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Letter_Name.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UPDATE_MST_DIAGNOSIS_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Service_render_location.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Template_Name.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Transactions_Provider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Verification_Response_Fax_Queue_Progress.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Verification_Response_Fax_Queue_Progress_Download.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_Workflow_Case_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UpdateAzureTransferStatus_of_File.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UpdateAzureTransferStatus_of_File_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\updateCaseData.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UpdateCaseID.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UpdateDatabaseForNewUser.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UpdatedCasesSyncedToGYB.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UpdateFilePath.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\UpdateProcedureCode.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Users_DDL.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\usersgroup.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_AddProviderCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_AddProviderCaseBillDetail.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_BulkImportCases.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_GetAttorneyFirm.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_GetLoggedInvestorName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_GetLoggedProviderName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_GetPortfolio.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_GetPortfolioForProvider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_GetPortfolioForUser.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_GetPortfolioId.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_InsertUpdateGetAttorneyFirm.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_InsertUpdateGetLocation.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_InsertUpdateGetProgram.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_InsertUpdateGetTypeOfPractice.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_InvestmentDashoboard.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_ProviderCaseDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_SearchProviderCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_SearchProviderCase_New.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\USP_UpdateProviderCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_REQUEST_RESPONSE_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_RESPONSE_FAX_ATTACHMENT_DOCUMENTS_RETRIEVE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_RESPONSE_FAX_QUEUE_FAILURE_COUNT_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_RESPONSE_FAX_QUEUE_FAILURE_RESEND.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_RESPONSE_FAX_QUEUE_FAILURE_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_RESPONSE_FAX_QUEUE_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_RESPONSE_FAX_QUEUE_RETRIEVE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_RESPONSE_FAX_QUEUE_SCHEDULED_RETRIEVE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\VERIFICATION_RESPONSE_FAX_QUEUE_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\verification_response_template_data.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Voluntary_Payment_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Voluntary_Payment_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Voluntary_Payment_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Voluntary_Payment_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\WINAPP_GET_CASES.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\WINAPP_GET_LOGIN_INGO.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Witness_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Witness_List_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\WitnessType_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\WitnessType_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\WitnessType_List.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\WorkflowDailyReport_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN _INSERT_CASE_DETAILS_GBB.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_GET_DOCS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_TEMP_INSERT_CASE_DETAILS_GBB.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_TEMP_INSERT_CASE_DETAILS_GBB_04_20_2018.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_TEMP_INSERT_CASE_DETAILS_GBB_CLO.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_TEMP_INSERT_CASE_DETAILS_GBB_Dino.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_TEMP_INSERT_CASE_DETAILS_GBB_mccollum.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_TEMP_INSERT_CASE_DETAILS_GBB_old.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_TEMP_INSERT_CASE_DETAILS_GBB_OLD_DATA.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\XN_TRANFER_DOCS_FROM_OLD_TO_NEW_SERVER.sql" />
+    <Build Include="dbo\User Defined Types\ExcelImportTypes.sql" />
+    <Build Include="dbo\User Defined Types\UT_TransferCases.sql" />
+    <Build Include="dbo\User Defined Types\LawFirmDetails.sql" />
+    <Build Include="dbo\User Defined Types\BillDetails.sql" />
+    <Build Include="dbo\User Defined Types\BillDocumentDetailsDetails.sql" />
+    <Build Include="dbo\User Defined Types\CPTPayDetails.sql" />
+    <Build Include="dbo\User Defined Types\CPTBillsUpdate.sql" />
+    <Build Include="dbo\User Defined Types\CPTPayDetails_Update.sql" />
+    <Build Include="dbo\User Defined Types\UDT_CaseNumber.sql" />
+    <Build Include="dbo\User Defined Types\CPTBillsUpdateLIT.sql" />
+    <Build Include="dbo\User Defined Types\CPTPayDetailsLIT.sql" />
+    <Build Include="dbo\User Defined Types\CPTPayDetails_Update_LIT.sql" />
+    <Build Include="dbo\User Defined Types\TransferredCaseDataType.sql" />
+    <Build Include="dbo\User Defined Types\CasePomDetails.sql" />
+    <Build Include="dbo\User Defined Types\ut_bulck_hearing.sql" />
+    <Build Include="dbo\User Defined Types\Images.sql" />
+    <Build Include="dbo\User Defined Types\CaseSearch.sql" />
+    <Build Include="dbo\User Defined Types\procedurecode.sql" />
+    <Build Include="dbo\User Defined Types\ProviderSlabs.sql" />
+    <Build Include="dbo\User Defined Types\ProviderImport.sql" />
+    <Build Include="dbo\User Defined Types\WithdrawnCaseDataType.sql" />
+    <Build Include="Security\HangFire.sql" />
+  </ItemGroup>
+</Project>

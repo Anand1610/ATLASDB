@@ -1,0 +1,3 @@
+"C:\Program Files (x86)\Microsoft SQL Server\140\DAC\bin\sqlpackage.exe" /action:Publish /sourceFile:"E:\Project\DB\LS_ATLAS_DB_PROJECT\LS_ATLAS_DB_PROJECT\bin\Debug\LS_ATLAS_DB_PROJECT.dacpac" /targetconnectionstring:"Data Source=8.9.36.148;Initial Catalog=LS_ATLAS_DB_PROJECT;Persist Security Info=False;User ID=sa;password=LawSpades@123;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True" > DeploymentLog.txt
+
+set /p=Hit ENTER to continue...

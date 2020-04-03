@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[tbl_batch_print_offline_queue] (
+    [pk_batch_print_Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [DomainId]            VARCHAR (50)  NULL,
+    [printing_type]       VARCHAR (150) NULL,
+    [case_ids]            VARCHAR (MAX) NULL,
+    [node_name]           VARCHAR (250) NULL,
+    [changed_status]      VARCHAR (250) NULL,
+    [is_upload_docs]      BIT           NULL,
+    [fk_configured_by_id] INT           NULL,
+    [configured_date]     DATETIME      NULL,
+    [is_processed]        BIT           NULL,
+    [processed_date]      DATETIME      NULL,
+    [file_name]           VARCHAR (MAX) NULL,
+    [file_path]           VARCHAR (MAX) NULL,
+    [in_progress]         BIT           NULL,
+    [processed_case_ids]  VARCHAR (MAX) NULL,
+    [failed_case_ids]     VARCHAR (MAX) NULL,
+    [fk_batch_type_id]    INT           NULL,
+    [fk_template_id]      INT           NULL,
+    [entity_type_ids]     VARCHAR (MAX) NULL,
+    [IsDeleted]           BIT           NULL,
+    [InSequence]          BIT           DEFAULT ((0)) NULL,
+    CONSTRAINT [PK_tbl_batch_print_offline_queue] PRIMARY KEY CLUSTERED ([pk_batch_print_Id] ASC),
+    CONSTRAINT [FK_tbl_batch_print_offline_queue_IssueTracker_Users] FOREIGN KEY ([fk_configured_by_id]) REFERENCES [dbo].[IssueTracker_Users] ([UserId]),
+    CONSTRAINT [tbl_batch_print_offline_queue_fk_batch_type_id] FOREIGN KEY ([fk_batch_type_id]) REFERENCES [dbo].[tbl_batch_type] ([ID]),
+    CONSTRAINT [tbl_batch_print_offline_queue_fk_template_id] FOREIGN KEY ([fk_template_id]) REFERENCES [dbo].[tbl_template_word] ([pk_template_id])
+);
+

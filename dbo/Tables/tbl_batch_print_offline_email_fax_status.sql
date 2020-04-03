@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[tbl_batch_print_offline_email_fax_status] (
+    [pk_bp_ef_status_id]        BIGINT           IDENTITY (1, 1) NOT NULL,
+    [fk_batch_print_id]         INT              NOT NULL,
+    [case_Id]                   NVARCHAR (100)   NOT NULL,
+    [DomainID]                  VARCHAR (50)     NOT NULL,
+    [fk_batch_entity_type_id]   INT              NOT NULL,
+    [documentImageID]           BIGINT           NULL,
+    [emailStatus]               VARCHAR (10)     NULL,
+    [emailStatusDate]           DATETIME         NULL,
+    [emailAcknowledgementKey]   UNIQUEIDENTIFIER NULL,
+    [isEmailAcknowledged]       BIT              NULL,
+    [emailAcknowledgementDate]  DATETIME         NULL,
+    [faxQueueID]                BIGINT           NULL,
+    [faxStatus]                 VARCHAR (50)     NULL,
+    [faxStatusDate]             DATETIME         NULL,
+    [faxAcknowledgementImageID] BIGINT           NULL,
+    [faxAcknowledgementDate]    DATETIME         NULL,
+    [ResendCount]               INT              NULL,
+    [isDeleted]                 BIT              NULL,
+    [in_progress]               BIT              NULL,
+    PRIMARY KEY CLUSTERED ([pk_bp_ef_status_id] ASC),
+    CONSTRAINT [tbl_batch_print_offline_email_fax_status_fk_batch_entity_type_id] FOREIGN KEY ([fk_batch_entity_type_id]) REFERENCES [dbo].[tbl_batch_entity_type] ([ID]),
+    CONSTRAINT [tbl_batch_print_offline_email_fax_status_fk_batch_print_id] FOREIGN KEY ([fk_batch_print_id]) REFERENCES [dbo].[tbl_batch_print_offline_queue] ([pk_batch_print_Id])
+);
+

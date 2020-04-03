@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[TXN_SET_ORDER] (
+    [AUTO_ID]     INT            IDENTITY (1, 1) NOT NULL,
+    [SZ_IMAGEID]  VARCHAR (500)  NULL,
+    [SZ_FILENAME] VARCHAR (1000) NULL,
+    [SZ_FILEPATH] VARCHAR (5000) NULL,
+    [SEQ_ORDER]   INT            NULL,
+    [DomainId]    NVARCHAR (512) DEFAULT ('h1') NOT NULL
+);
+

@@ -1,0 +1,21 @@
+﻿CREATE PROCEDURE [dbo].[INSERT_NEW_DEFAULT_NODE]  
+	@NODENAME NVARCHAR(50)=NULL
+AS	
+DECLARE @CaseID NVARCHAR(50)
+DECLARE @Parent_ID NVARCHAR(50)
+
+DECLARE CASESEELCT CURSOR FOR
+SELECT Case_Id,NodeId FROM tblcase,tblTAgs Where tblTAgs.CaseID=tblcase.Case_Id and tblTAgs.ParentId Is null AND tblcase.Case_Id  not in (Select rtrim(ltrim(CaseID)) From tblTAgs  Where  NodeName=@NODENAME)
+
+OPEN CASESEELCT
+FETCH NEXT FROM CASESEELCT INTO @CaseID,@Parent_ID
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+
+		INSERT INTO tblTags(NodeName,Expanded,ParentID,CaseID,NodeLevel) VALUES (@NODENAME,0,@Parent_ID,@CaseID,1)
+		FETCH NEXT FROM CASESEELCT INTO @CaseID,@Parent_ID
+	END
+
+CLOSE CASESEELCT
+DEALLOCATE CASESEELCT
+

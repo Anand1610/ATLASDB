@@ -1,0 +1,20 @@
+﻿CREATE PROCEDURE [dbo].[SP_INSERT_TREATINGDOCTOR_DETAILS]
+	@DomainID NVARCHAR(50),
+	@Treatment_Id int,
+	@DOCTOR_ID INT ,
+	@DOCTOR_NAME varchar(50)
+	--@TreatingDoctor_ID INT
+	
+AS
+BEGIN
+	IF EXISTS(SELECT 1 FROM txn_case_treating_doctor WHERE TREATMENT_ID=@Treatment_Id AND DOCTOR_ID=@DOCTOR_ID) 
+	BEGIN
+		RETURN -2
+	END
+	ELSE
+	BEGIN
+		INSERT INTO txn_case_treating_doctor(TREATMENT_ID,DOCTOR_ID,DomainID)
+		VALUES(@Treatment_Id,@DOCTOR_ID,@DomainID)
+	END
+END
+

@@ -1,0 +1,7 @@
+﻿CREATE PROCEDURE [dbo].[GETINSURANCEGROUPS]
+@DomainId NVARCHAR(50)
+AS
+BEGIN
+	SELECT * FROM dbo.tblInsuranceGroups WHERE DomainId=@DomainId
+END
+

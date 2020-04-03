@@ -1,0 +1,37 @@
+﻿CREATE PROCEDURE [dbo].[SP_EXCLUSION_GET_AGE_NON_SETTLED_REPORT]-- [SP_EXCLUSION_GET_AGE_NON_SETTLED_REPORT]  '85'
+@PROVIDER_ID NVARCHAR(50) 
+
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+  DECLARE @AVG_AGE DECIMAL(10,2)
+	DECLARE @COUNT INT
+
+	CREATE TABLE #TEMP
+	(
+		[AVERAGE TURNAROUND TIME] DECIMAL(10,2),
+		[NUMBER OF CASES] INT
+	)
+
+	INSERT INTO #TEMP
+		EXEC SP_GET_AGE_REPORT @PROVIDER_ID
+
+	SET @COUNT = (SELECT COUNT(CASE_ID) FROM TBLCASE WHERE PROVIDER_ID=@PROVIDER_ID AND STATUS<>'SETTLED' and  status not in ('CLOSED','Closed Arbitration','Closed as per RCF','Closed Judgement','Closed Withdrawn with Prejudice','Closed Withdrawn without prejudice','Settled','Withdrawn-with-prejudice','withdrawn-without-prejudice','Carrier In Rehab','Pending','Open-Old','Trial Lost'))
+	IF @COUNT <> 0
+	BEGIN
+		SET @AVG_AGE = (((SELECT [AVERAGE TURNAROUND TIME] FROM #TEMP) * @COUNT) /
+						(SELECT [NUMBER OF CASES] FROM #TEMP))
+	END
+	ELSE
+	BEGIN
+		SET @AVG_AGE = 0
+	END
+
+	DROP TABLE #TEMP
+	SELECT @AVG_AGE AS AVG_AGE, @COUNT [REMAINING CASES] 
+
+	
+END
+

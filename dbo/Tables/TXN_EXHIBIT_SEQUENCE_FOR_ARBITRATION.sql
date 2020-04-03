@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[TXN_EXHIBIT_SEQUENCE_FOR_ARBITRATION] (
+    [I_SEQUENCE]      INT            NULL,
+    [I_DOCUMENT_TYPE] INT            NULL,
+    [DOCUMENT_TYPE]   NVARCHAR (200) NULL,
+    [DomainId]        NVARCHAR (512) DEFAULT ('h1') NOT NULL
+);
+

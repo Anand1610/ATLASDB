@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[ECMC] (
+    [Patient Name]                NVARCHAR (255) NULL,
+    [Account]                     NVARCHAR (255) NULL,
+    [UCR]                         NVARCHAR (255) NULL,
+    [Account Type]                NVARCHAR (255) NULL,
+    [ST]                          NVARCHAR (255) NULL,
+    [Discharge Date]              NVARCHAR (255) NULL,
+    [Age Date]                    NVARCHAR (255) NULL,
+    [Age in Days]                 FLOAT (53)     NULL,
+    [Insurance Group]             NVARCHAR (255) NULL,
+    [Policy]                      NVARCHAR (255) NULL,
+    [Insurance]                   NVARCHAR (255) NULL,
+    [Insurance Name]              NVARCHAR (255) NULL,
+    [No]                          NVARCHAR (255) NULL,
+    [Bill_No]                     NVARCHAR (255) NULL,
+    [Bill Charges]                MONEY          NULL,
+    [Bill Balance]                MONEY          NULL,
+    [MCD Insurance Payments]      MONEY          NULL,
+    [Other Insurance Payments]    MONEY          NULL,
+    [SP Payments]                 MONEY          NULL,
+    [Bill Receipt]                MONEY          NULL,
+    [Bill Adjustment]             MONEY          NULL,
+    [Bill Expected Reimbursement] MONEY          NULL,
+    [ID]                          INT            IDENTITY (1, 1) NOT NULL,
+    [FHKP_Case_Id]                NVARCHAR (50)  NULL,
+    [DomainId]                    NVARCHAR (50)  DEFAULT ('h1') NOT NULL
+);
+

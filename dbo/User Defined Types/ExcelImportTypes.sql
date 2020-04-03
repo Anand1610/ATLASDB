@@ -1,0 +1,23 @@
+﻿CREATE TYPE [dbo].[ExcelImportTypes] AS TABLE (
+    [Provider]     VARCHAR (100) NULL,
+    [Portfolio]    VARCHAR (100) NULL,
+    [PurchaseDate] DATETIME      NULL,
+    [Insured]      VARCHAR (100) NULL,
+    [InsCompany]   VARCHAR (100) NULL,
+    [ClaimNo]      VARCHAR (100) NULL,
+    [DOL]          DATETIME      NULL,
+    [DOS]          DATETIME      NULL,
+    [DOFN]         DATETIME      NULL,
+    [InvoiceAmt]   VARCHAR (100) NULL,
+    [PartialPmts]  VARCHAR (100) NULL,
+    [CaseNo]       VARCHAR (100) NULL,
+    [FilingDate]   DATETIME      NULL,
+    [Attorney]     VARCHAR (100) NULL,
+    [County_Filed] VARCHAR (100) NULL,
+    [Settled_Date] DATETIME      NULL,
+    [Paid_Date]    DATETIME      NULL,
+    [Paid_Amount]  VARCHAR (100) NULL,
+    [Notes]        VARCHAR (100) NULL,
+    [Status]       VARCHAR (100) NULL,
+    [PortfolioId]  VARCHAR (100) NULL);
+
