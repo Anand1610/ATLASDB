@@ -2571,5 +2571,6 @@
     <Build Include="dbo\User Defined Types\ProviderImport.sql" />
     <Build Include="dbo\User Defined Types\WithdrawnCaseDataType.sql" />
     <Build Include="Security\HangFire.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\GET_MONTHLY_CASE_COUNT.sql" />
   </ItemGroup>
 </Project>
