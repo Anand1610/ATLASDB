@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[LCJ_GETCLIENTREMITTANCECOST] --[LCJ_GETCLIENTREMITTANCECOST] 'DK',5329 
+﻿CREATE PROCEDURE [dbo].[LCJ_GETCLIENTREMITTANCECOST]
 (      
 @DomainId NVARCHAR(50),
 @clientid varchar(50)      
@@ -69,8 +69,9 @@ BEGIN
 		, A.TRANSACTIONS_AMOUNT
 		, A.TRANSACTIONS_DATE
 		, A.TRANSACTIONS_dESCRIPTION   
+		, A.BatchNo
 		, CONVERT(VARCHAR(10),B.DATEOFSERVICE_START,101) + ' - ' + CONVERT(VARCHAR(10),B.DATEOFSERVICE_END,101) [DOS]    
-	 from tbltransactions A 
+	 FROM tbltransactions A 
 	 inner join tblcase B ON A.Case_Id = B.Case_Id   
 	 inner join tblprovider C on C.Provider_Id=B.Provider_Id 
 	 inner join tblInsuranceCompany ins on ins.InsuranceCompany_Id=B.InsuranceCompany_Id    
@@ -79,4 +80,3 @@ BEGIN
 	 AND A.PROVIDER_ID=@clientid
 	 and B.DomainId=@DomainId
 END
-
