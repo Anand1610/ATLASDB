@@ -28,7 +28,7 @@ BEGIN
 	             
 	   SET @i_l_max_id = SCOPE_IDENTITY()            
 	      
-	   INSERT INTO tblImageTag           
+	   INSERT INTO tblImageTag(ImageID,TagID,LoginID,DateInserted,DateModified,DateScanned,DomainId)           
 	   VALUES (@i_l_max_id,@i_a_node_id,@i_a_user_id,GETDATE(),NULL, NULL,@DomainId)
 	 END       
 	 ELSE    
@@ -42,4 +42,7 @@ BEGIN
 	      
 	select @i_a_node_id  ,@i_l_max_id as Imageid,@i_l_duplicate as duplicate    
 END
+
+GO
+
 

@@ -34,7 +34,7 @@ BEGIN
  SET @i_l_max_id = SCOPE_IDENTITY()          
     
  INSERT INTO     
-  tblImageTag        
+  tblImageTag(ImageID,TagID,LoginID,DateInserted,DateModified,DateScanned,DomainId)        
  VALUES    
  (    
   @i_l_max_id,@i_l_nodeid,@i_a_user_id,GETDATE(),NULL  ,NULL, @DomainId
@@ -44,4 +44,7 @@ BEGIN
 END     
     
 --SP_HELP tblDocImages
+
+GO
+
 

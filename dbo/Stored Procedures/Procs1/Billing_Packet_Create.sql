@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[Billing_Packet_Create] 
+﻿CREATE PROCEDURE [dbo].[Billing_Packet_Create] 
 (
 	@DomainID VARCHAR(40),
 	@s_a_caption VARCHAR(1024),
@@ -308,7 +307,7 @@ SET NOCOUNT ON;
 
 				SELECT TOP 1 @i_l_user_id =  UserId  FROM IssueTracker_Users WHERE DomainId = @DomainId and UserName = @s_a_UserName
 
-				INSERT INTO tblImageTag          
+				INSERT INTO tblImageTag (ImageID,TagID,LoginID,DateInserted,DateModified,DateScanned,DomainId)        
 				SELECT I.ImageID, Node_ID, @i_l_user_id, GETDATE(), NULL, NULL, @DomainId
 				FROM tblDocImages I  
 				WHERE DomainId = @DomainId
@@ -390,4 +389,7 @@ SET NOCOUNT ON;
 	SELECT @s_l_message AS [Message], @i_l_result AS [RESULT]	
 
 END
+
+GO
+
 
