@@ -5,7 +5,8 @@
     [DateInserted] DATETIME       NULL,
     [DateModified] DATETIME       NULL,
     [DateScanned]  DATETIME       NULL,
-    [DomainId]     NVARCHAR (512) DEFAULT ('h1') NOT NULL
+    [DomainId]     NVARCHAR (512) DEFAULT ('h1') NOT NULL, 
+    [IsDeleted] BIT NULL DEFAULT 0
 );
 
 

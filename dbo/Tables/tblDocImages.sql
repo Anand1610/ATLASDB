@@ -22,7 +22,8 @@
     [CID]              NVARCHAR (100) NULL,
     [BillNumber]       VARCHAR (100)  NULL,
     [ACT_CASE_ID]      VARCHAR (40)   NULL,
-    [azure_statusdone] VARCHAR (100)  NULL
+    [azure_statusdone] VARCHAR (100)  NULL, 
+    [IsDeleted] BIT NULL DEFAULT 0
 );
 
 
