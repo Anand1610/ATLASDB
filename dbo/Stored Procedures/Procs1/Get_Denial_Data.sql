@@ -59,6 +59,9 @@ BEGIN
 	WHERE
 		tre.Denial_Posted_Date BETWEEN @FROMDate AND @ToDate
 		AND B.BasePathType = 2
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND IT.IsDeleted=0 and I.IsDeleted=0
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 	UNION
 		SELECT 
 			tre.Treatment_Id,			
@@ -75,6 +78,9 @@ BEGIN
 	    WHERE
 		    t_tre.Denial_Posted_Date BETWEEN @FROMDate AND @ToDate
 			AND  B.BasePathType = 2
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		    AND IT.IsDeleted=0 and I.IsDeleted=0
+            ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 	END
 
 	ELSE IF(@Param = 'File')
@@ -93,6 +99,9 @@ BEGIN
 			LEFT OUTER JOIN tblBasePath B (NOLOCK) ON B.BasePathId = I.BasePathId 
 	WHERE
 		tre.Denial_Posted_Date BETWEEN @FROMDate AND @ToDate
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND IT.IsDeleted=0 and I.IsDeleted=0
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		--AND B.BasePathType != 2
 	UNION
 		SELECT 
@@ -110,6 +119,9 @@ BEGIN
 			LEFT OUTER JOIN tblBasePath B (NOLOCK) ON B.BasePathId = I.BasePathId 
 	    WHERE
 		    t_tre.Denial_Posted_Date BETWEEN @FROMDate AND @ToDate
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		    AND IT.IsDeleted=0 and I.IsDeleted=0
+            ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 			--AND  B.BasePathType != 2
 	END
 END
