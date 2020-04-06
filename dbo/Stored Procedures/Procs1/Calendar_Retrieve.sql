@@ -42,7 +42,12 @@ BEGIN
          from 
             dbo.TBLDOCIMAGES I WITH(NOLOCK)
             Join dbo.tblImageTag IT WITH(NOLOCK) on IT.ImageID=i.ImageID
-            Join dbo.tblTags T WITH(NOLOCK) on T.NodeID = IT.TagID And T.NodeName ='TRIAL SUBMISSION' and T.CaseID= EVT.CASE_ID ORDER BY DateInserted DESC) AS TRIAL_SUBMISSION_File,
+            Join dbo.tblTags T WITH(NOLOCK) on T.NodeID = IT.TagID And T.NodeName ='TRIAL SUBMISSION' and T.CaseID= EVT.CASE_ID 
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		    where I.IsDeleted=0 and IT.IsDeleted=0
+            ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+			
+			ORDER BY DateInserted DESC) AS TRIAL_SUBMISSION_File,
 		'Edit' AS Edit_Text
 	FROM 
 		TBLEVENT EVT WITH(NOLOCK)
