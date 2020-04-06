@@ -34,6 +34,9 @@ BEGIN
 		and (nodename in ('BILLS','MEDICAL REPORTS','A.O.B') OR Filename = 'Initial Submisson Letter.pdf')
 		--and Filename not like 'Initial Submisson Letter_0%'
 		--and Filename not like 'Initial submission letter_0%'
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND I.IsDeleted=0 and IT.IsDeleted=0
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 							   
 		ORDER BY CaseID, ord.OrerID
 END
