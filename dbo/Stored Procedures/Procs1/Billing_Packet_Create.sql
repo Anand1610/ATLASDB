@@ -302,7 +302,9 @@ SET NOCOUNT ON;
 				and b_tag.CaseID IN (SELECT case_id FROM @tblcase) 
 				and n_I.Filename IS NULL
 				AND n_I.FilePath IS NULL
-				
+					---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		        and n_IT.IsDeleted=0 and n_I.IsDeleted=0 and  b_IT.IsDeleted=0 and  b_I.IsDeleted=0
+                ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 
 
 				SELECT TOP 1 @i_l_user_id =  UserId  FROM IssueTracker_Users WHERE DomainId = @DomainId and UserName = @s_a_UserName
@@ -313,6 +315,10 @@ SET NOCOUNT ON;
 				WHERE DomainId = @DomainId
 				AND CID = @case_id
 				AND ACT_CASE_ID IN (SELECT case_id FROM @tblcase)
+
+				---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		        and   I.IsDeleted=0
+                ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 
 				---- Add Documents Please note- Only path is recorded no physical file...
 				--DECLARE  @s_l_node_name VARCHAR(500),          
