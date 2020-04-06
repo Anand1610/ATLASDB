@@ -44,7 +44,7 @@ CREATE TRIGGER [dbo].[Trigger_CPT_Change]
 	ON [dbo].[BILLS_WITH_PROCEDURE_CODES] 
 	AFTER INSERT, UPDATE, DELETE
 AS 
-Declare @Treatment_Id int,@Amount decimal(18, 2), @ins_fee_schedule decimal(18, 2), @BILL_NUMBER varchar(150),@SumofAmount decimal(18, 2);
+Declare @Treatment_Id int,@Amount decimal(18, 2), @ins_fee_schedule decimal(18, 2), @BILL_NUMBER varchar(150),@SumofAmount decimal(18, 2),@sumRegionIV decimal(18, 2),@count int;
 
 
 
@@ -52,11 +52,31 @@ Declare @Treatment_Id int,@Amount decimal(18, 2), @ins_fee_schedule decimal(18, 
 	Begin
 		SELECT @Treatment_Id = fk_Treatment_Id, @Amount = isnull(Amount,0), @ins_fee_schedule = isnull(ins_fee_schedule,0), @BILL_NUMBER = BillNumber
 		from inserted i;
-		select @SumofAmount=sum(isnull(amount,0)) from BILLS_WITH_PROCEDURE_CODES where fk_Treatment_Id=@Treatment_Id
+
+
+
+		select @count=count(t1.Auto_Proc_id) from  
+		MST_PROCEDURE_CODES t1
+		join BILLS_WITH_PROCEDURE_CODES t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
+		where t2.fk_Treatment_Id=@Treatment_Id and t1.Specialty='Law Firm Code'
+
+		if(@count>0)
+		begin
+			select @SumofAmount=sum(isnull(t1.amount,0)),@sumRegionIV=sum(isnull(t1.FeeSchedule,0))
+			from BILLS_WITH_PROCEDURE_CODES t1
+			join MST_PROCEDURE_CODES t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
+			where fk_Treatment_Id=@Treatment_Id and t2.Specialty='Law Firm Code'
+		end
+		else
+		begin
+			select @SumofAmount=sum(isnull(amount,0)),@sumRegionIV=sum(isnull(FeeSchedule,0))
+			from BILLS_WITH_PROCEDURE_CODES where fk_Treatment_Id=@Treatment_Id
+			
+		end
 
 		Update tblTreatment set 
 		Claim_Amount = @SumofAmount,
-		Fee_Schedule = @SumofAmount
+		Fee_Schedule = @sumRegionIV
 		Where Treatment_Id = @Treatment_Id or (ISNULL(BILL_NUMBER,'') = ISNULL(@BILL_NUMBER,'') AND ISNULL(BILL_NUMBER,'') <> '')
 	End
 
@@ -65,12 +85,29 @@ Declare @Treatment_Id int,@Amount decimal(18, 2), @ins_fee_schedule decimal(18, 
 		SELECT @Treatment_Id = i.fk_Treatment_Id, @Amount = (isnull(i.Amount,0) - isnull(d.Amount,0)), 
 		@ins_fee_schedule = (isnull(i.ins_fee_schedule,0) - isnull(d.ins_fee_schedule,0)), @BILL_NUMBER = d.BillNumber
 		from inserted i join deleted d on (i.CPT_ATUO_ID = d.CPT_ATUO_ID);
-				
-		select @SumofAmount=sum(isnull(amount,0)) from BILLS_WITH_PROCEDURE_CODES where fk_Treatment_Id=@Treatment_Id
+		
+		select @count=count(t1.Auto_Proc_id) from  
+		MST_PROCEDURE_CODES t1
+		join BILLS_WITH_PROCEDURE_CODES t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
+		where t2.fk_Treatment_Id=@Treatment_Id and t1.Specialty='Law Firm Code'
+
+		if(@count>0)
+		begin
+			select @SumofAmount=sum(isnull(t1.amount,0)),@sumRegionIV=sum(isnull(t1.FeeSchedule,0))
+			from BILLS_WITH_PROCEDURE_CODES t1
+			join MST_PROCEDURE_CODES t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
+			where fk_Treatment_Id=@Treatment_Id and t2.Specialty='Law Firm Code'
+		end
+		else
+		begin		
+		select @SumofAmount=sum(isnull(amount,0)),@sumRegionIV=sum(isnull(FeeSchedule,0))
+		from BILLS_WITH_PROCEDURE_CODES where fk_Treatment_Id=@Treatment_Id
+		end
+
 
 		Update tblTreatment set 
 		Claim_Amount = @SumofAmount,
-		Fee_Schedule = @SumofAmount
+		Fee_Schedule = @sumRegionIV
 		Where Treatment_Id = @Treatment_Id or (ISNULL(BILL_NUMBER,'') = ISNULL(@BILL_NUMBER,'') AND ISNULL(BILL_NUMBER,'') <> '')
 	End
 	
@@ -78,11 +115,29 @@ Declare @Treatment_Id int,@Amount decimal(18, 2), @ins_fee_schedule decimal(18, 
 	If exists(select * from deleted) and not exists(Select * from inserted)
 	Begin
 	 SELECT @Treatment_Id = fk_Treatment_Id, @Amount = isnull(Amount,0), @ins_fee_schedule = isnull(ins_fee_schedule,0), @BILL_NUMBER = BillNumber from deleted i;
-	 select @SumofAmount=sum(isnull(amount,0)) from BILLS_WITH_PROCEDURE_CODES where fk_Treatment_Id=@Treatment_Id
+
+	 select @count=count(t1.Auto_Proc_id) from  
+		MST_PROCEDURE_CODES t1
+		join BILLS_WITH_PROCEDURE_CODES t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
+		where t2.fk_Treatment_Id=@Treatment_Id and t1.Specialty='Law Firm Code'
+
+		if(@count>0)
+		begin
+			select @SumofAmount=sum(isnull(t1.amount,0)),@sumRegionIV=sum(isnull(t1.FeeSchedule,0))
+			from BILLS_WITH_PROCEDURE_CODES t1
+			join MST_PROCEDURE_CODES t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
+			where fk_Treatment_Id=@Treatment_Id and t2.Specialty='Law Firm Code'
+		end
+		else
+		begin
+			select @SumofAmount=sum(isnull(amount,0)) ,@sumRegionIV=sum(isnull(FeeSchedule,0))
+			from BILLS_WITH_PROCEDURE_CODES where fk_Treatment_Id=@Treatment_Id
+		end
+	
 
 		Update tblTreatment set 
 		Claim_Amount = @SumofAmount,
-		Fee_Schedule = @SumofAmount
+		Fee_Schedule = @sumRegionIV
 		Where Treatment_Id = @Treatment_Id or (ISNULL(BILL_NUMBER,'') = ISNULL(@BILL_NUMBER,'') AND ISNULL(BILL_NUMBER,'') <> '')
 
 		--Update tblTreatment set 

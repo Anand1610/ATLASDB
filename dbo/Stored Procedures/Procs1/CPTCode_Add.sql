@@ -17,7 +17,7 @@
    @s_a_ICD10_2 VARCHAR(100),
    @s_a_ICD10_3 VARCHAR(100),
    @Auto_Proc_id int =null,
-   @FeeSchedule MONEY =NULL
+   @FeeSchedule money=null
    --@s_a_refund_date VARCHAR(20)
 )
 AS
