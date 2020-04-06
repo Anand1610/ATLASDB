@@ -15,7 +15,7 @@ AS
 			Inner Join tblTags T on T.NodeID=IT.TagID 
 			INNER JOIN dbo.LCJ_VW_CaseSearchDetails LCJ ON T.CaseID=LCJ.Case_Id
 			Where FilePath like ''%ARB Docs%'' and Filename like ''%_ARB_FILED_%''  and Filename like ''%.pdf''
-			and LCJ.INSURANCE_NAME not in ( ''ALLSTATE INSURANCE COMPANY'',''GEICO INSURANCE COMPANY'') '
+			and LCJ.INSURANCE_NAME not in ( ''ALLSTATE INSURANCE COMPANY'',''GEICO INSURANCE COMPANY'') AND IT.IsDeleted=0 and I.IsDeleted=0 '
 		END  
 		ELSE
 		IF (@rblArb = '0')
@@ -24,7 +24,7 @@ AS
 			Inner Join tblImageTag IT on IT.ImageID=i.ImageID  
 			Inner Join tblTags T on T.NodeID=IT.TagID 
 			INNER JOIN dbo.LCJ_VW_CaseSearchDetails LCJ ON T.CaseID=LCJ.Case_Id
-			Where FilePath like ''%ARB Docs%'' and Filename like ''%AAA DEMAND PACKET%''  and Filename like ''%.pdf'''
+			Where IT.IsDeleted=0 and I.IsDeleted=0 AND FilePath like ''%ARB Docs%'' and Filename like ''%AAA DEMAND PACKET%''  and Filename like ''%.pdf'''
 			
 		END
 		if @dt_From <>'1/1/0001' and @dt_To<>'1/1/0001' and @dt_From<>'' and @dt_To<>''
