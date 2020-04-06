@@ -13,8 +13,18 @@ BEGIN
 		isDeleted=ISNULL(Q.isDeleted,0),    
 		FaxQueueID,  
 		PhysicalBasePath=(SELECT TOP 1 BP.PhysicalBasePath FROM tblBasePath BP JOIN tblApplicationSettings APS ON BP.BasePathId = APS.ParameterValue WHERE ParameterName = 'BasePathId'),  
-		FilePath=(SELECT TOP 1 FilePath FROM tblDocImages DI WHERE DI.ImageID = R.documentImageID),  
-		NodeID=(SELECT TOP 1 T.NodeID FROM tblTags T JOIN tblImageTag IT ON T.NodeID = IT.TagID WHERE T.CaseID = R.case_Id AND T.DomainId = R.DomainID AND IT.ImageID = R.documentImageID),  
+		FilePath=(SELECT TOP 1 FilePath FROM tblDocImages DI WHERE DI.ImageID = R.documentImageID
+		
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		and DI.IsDeleted=0
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		
+		),  
+		NodeID=(SELECT TOP 1 T.NodeID FROM tblTags T JOIN tblImageTag IT ON T.NodeID = IT.TagID WHERE T.CaseID = R.case_Id AND T.DomainId = R.DomainID AND IT.ImageID = R.documentImageID
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND   IT.IsDeleted=0 
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		),  
 		SZ_CASE_ID=R.case_Id,  
 		BasePathId=(SELECT TOP 1 BP.BasePathId FROM tblBasePath BP JOIN tblApplicationSettings APS ON BP.BasePathId = APS.ParameterValue WHERE ParameterName = 'BasePathId'),  
 		SentByUserID=(SELECT TOP 1 U.UserId FROM IssueTracker_Users U WHERE LOWER(U.UserName) = LOWER(SentByUser) AND U.DomainId = Q.Domain_Id)  
