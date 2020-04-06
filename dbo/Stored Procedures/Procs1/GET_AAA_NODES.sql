@@ -14,7 +14,10 @@ BEGIN
 	usr.userid=RTRIM(imgtag.loginid)
 	inner join dbo.tblcase c on
 	c.Case_Id=tag.CaseID
-	where nodename =''' + @NodeName + ''''
+	where imgtag.IsDeleted=0 AND doc.IsDeleted=0 AND nodename =''' + @NodeName + ''''
+	---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+	--imgtag.IsDeleted=0 AND doc.IsDeleted=0 AND added
+	---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 	
 	if @dt_From <>'1/1/0001' and @dt_To<>'1/1/0001' and @dt_From<>'' and @dt_To<>''
 	begin  
