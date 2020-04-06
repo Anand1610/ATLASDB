@@ -39,7 +39,9 @@ INSERT INTO #TEMP
    tblImageTag IT ON IT.ImageID=i.ImageID INNER JOIN   
    tblTags T ON T.NodeID=IT.TagID AND T.CaseID=@CASEID LEFT JOIN   
    tblApplicationSettings s ON s.parametername='DocumentUploadLocation'  
-    
+    ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		 AND IT.isdeleted=0  and I.Isdeleted  =0 
+  ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 ELSE  
 INSERT INTO #TEMP    
  SELECT   
@@ -72,7 +74,9 @@ INSERT INTO #TEMP
   tblImageTag IT ON IT.ImageID=i.ImageID INNER JOIN   
   tblTags T ON T.NodeID=IT.TagID and T.CaseID=@CASEID LEFT JOIN   
   tblApplicationSettings s ON s.parametername='ArchivedDocumentUploadLocation'
-   
+   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		 AND IT.isdeleted=0  and I.Isdeleted  =0 
+  ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 if @UserId=0   
 SELECT * FROM #TEMP   ORDER BY   nodelevel,orderby 
 else
