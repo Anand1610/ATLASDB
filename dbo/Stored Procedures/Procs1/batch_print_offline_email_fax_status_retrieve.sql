@@ -26,6 +26,11 @@ AS BEGIN
 		ISNULL(BPEF.isDeleted,0)	=	0	AND
 		BPEF.DomainID				=	@DomainID	AND
 		fk_batch_print_id			=	@fk_batch_print_id
+
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND RI.IsDeleted=0 and FAI.IsDeleted=0
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+
 	ORDER BY
 		pk_bp_ef_status_id ASC
 END
