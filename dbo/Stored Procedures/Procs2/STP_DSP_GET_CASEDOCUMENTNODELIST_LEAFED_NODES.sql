@@ -56,6 +56,9 @@ CREATE TABLE #TEMP(NodeID NVARCHAR(100),ParentID INT,Nodename_code NVARCHAR(MAX)
   WHERE   
     CaseID = @CASEID AND parentid IS NOT NULL   
     and t.DomainId=@DomainId  
+	---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND tit.IsDeleted=0
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
   UNION  
   SELECT   
     'IMG-' + Cast(I.ImageID as nvarchar),   
@@ -75,6 +78,10 @@ CREATE TABLE #TEMP(NodeID NVARCHAR(100),ParentID INT,Nodename_code NVARCHAR(MAX)
     tblBasePath B ON B.BasePathId = I.BasePathId  
     --tblApplicationSettings s ON s.parametername='DocumentUploadLocation'   
   WHERE I.DomainId=@DomainId   
+   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		  AND I.IsDeleted=0 AND IT.IsDeleted=0
+  ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+
       
  END   
  ELSE  
@@ -115,7 +122,9 @@ CREATE TABLE #TEMP(NodeID NVARCHAR(100),ParentID INT,Nodename_code NVARCHAR(MAX)
      tblBasePath B ON B.BasePathId = I.BasePathId  
      --tblApplicationSettings s ON s.parametername='DocumentUploadLocation'  
    WHERE I.DomainId=@DomainId  
-       
+         ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND I.IsDeleted=0 AND IT.IsDeleted=0
+  ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
      
   ELSE  
   INSERT iNTO #TEMP  
@@ -151,7 +160,10 @@ CREATE TABLE #TEMP(NodeID NVARCHAR(100),ParentID INT,Nodename_code NVARCHAR(MAX)
     tblBasePath B ON B.BasePathId = I.BasePathId  
     --tblApplicationSettings s ON s.parametername='ArchivedDocumentUploadLocation'     
    WHERE I.DomainId=@DomainId    
-      
+        ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND I.IsDeleted=0 AND IT.IsDeleted=0
+  ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+
  END  
    
  if @UserId=0     
@@ -177,6 +189,10 @@ CREATE TABLE #TEMP(NodeID NVARCHAR(100),ParentID INT,Nodename_code NVARCHAR(MAX)
    --tblApplicationSettings s ON s.parametername='DocumentUploadLocation'  
    LEFT JOIN dbo.IssueTracker_Users  ON UserId   = CASE WHEN  ISNUMERIC(loginid)= 1 THEN  loginid ELSE 1 END    
   WHERE I.DomainId = @DomainId  
+   
+  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND I.IsDeleted=0 AND IT.IsDeleted=0
+  ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
   ORDER BY   
    nodelevel  
   
