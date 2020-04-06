@@ -732,7 +732,6 @@
     <Build Include="dbo\Stored Procedures\Procs1\ChangeBillStatusToImported.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\check_batch_print_queue_delay.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\check_bill_number_exists.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\Check_Case_Claim_Amount.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\check_case_entity_email_or_fax_number_exists.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\CHECK_CASE_EXIST.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\check_case_ids_exists.sql" />
