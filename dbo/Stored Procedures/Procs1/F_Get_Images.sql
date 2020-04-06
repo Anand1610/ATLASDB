@@ -25,6 +25,10 @@ INNER JOIN  dbo.tblInsuranceCompany INS WITH (NOLOCK) ON LCJ.InsuranceCompany_Id
 INNER JOIN dbo.tblProvider pro WITH (NOLOCK) ON LCJ.Provider_Id = pro.Provider_Id
 WHERE T.CaseID=@Case_Id --and Filename like '%.pdf%'
 AND ISNULL(LCJ.IsDeleted,0) = 0
+---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+AND I.IsDeleted=0 AND IT.IsDeleted=0   
+---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+
 END              
 IF(ISNULL(@SearchInputType,'') ='Search By ScanDocs')            
 BEGIN            
