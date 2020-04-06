@@ -89,7 +89,8 @@ begin
 				RegionIVfeeScheduleAmount,
 				Comment
 		from	MST_PROCEDURE_CODES
-		where	DomainId=@DomainId and IsDeleted=0
+		where	DomainId=@DomainId 
+		and isnull(IsDeleted,0)=0
 	end
 
 		if(@Flag='Delete')
