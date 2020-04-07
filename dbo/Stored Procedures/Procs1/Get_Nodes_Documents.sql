@@ -49,5 +49,8 @@ BEGIN
 		  T.CaseID in  (SELECT items FROM dbo.STRING_SPLIT(@S_l_Packeted_Case_Ids,',')) AND   
 		  LOWER(I.Filename) like '%.pdf%'  
 		  AND NodeName in (Select s from SplitString(@s_a_Nodes, ','))
+		    ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+           AND I.IsDeleted=0 AND IT.IsDeleted=0  
+          ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 		  Order by NodeName 
 END

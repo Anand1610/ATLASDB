@@ -10,7 +10,12 @@
 AS
 BEGIN 
 SET NOCOUNT ON
-	IF((SELECT ISNULL(COUNT(*),0) FROM dbo.tblDocImages WHERE IMAGEID=@i_a_IMAGEID AND DomainId	= @DomainId) <> 0)  
+	IF((SELECT ISNULL(COUNT(*),0) FROM dbo.tblDocImages WHERE IMAGEID=@i_a_IMAGEID AND DomainId	= @DomainId
+	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+    AND IsDeleted=0  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
+	
+	) <> 0)  
 	BEGIN  
 		UPDATE
 			dbo.tblDocImages
@@ -24,7 +29,9 @@ SET NOCOUNT ON
 		WHERE 
 			IMAGEID			=	@i_a_IMAGEID		AND
 			DomainId		=	@DomainId
-
+			 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+         AND IsDeleted=0  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 		UPDATE
 				dbo.tblImageTag
 		SET
@@ -32,6 +39,9 @@ SET NOCOUNT ON
 		WHERE
 				ImageID			=	@i_a_IMAGEID 
 				AND @DomainId	=	DomainId
+				 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+         AND IsDeleted=0  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 				
 				
 		DECLARE @i_l_duplicate INT = 0	
