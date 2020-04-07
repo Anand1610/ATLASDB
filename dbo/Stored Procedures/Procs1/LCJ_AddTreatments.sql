@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[LCJ_AddTreatments]
+﻿CREATE PROCEDURE [dbo].[LCJ_AddTreatments]
 (
 	@DomainId NVARCHAR(50),
 	@Case_Id nvarchar(100),
@@ -74,7 +73,7 @@ DECLARE @Treatment_Id INT
 			@Date_BillSent,
 			@ServiceType,
 			@Account_Number,
-			@Fee_Schedule,
+			case when @DomainId='af' then 0 else @Fee_Schedule end ,
 			@DenialReason_ID,
 			@PeerReviewDoctor,
 			@TreatingDoctor_ID,
