@@ -246,7 +246,7 @@ BEGIN
 
 			if(@oldStatus <> @newStatus)
 			BEGIN
-			 IF (dbo.CheckStatusHierarchy(@Case_id, @oldStatus, @newStatus, @User_Id, @DomainId) = 1 OR @DomainId!='AMT')
+			 IF (dbo.CheckStatusHierarchy(@Case_id, @oldStatus, @newStatus, @User_Id, @DomainId) = 1 OR @DomainId not in ('PDC','AMT'))
     BEGIN
     UPDATE tblcase SET STATUS = @newStatus WHERE CASE_ID = @Case_Id AND DomainId = @DomainId  
     set @NDesc = 'Status changed from ' + @oldStatus + ' to ' + @newStatus     
