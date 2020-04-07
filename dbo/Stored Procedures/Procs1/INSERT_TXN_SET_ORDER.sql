@@ -11,7 +11,13 @@ BEGIN
 
 	SELECT @BASEFOLDER=PARAMETERVALUE FROM tblApplicationSettings WHERE PARAMETERNAME='DocumentUploadLocationPhysical' and DomainId=@DomainId
 	SELECT @SZ_FILENAME = FILENAME FROM TBLDOCIMAGES WHERE IMAGEID = @IMAGEID and DomainId=@DomainId
+	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+    AND IsDeleted=0  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 	SELECT @SZ_FILEPATH = @BASEFOLDER + @DomainId+'/' + FILEPATH + FILENAME FROM TBLDOCIMAGES WHERE IMAGEID=@IMAGEID and DomainId=@DomainId
+	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+    AND IsDeleted=0  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 
 	SET @SEQ_ORDER = (SELECT ISNULL(MAX(SEQ_ORDER + 1),1) FROM TXN_SET_ORDER WHERe DomainId = @DomainId)
 	
