@@ -206,7 +206,7 @@ BEGIN
 
 
 
-		WHERE Filename like ''%.pdf'') AS [DM_Files],
+		WHERE Filename like ''%.pdf'' and I.IsDeleted=0 and IT.IsDeleted=0) AS [DM_Files],
 
 
 
@@ -263,7 +263,9 @@ BEGIN
 
 
 		  
-
+ ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+			 --and I.IsDeleted=0 and IT.IsDeleted=0 added
+			---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 
 
 
