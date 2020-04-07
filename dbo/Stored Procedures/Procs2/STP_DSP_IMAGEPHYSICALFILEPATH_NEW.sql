@@ -16,7 +16,9 @@ SET NOCOUNT ON
 	FROM  @Images T 
 	Left JOIN tblDocImages I  ON T.ImageId=I.ImageID
 	left Join tblBasePath B ON B.BasePathId=I.BasePathId
-	
+	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+    where  I.IsDeleted=0  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 	
 
 	
