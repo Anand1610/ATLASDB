@@ -166,7 +166,7 @@ BEGIN
 
 
 
-            Join dbo.tblTags  T on T.DomainId = IT.DomainId and T.NodeID = IT.TagID And T.NodeName =''NOTICE OF TRIAL'' and T.CaseID= a.CASE_ID ) AS NOT_IN_DM,
+            Join dbo.tblTags  T on T.DomainId = IT.DomainId and T.NodeID = IT.TagID And T.NodeName =''NOTICE OF TRIAL'' and T.CaseID= a.CASE_ID WHERE I.IsDeleted=0 AND IT.IsDeleted=0) AS NOT_IN_DM,
 
 
 
@@ -222,7 +222,7 @@ BEGIN
 
 
 
-            Join dbo.tblTags  T on T.NodeID = IT.TagID AND T.DomainId = IT.DomainId And T.NodeName =''NOTICE OF TRIAL CONFIRMED'' and T.CaseID= a.CASE_ID ) AS NOT_Con_IN_DM,
+            Join dbo.tblTags  T on T.NodeID = IT.TagID AND T.DomainId = IT.DomainId And T.NodeName =''NOTICE OF TRIAL CONFIRMED'' and T.CaseID= a.CASE_ID WHERE I.IsDeleted=0 AND IT.IsDeleted=0) AS NOT_Con_IN_DM,
 
 
 
