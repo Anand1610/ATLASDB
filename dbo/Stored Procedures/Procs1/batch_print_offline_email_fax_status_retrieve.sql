@@ -19,17 +19,21 @@ AS BEGIN
 	FROM
 		tbl_batch_print_offline_email_fax_status BPEF (NOLOCK)
 		LEFT JOIN tblDocImages RI (NOLOCK) ON RI.ImageID = BPEF.documentImageID AND RI.DomainId = @DomainID
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		AND RI.IsDeleted=0  
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		LEFT JOIN tblBasePath RIBP (NOLOCK) ON RIBP.BasePathId = RI.BasePathId
 		LEFT JOIN tblDocImages FAI (NOLOCK) ON FAI.ImageID = BPEF.FaxAcknowledgementImageID AND FAI.DomainId = @DomainID
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		 and FAI.IsDeleted=0
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		LEFT JOIN tblBasePath FABP (NOLOCK) ON FABP.BasePathId = FAI.BasePathId
 	WHERE
 		ISNULL(BPEF.isDeleted,0)	=	0	AND
 		BPEF.DomainID				=	@DomainID	AND
 		fk_batch_print_id			=	@fk_batch_print_id
 
-		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
-		AND RI.IsDeleted=0 and FAI.IsDeleted=0
-        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		
 
 	ORDER BY
 		pk_bp_ef_status_id ASC
