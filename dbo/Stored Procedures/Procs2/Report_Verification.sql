@@ -77,10 +77,19 @@ BEGIN
 			--JOIN tblprovider pro on cas.provider_id=pro.provider_id 
 			--JOIN tblinsurancecompany ins on cas.insurancecompany_id=ins.insurancecompany_id
 			LEFT JOIN tblDocImages RI ON RI.ImageID = VR.RequestImageID
+			 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+             AND RI.IsDeleted=0  
+           ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 			LEFT JOIN tblBasePath RIBP ON RIBP.BasePathId = RI.BasePathId			
 			LEFT JOIN tblDocImages FAI ON FAI.ImageID = VR.FaxAcknowledgementImageID
+			 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+              AND FAI.IsDeleted=0   
+           ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 			LEFT JOIN tblBasePath FABP ON FABP.BasePathId = FAI.BasePathId
 			LEFT JOIN tblDocImages MRI ON MRI.ImageID = VR.ManualResponseImageID
+			 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+              AND MRI.IsDeleted=0  
+           ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 			LEFT JOIN tblBasePath MRBP ON MRBP.BasePathId = MRI.BasePathId
 			LEFT JOIN tbl_verification_type VT (NOLOCK) ON VT.vr_type_Id = VR.vr_type_Id
 		WHERE
@@ -101,9 +110,7 @@ BEGIN
 			AND (@s_a_dt_response_date_to = '' OR (CAST(CONVERT(VARCHAR,VR.DT_VERIFICATION_REPLIED,101) AS DATETIME) <= CONVERT(datetime,@s_a_dt_response_date_to))))
 			AND (@s_a_bill_no = '' OR VR.SZ_CASE_ID IN (SELECT DISTINCT Case_Id FROM tbltreatment WHERE BILL_NUMBER  LIKE '%' + @s_a_bill_no + '%'))
 			AND (@s_a_vr_type='0' OR VR.vr_type_Id = @s_a_vr_type)
-			 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-             AND RI.IsDeleted=0 and FAI.IsDeleted=0 AND MRI.IsDeleted=0  
-           ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+			 
 	ORDER BY
 			VR.I_VERIFICATION_ID DESC
 			OPTION	(RECOMPILE)
