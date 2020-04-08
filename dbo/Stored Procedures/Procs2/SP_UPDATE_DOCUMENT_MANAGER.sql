@@ -18,7 +18,9 @@ UPDATE dbo.TEST_PRI SET DM_Transfer = 1 where Case_ID_Old = @SZ_OLD_CASE_ID
 
 		update tbldocimages set FilePath = replace(replace(FilePath,@SZ_OLD_CASE_ID,@SZ_NEW_CASE_ID),'/','\')
 		where FilePath like '%' +@SZ_OLD_CASE_ID +'%'
-			
+		  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+        AND IsDeleted=0  
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  	
 		
 		
 		
