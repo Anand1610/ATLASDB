@@ -59,14 +59,12 @@ BEGIN
 		,tc.DenialReasons_Type AS DenialReasons
 		,DateDiff(dd, ISNULL(tc.Date_Status_Changed, tc.Date_Opened), GETDATE()) AS Status_Age
 		,DateDiff(dd, tc.Date_Opened, GETDATE()) AS Case_Age
-		,'' AS [Check_Number]
 		,ISNULL(Service_Type, '') AS Service_Type
 	FROM tblCase tc(NOLOCK)
 	INNER JOIN tbltreatment tt(NOLOCK) ON tt.Case_Id = tc.Case_Id
 	INNER JOIN tblProvider tp(NOLOCK) ON tp.Provider_Id = tc.Provider_Id
 	LEFT JOIN tbl_portfolio PF(NOLOCK) ON tc.PortfolioId = PF.id
 	LEFT JOIN tblinsurancecompany tic(NOLOCK) ON tc.insurancecompany_id = tic.insurancecompany_id
-	--LEFT JOIN tblTransactions txn(NOLOCK) ON txn.Case_Id = tc.Case_Id
 	WHERE tc.Provider_Id IN (
 			SELECT ITEMS
 			FROM dbo.STRING_SPLIT(@ProviderId, ',')
