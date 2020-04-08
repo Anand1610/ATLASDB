@@ -47,7 +47,11 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		FROM   
 			tblTags T (NOLOCK)
 		WHERE   
-			NodeID IN (SELECT DISTINCT(CAST(T.parentid AS NVARCHAR)) NodeID FROM tblTags T JOIN tblimagetag tit ON t.nodeid = tit.tagid WHERE CaseID = @s_a_fk_case_id AND parentid IS NOT NULL) AND T.ParentID IS NOT NULL  
+			NodeID IN (SELECT DISTINCT(CAST(T.parentid AS NVARCHAR)) NodeID FROM tblTags T JOIN tblimagetag tit ON t.nodeid = tit.tagid WHERE CaseID = @s_a_fk_case_id AND parentid IS NOT NULL
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		    AND tit.IsDeleted=0
+            ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+			) AND T.ParentID IS NOT NULL  
 		UNION ALL
 		SELECT DISTINCT  
 			CAST(T.NodeID AS VARCHAR(MAX)) AS NodeID,
@@ -62,6 +66,9 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		WHERE
 			CaseID = @s_a_fk_case_id AND 
 			parentid IS NOT NULL    
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+	    	AND  tit.IsDeleted=0
+            ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		UNION ALL
 		SELECT
 			'IMG-'+CAST(I.ImageID AS VARCHAR(MAX)) AS NodeID,     
@@ -78,6 +85,9 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 			--tblBasePath BP (NOLOCK) ON BP.BasePathId = s.ParameterValue
 		WHERE
 			LOWER(I.FileName) like '%.pdf%'
+				---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		    AND I.IsDeleted=0 AND IT.IsDeleted=0
+            ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		ORDER BY     
 			ParentID,
 			order_by
