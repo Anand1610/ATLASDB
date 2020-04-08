@@ -15,10 +15,11 @@ SET NOCOUNT ON
 	 case  when T.ImageId >6 then convert(varchar(10),I.BasePathId) else '' end [BasePathId]
 	FROM  @Images T 
 	Left JOIN tblDocImages I  ON T.ImageId=I.ImageID
-	left Join tblBasePath B ON B.BasePathId=I.BasePathId
 	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-    where  I.IsDeleted=0  
+    AND  I.IsDeleted=0  
     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+	left Join tblBasePath B ON B.BasePathId=I.BasePathId
+	
 	
 
 	
