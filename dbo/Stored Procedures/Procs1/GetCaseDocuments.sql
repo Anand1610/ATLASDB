@@ -37,15 +37,20 @@ left join tbl_Portfolio pfl with(nolock)  on pfl.Id=cas.PortfolioId
 left JOIN tblprovider pro (NOLOCK) on cas.provider_id=pro.provider_id and pro.DomainId= @DOMAINID 
 LEFT outer JOIN  tblTags tgs   with(nolock)  on tgs.CASEID=cas.Case_Id
  left JOIN tblImageTag tblImg with(nolock)  ON tgs.Nodeid = tblImg.tagid
+ ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+AND tblImg.IsDeleted=0  
+---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+
  left JOIN tblDocImages docimg with(nolock)  on tblImg.ImageID = docimg.ImageID
+ ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+ AND docimg.IsDeleted=0
+---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+
 where cas.DomainId= @DOMAINID
 AND  tgs.nodename in ('Correspondence' ,'Defense pleadings','DISCOVERY','MOTIONS/RESPONSES','Plaintiff pleadings','Proof of Notice','Checks and Releases','Settlement Letter')
 AND (@s_a_PortfolioId = '0' OR @s_a_PortfolioId = '' OR cas.PortfolioId  IN (SELECT  cast(items as INT )  FROM dbo.STRING_SPLIT(@s_a_PortfolioId,',')))
 AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))
 AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
----Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
-AND tblImg.IsDeleted=0 AND docimg.IsDeleted=0
----End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 
 order by cas.Case_Id,NodeName
 END
