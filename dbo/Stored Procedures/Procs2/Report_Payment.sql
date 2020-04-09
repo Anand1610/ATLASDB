@@ -19,20 +19,34 @@
   
 AS  
 BEGIN  
+
     
-	print @s_a_Transactions_Type_mul
+	select tre.Case_Id,
+max(tre.BILL_NUMBER) BILL_NUMBER,
+min(tre.DateOfService_Start) [DateOfService_Start],
+max(tre.DateOfService_End) [DateOfService_End],
+max(tre.Date_BillSent) Date_BillSent,
+max(tre.SERVICE_TYPE) SERVICE_TYPE
+into #temp
+ from tblTreatment tre where tre.DomainId=@domainId
+ group by tre.Case_Id
+
+
+
+
    
-  SELECT distinct  
-   trans.Transactions_Id,   
-   max(trans.Case_Id) AS Case_Id,  
-   max(tre.BILL_NUMBER) AS BILL_NUMBER,  
-   CONVERT(VARCHAR(10),max(tre.DateOfService_Start),101) AS DateOfService_Start,  
-   CONVERT(VARCHAR(10),max(tre.DateOfService_End),101) AS DateOfService_End,  
-   max(pro.Provider_Name) AS Provider_Name,  
-   max(cas.InjuredParty_LastName + ', ' + cas.InjuredParty_FirstName) as InjuredParty_Name,  
-   max(LTRIM(RTRIM(LEFT(ins.InsuranceCompany_Name,15)))) AS InsuranceCompany_Name,   
-   max(pro.Provider_Local_Address) AS Provider_Local_Address,  
-   cas.IndexOrAAA_Number,
+
+select  
+trans.Transactions_Id,   
+trans.Case_Id as Case_Id,
+tre.BILL_NUMBER AS BILL_NUMBER,
+tre.DateOfService_Start AS DateOfService_Start,  
+tre.DateOfService_End AS DateOfService_End, 
+pro.Provider_Name  AS Provider_Name, 
+
+cas.InjuredParty_LastName + ', ' + cas.InjuredParty_FirstName as InjuredParty_Name,
+LTRIM(RTRIM(LEFT(ins.InsuranceCompany_Name,15))) AS InsuranceCompany_Name,   
+  cas.IndexOrAAA_Number,
    (CASE WHEN Date_AAA_Arb_Filed IS NULL OR Date_AAA_Arb_Filed = '' THEN ''
 				ELSE convert(varchar(10), Date_AAA_Arb_Filed,101)
 				END
@@ -43,36 +57,36 @@ BEGIN
 		) AS Date_Index_Number_Purchased,
    trans.ChequeNo,  
    trans.CheckDate,  
-   convert(decimal(38,2),trans.Transactions_Amount) AS Transactions_Amount,  
-   CONVERT(VARCHAR(10),max(tre.Date_BillSent), 101) AS BillDate_submitted,   -- POMGenerated  
-   CONVERT(VARCHAR(10), trans.Transactions_Date, 101) AS Payment_date,  
+pro.Provider_Local_Address  AS Provider_Local_Address,
+  convert(decimal(38,2),trans.Transactions_Amount) AS Transactions_Amount,  
+ CONVERT(VARCHAR(10),(tre.Date_BillSent), 101) AS BillDate_submitted,
+    CONVERT(VARCHAR(10), trans.Transactions_Date, 101) AS Payment_date,  
    trans.Transactions_Type,  
    transtype.Report_Type,  
-   max(tre.SERVICE_TYPE) AS SERVICE_TYPE,  
+   (tre.SERVICE_TYPE) AS SERVICE_TYPE,  
    trans.BatchNo,  
    trans.Transactions_Description,  
    trans.User_Id,  
-   --Provider_Name + ISNULL(' [ ' + pro.Provider_Groupname + ' ]','') as Provider_Name,    
-   convert(decimal(38,2),(convert(money,convert(float,max(cas.Claim_Amount))))) as Claim_Amount,  
-   convert(decimal(38,2),(convert(money,convert(float,max(cas.Paid_Amount))))) as Paid_Amount,  
-   convert(decimal(38,2),(convert(money,convert(float,max(cas.Claim_Amount)) - convert(float,max(cas.Paid_Amount))))) as Claim_Balance,  
-   convert(decimal(38,2),(convert(money,convert(float,max(cas.Fee_Schedule))))) as Fee_Schedule,  
-   convert(decimal(38,2),(convert(money,convert(float,max(cas.Fee_Schedule)) - convert(float,max(cas.Paid_Amount))))) as FS_Balance,  
-   max(cas.Initial_Status) AS Initial_Status,  
-   max(pro.Provider_GroupName) AS Provider_GroupName,  
-   --max(doc.DOCTOR_NAME) AS DOCTOR_NAME,   
-   convert(decimal(38,2),(select sum(Transactions_Amount) from tblTransactions(NOLOCK) where DomainId= cas.DomainId and case_id = cas.Case_Id and Transactions_Type IN ('C','PreC','ProCToP'))) AS Paid_Principal ,  
-   convert(decimal(38,2),(convert(money,convert(float,max(cas.Claim_Amount)) - convert(float,(select sum(Transactions_Amount) from tblTransactions(NOLOCK) where DomainId= cas.DomainId and case_id = cas.Case_Id and Transactions_Type IN ('C','PreC','ProCToP
+     convert(decimal(38,2),(convert(money,convert(float,(cas.Claim_Amount))))) as Claim_Amount,  
+   convert(decimal(38,2),(convert(money,convert(float,(cas.Paid_Amount))))) as Paid_Amount,  
+   convert(decimal(38,2),(convert(money,convert(float,(cas.Claim_Amount)) - convert(float,(cas.Paid_Amount))))) as Claim_Balance,  
+   convert(decimal(38,2),(convert(money,convert(float,(cas.Fee_Schedule))))) as Fee_Schedule,  
+   convert(decimal(38,2),(convert(money,convert(float,(cas.Fee_Schedule)) - convert(float,(cas.Paid_Amount))))) as FS_Balance,  
+   (cas.Initial_Status) AS Initial_Status,  
+   (pro.Provider_GroupName) AS Provider_GroupName,
+ isnull(convert(decimal(38,2),(select sum(isnull(tblTransactions.Transactions_Amount,0)) from tblTransactions(NOLOCK) where tblTransactions.DomainId= cas.DomainId and tblTransactions.case_id = cas.Case_Id and tblTransactions.Transactions_Type IN ('C','PreC','ProCToP'))),0) AS Paid_Principal ,  
+   convert(decimal(38,2),(convert(money,convert(float,(cas.Claim_Amount)) - convert(float,(select isnull( sum(isnull(tblTransactions.Transactions_Amount,0)),0) 
+   from tblTransactions(NOLOCK) where tblTransactions.DomainId= cas.DomainId and tblTransactions.case_id = cas.Case_Id and tblTransactions.Transactions_Type IN ('C','PreC','ProCToP
 ')))))) as Calim_Pricipal_Balance  ,
 case when cas.portfolioid is null or cas.portfolioid =0 then '' else  ISNULL(port.Name,'') end AS PortfolioName
-  FROM  dbo.tblCase cas with(nolock)  
-  INNER JOIN dbo.tblprovider pro with(nolock) on cas.provider_id=pro.provider_id   
-  INNER JOIN dbo.tblinsurancecompany ins with(nolock) on cas.insurancecompany_id=ins.insurancecompany_id  
-  LEFT OUTER JOIN dbo.tblTreatment tre with(nolock) on tre.Case_Id= cas.Case_Id  
-  INNER JOIN tblTransactions trans with(nolock) on cas.case_id = trans.Case_Id  
-  LEFT JOIN tblOperatingDoctor doc with(nolock) on  doc.Doctor_Id =tre.Doctor_Id   
-  INNER JOIN tblTransactionType transtype with(nolock) on trans.Transactions_Type=transtype.payment_value
-  OUTER APPLY(SELECT port.Id, port.Name from tbl_Portfolio port with(nolock) where port.domainid=@domainId and cas.PortfolioId = port.ID) as port
+  FROM  tblCase cas with(nolock)  
+  JOIN tblprovider pro with(nolock) on cas.provider_id=pro.provider_id   
+  JOIN tblinsurancecompany ins with(nolock) on cas.insurancecompany_id=ins.insurancecompany_id  
+ LEFT JOIN #temp tre with(nolock) on tre.Case_Id= cas.Case_Id  
+  JOIN tblTransactions trans with(nolock) on cas.case_id = trans.Case_Id  
+--  LEFT JOIN tblOperatingDoctor doc with(nolock) on  doc.Doctor_Id =tre.Doctor_Id   
+  JOIN tblTransactionType transtype with(nolock) on trans.Transactions_Type=transtype.payment_value
+  left join  tbl_Portfolio port on port.id=cas.PortfolioId
 	
   WHERE  
    cas.DomainId =@domainId  AND ISNULL(cas.IsDeleted, 0) = 0  and ((@domainId='JL' and Transactions_Type!='FFB') OR @domainId!='JL')
@@ -94,23 +108,9 @@ case when cas.portfolioid is null or cas.portfolioid =0 then '' else  ISNULL(por
    
    ))  
    AND   ((@s_a_Portfolio_Id = 0 ) OR port.Id = @s_a_Portfolio_Id) 
-   Group by   
-   trans.Transactions_Id  
-   , cas.IndexOrAAA_Number
-   , cas.Date_AAA_Arb_Filed
-   , cas.Date_Index_Number_Purchased
-   , trans.ChequeNo  
-   , trans.CheckDate  
-   , trans.Transactions_Amount  
-   , trans.Transactions_Date  
-   , trans.Transactions_Type  
-   , trans.BatchNo  
-   , trans.Transactions_Description  
-   , trans.User_Id  
-   , cas.DomainId  
-   , cas.Case_Id  
-   , transtype.Report_Type  
-   ,port.Name,
-   cas.portfolioid
-   OPTION (RECOMPILE)  
+  
+  order by trans.Case_Id,tre.BILL_NUMBER 
+
+  OPTION (RECOMPILE)  
+
 END  
