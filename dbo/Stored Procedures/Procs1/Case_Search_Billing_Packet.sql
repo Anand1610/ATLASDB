@@ -287,9 +287,10 @@ BEGIN
 				)
 			AND (
 				cas.Case_Id LIKE 'ACT%'
-			    ---Start of  changes for LSS-490 done on 9 APRIL 2020  By Tushar Chandgude  
-                 oR (Initial_Status = 'ARB' AND @DomainId='BT' AND Status='ARB PREP - STANDBY')
-               ---End   of  changes for LSS-490 done on 9 APRIL 2020  By Tushar Chandgude  
+                OR Initial_Status = 'PRE-ARB'  
+				 ---Start of  changes for LSS-490 done on 9 APRIL 2020  By Tushar Chandgude  
+				oR (Initial_Status = 'ARB' AND @DomainId='BT' AND Status='ARB PREP - STANDBY')
+				 ---End   of  changes for LSS-490 done on 9 APRIL 2020  By Tushar Chandgude  
 				) --and status <> 'IN ARB OR LIT'
 			AND (
 				@s_a_CurrentStatusGroupSel = ''
@@ -466,10 +467,9 @@ BEGIN
 			AND (
 				cas.Case_Id LIKE 'ACT%'
 				OR Initial_Status = 'PRE-ARB' 
-				---Start of  changes for LSS-490 done on 9 APRIL 2020  By Tushar Chandgude  
-                 oR (Initial_Status = 'ARB' AND @DomainId='BT' AND Status='ARB PREP - STANDBY')
-                 ---End   of  changes for LSS-490 done on 9 APRIL 2020  By Tushar Chandgude  
-				
+				---Start of  changes for LSS-490 done on 9 APRIL 2020  By Tushar Chandgude 
+				OR (Initial_Status = 'ARB' AND @DomainId='BT' AND Status='ARB PREP - STANDBY')
+				 ---End   of  changes for LSS-490 done on 9 APRIL 2020  By Tushar Chandgude  
 				) --and status <> 'IN ARB OR LIT'
 			AND (
 				@s_a_CurrentStatusGroupSel = ''
