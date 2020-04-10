@@ -1,10 +1,9 @@
-﻿  
-  
+﻿
   
 -- =============================================  
--- Author:  <Author,,Name>  
--- Create date: <Create Date,,>  
--- Description: <Description,,>  
+-- Changed By: Atul Jadhav 
+-- Changed date: 4/9/2020
+-- Description: Added CptCodeC Change  
 -- =============================================  
 CREATE PROCEDURE [dbo].[TransferCasesLogic] -- TransferCasesLogic 'GYB'  
 (  
@@ -67,8 +66,11 @@ BEGIN
    [IsDuplicateCase] INT NULL,  
    [POMStampDate] DATETIME NULL,  
    [POMGeneratedDate] DATETIME NULL,  
-   [POMId] [varchar](40) NULL  
+   [POMId] [varchar](40) NULL ,
+   [TreatmentDetails] varchar(max) null 
  )  
+    declare @TreatmentId int
+
   
   INSERT INTO @Case  
   SELECT --top 200  
@@ -120,7 +122,8 @@ BEGIN
    IsDuplicateCase ,  
    POMStampDate,  
    POMGeneratedDate ,  
-   [POMId]  
+   [POMId] ,
+   TreatmentDetails  
   FROM XN_TEMP_GBB_ALL (NOLOCK)  
   WHERE ISNULL(AtlasProviderId,'') <>''  
    AND ISNULL(AtlasInsuranceId,'') <> ''  
@@ -171,8 +174,9 @@ BEGIN
   DECLARE @Specialty VARChar(800)    
   DECLARE @POMStampDate DATETIME  
   DECLARE @POMGeneratedDate DATETIME  
-  DECLARE @POMId varchar(40)   
-  
+  DECLARE @POMId varchar(40) 
+  DECLARE @TreatmentDetails VARCHAR(MAX)    
+
     
   
   SELECT @TotalCount = COUNT(*) FROM @Case  
@@ -192,7 +196,8 @@ BEGIN
      @POMGeneratedDate = POMGeneratedDate,  
      @POMId = POMId,  
      @DenialReason1 = DenialReason1,@DenialReason2 = DenialReason2,@DenialReason3 = DenialReason3,  
-     @IsDuplicateCase = IsDuplicateCase,@ProviderID=AtlasProviderId,@InsuranceCompanyID= AtlasInsuranceId, @GBBType = GBB_Type  
+     @IsDuplicateCase = IsDuplicateCase,@ProviderID=AtlasProviderId,@InsuranceCompanyID= AtlasInsuranceId, @GBBType = GBB_Type ,
+	 @TreatmentDetails=TreatmentDetails  
    FROM @Case WHERE ID = @Counter  
   
    SET @InsuredParty_FirstName = RTRIM(LTRIM(SUBSTRING(@SZ_POLICY_HOLDER,CHARINDEX(',',@SZ_POLICY_HOLDER) + 1,LEN(@SZ_POLICY_HOLDER))))  
@@ -305,6 +310,10 @@ BEGIN
        @POMId  
       )  
    
+		set @TreatmentId=SCOPE_IDENTITY()
+		exec InsertProcedureCode  @Treatment_Details =@TreatmentDetails,@Bill_Number =@SZ_BILL_NUMBER,@Treatment_Id= @TreatmentId ,@Case_Id =@AtlasCaseID,@DomainID =@DOMAINID
+
+	 
      IF((SELECT TOP 1 DenialReasons_Id FROM tblDenialReasons (NOLOCK) WHERE DENIALREASONS_TYPE = @DenialReason2 and DENIALREASONS_TYPE <> ''  and DomainId = @DOMAINID) is not null)  
      BEGIN  
       INSERT TXN_tblTreatment (Treatment_Id, DenialReasons_Id, DomainId)  
@@ -492,7 +501,9 @@ BEGIN
      )  
      
         
-  
+		set @TreatmentId=SCOPE_IDENTITY()
+		exec InsertProcedureCode  @Treatment_Details =@TreatmentDetails,@Bill_Number =@SZ_BILL_NUMBER,@Treatment_Id= @TreatmentId ,@Case_Id =@AtlasCaseID,@DomainID =@DOMAINID
+
      IF((SELECT TOP 1 DenialReasons_Id from tblDenialReasons (NOLOCK) WHERE DENIALREASONS_TYPE = @DenialReason2 AND DENIALREASONS_TYPE <> ''   and DomainId = @DOMAINID) IS NOT NULL)  
      BEGIN  
       INSERT TXN_tblTreatment (Treatment_Id,DenialReasons_Id, DomainId)--  
