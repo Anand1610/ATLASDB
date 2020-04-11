@@ -22,8 +22,17 @@ BEGIN
    
     set @FileName =(@caseid+'_ARB_FILED_'+ replace(convert(varchar, @date, 101), '/','-')+'.pdf')
     set @Filepath = (@caseid+'/ARB Docs/')
-     SELECT @a=COUNT(*) FROM tblDocImages WHERE FilePath = @Filepath AND Filename = @FileName and ImageID in   
-	 (SELECT ImageID FROM tblImageTag WHERE TagID IN (SELECT NodeID FROM tblTags WHERE ltrim(rtrim( caseid)) = ltrim(rtrim( @caseid))))
+     SELECT @a=COUNT(*) FROM tblDocImages WHERE FilePath = @Filepath AND Filename = @FileName 
+	  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+       AND tblDocImages.IsDeleted=0   
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+	 and ImageID in   
+	 (SELECT ImageID FROM tblImageTag WHERE 
+	   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+      tblImageTag.IsDeleted=0   AND
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+	 
+	 TagID IN (SELECT NodeID FROM tblTags WHERE ltrim(rtrim( caseid)) = ltrim(rtrim( @caseid))))
 if(@a>1)
 begin
 print (@caseid)
