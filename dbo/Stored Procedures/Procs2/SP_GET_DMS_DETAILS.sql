@@ -38,8 +38,17 @@ FETCH NEXT FROM CASE_CURSOR INTO @CASE_ID
   FETCH NEXT FROM NODE_CURSOR INTO @NODEID    
    WHILE @@FETCH_STATUS = 0      
    BEGIN    
-   SET @FILEPATH =(SELECT @DEFAULT_PATH+FilePath+FileName from tbldocimages where isnull(is_saga_doc,0)=0 and  imageid =     
-     (select top 1 imageid from tblimagetag where tagid = @nodeid))    
+   SET @FILEPATH =(SELECT @DEFAULT_PATH+FilePath+FileName from tbldocimages where 
+        ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+     IsDeleted=0   AND
+   ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+     isnull(is_saga_doc,0)=0 and  imageid =     
+     (select top 1 imageid from tblimagetag where tagid = @nodeid
+	  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+      AND IsDeleted=0 
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+	 
+	 ))    
      if(ISNULL( @FILEPATH,'')!='')
      begin
      
@@ -50,10 +59,28 @@ FETCH NEXT FROM CASE_CURSOR INTO @CASE_ID
 		(SELECT case_name from IRIS.dbo.tbl_case_details where pk_case_id=@CASE_ID) AS CASE_NAME,    
 		(SELECT file_number from IRIS.dbo.tbl_case_details where pk_case_id=@CASE_ID) AS FILE_NUMBER,    
 		(SELECT NODENAME FROM TBLTAGS WHERE NODEID=@NODEID) AS NODENAME,    
-		(SELECT @DEFAULT_PATH+FilePath+FileName from tbldocimages where imageid =     
-		 (select top 1 imageid from tblimagetag where tagid = @nodeid)) AS PHYSICAL_PATH,    
-		 (SELECT ImageID from tbldocimages where imageid =     
-		 (select top 1 imageid from tblimagetag where tagid = @nodeid)) AS Image_Id,  
+		(SELECT @DEFAULT_PATH+FilePath+FileName from tbldocimages where 
+		 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+        IsDeleted=0 AND
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
+		imageid =     
+		 (select top 1 imageid from tblimagetag where 
+		  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+        IsDeleted=0 AND
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
+		 tagid = @nodeid
+		 
+		 )) AS PHYSICAL_PATH,    
+		 (SELECT ImageID from tbldocimages where 
+		  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+        IsDeleted=0 AND
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
+		 imageid =     
+		 (select top 1 imageid from tblimagetag where 
+		  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+        IsDeleted=0 AND
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
+		 tagid = @nodeid)) AS Image_Id,  
 		STATUS=(CASE WHEN @i = 1 THEN 'FOUND' ELSE 'NOT FOUND' END)    
     
      end  
