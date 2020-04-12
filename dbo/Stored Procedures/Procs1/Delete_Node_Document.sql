@@ -23,6 +23,10 @@ BEGIN
 	SELECT @s_l_Existing_Tag_IDS=  convert(nvarchar(255), tblTags.NodeID )  FROM tblTags 
 	INNER JOIN tblImageTag ON tblImageTag.TagID = tblTags.NodeID and tblImageTag.DomainId = tblTags.DomainID 
 	WHERE tblTags.DomainID = @DomainID AND tblImageTag.ImageID=@i_a_Image_id 
+	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+    and tblImageTag.IsDeleted=0  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+   
 
 	   BEGIN TRAN
 	IF (ISNuLL(@s_l_Existing_Tag_IDS,'') != '')
@@ -35,8 +39,13 @@ BEGIN
 
 	END
 
-	delete from tblImageTag where domainid=@DomainId AND ImageID= @i_a_Image_id
-	delete from  tblDocImages where domainid=@DomainId AND ImageID= @i_a_Image_id
+	---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+    --delete from tblImageTag where domainid=@DomainId AND ImageID= @i_a_Image_id  
+ --delete from  tblDocImages where domainid=@DomainId AND ImageID= @i_a_Image_id  
+  
+ update tblImageTag SET IsDeleted=1 where domainid=@DomainId AND ImageID= @i_a_Image_id  
+ update tblDocImages SET IsDeleted=1  where domainid=@DomainId AND ImageID= @i_a_Image_id  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 
 
 	INSERT INTO tblNotes(Notes_Desc,Notes_Type,Notes_Priority,Case_Id,Notes_Date,User_Id,DomainID)
