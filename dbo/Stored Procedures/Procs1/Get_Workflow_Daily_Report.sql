@@ -41,23 +41,39 @@ BEGIN
 								SELECT COALESCE(isnull(DI.Filename,'')+',',' - ')
 								from tblCaseWorkflowAttachments CWA INNER JOIN tblDocImages DI ON DI.ImageID=CWA.AttachmentImageID
 								Where CWA.WorkflowQueue_Id = Q.Id
+								 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                                AND DI.IsDeleted=0  
+                                ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+          
 								for xml path('')),1,0,''),','),1,
 							(LEN(ISNULL(STUFF((
 								SELECT COALESCE(isnull(DI.Filename,'')+',',' - ')
 								from tblCaseWorkflowAttachments CWA INNER JOIN tblDocImages DI ON DI.ImageID=CWA.AttachmentImageID
 								Where CWA.WorkflowQueue_Id = Q.Id
+								 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                                AND DI.IsDeleted=0  
+                                ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+          
 								for xml path('')),1,0,''),',')))-1)) As [Activity Document Name]
 						,(SUBSTRING(ISNULL(STUFF((
 								SELECT COALESCE(isnull(@s_a_App_URL + REPLACE((VirtualBasePath+'/'+FilePath+Filename),'\','/'),'')+',',' - ')
 								from tblCaseWorkflowAttachments CWA INNER JOIN tblDocImages DI ON DI.ImageID=CWA.AttachmentImageID
 								LEFT JOIN tblBasePath B ON B.BasePathId = DI.BasePathId
 								Where CWA.WorkflowQueue_Id = Q.Id
+								 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                                AND DI.IsDeleted=0  
+                                ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+          
 								for xml path('')),1,0,''),','),1,
 							(LEN(ISNULL(STUFF((
 								SELECT COALESCE(isnull(@s_a_App_URL + REPLACE((VirtualBasePath+'/'+FilePath+Filename),'\','/'),'')+',',' - ')
 								from tblCaseWorkflowAttachments CWA INNER JOIN tblDocImages DI ON DI.ImageID=CWA.AttachmentImageID
 								LEFT JOIN tblBasePath B ON B.BasePathId = DI.BasePathId
 								Where CWA.WorkflowQueue_Id = Q.Id
+								 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                                AND DI.IsDeleted=0  
+                                ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+          
 								for xml path('')),1,0,''),',')))-1)) As [Activity Document Link]
 						--,D.Filename AS [Activity Document Name]
 						--,@s_a_App_URL + REPLACE((VirtualBasePath+'/'+FilePath+Filename),'\','/') AS [Activity Document Link]
