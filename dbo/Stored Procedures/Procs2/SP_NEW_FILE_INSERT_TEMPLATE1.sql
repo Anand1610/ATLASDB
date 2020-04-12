@@ -40,13 +40,18 @@ BEGIN
 	 ELSE    
 	 BEGIN
 			SELECT @i_l_max_id = imageid FROM tblDocImages WHERE 
-			 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-           tblImageTag.IsDeleted=0 AND    
+		 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+         tblDocImages.IsDeleted=0 AND    
             ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+  
 			
 			FilePath = @s_a_file_path 
 			AND Filename = @s_a_filename and ImageID in 
-			(SELECT ImageID FROM tblImageTag WHERE TagID IN (SELECT NodeID FROM tblTags WHERE ltrim(rtrim( caseid)) = ltrim(rtrim( @s_a_case_id))))      
+			(SELECT ImageID FROM tblImageTag WHERE 
+			 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+              tblImageTag.IsDeleted=0 AND    
+            ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+			TagID IN (SELECT NodeID FROM tblTags WHERE ltrim(rtrim( caseid)) = ltrim(rtrim( @s_a_case_id))))      
 	 END    
           
 	select @i_a_node_id  ,@i_l_max_id as Imageid,@i_l_duplicate as duplicate    
