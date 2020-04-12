@@ -52,6 +52,10 @@ BEGIN
    DATEMODIFIED=GETDATE()  
   WHERE IMAGEID=@IMAGEID
   AND DomainId = @DomainId
+   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+  AND IsDeleted=0  
+---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+     
    
  IF(@@ERROR>0)  
  BEGIN  
@@ -62,8 +66,16 @@ END
   
 IF @OPERATION='DELETE'  
 BEGIN  
- DELETE FROM TBLIMAGETAG   
-  WHERE IMAGEID=@IMAGEID AND TAGID=@TAGID  and DomainId=@DomainId
+ ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+  
+   --DELETE FROM TBLIMAGETAG     
+ -- WHERE IMAGEID=@IMAGEID AND TAGID=@TAGID  and DomainId=@DomainId  
+  
+  UPDATE TBLIMAGETAG   SET ISDELETED=1  
+  WHERE IMAGEID=@IMAGEID AND TAGID=@TAGID  and DomainId=@DomainId  AND IsDeleted=0  
+  
+    
+---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
    
  IF(@@ERROR>0)  
  BEGIN  
