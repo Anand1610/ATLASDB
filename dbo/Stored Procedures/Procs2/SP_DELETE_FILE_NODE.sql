@@ -8,7 +8,11 @@ BEGIN
 begin transaction deletenode
 
 IF NOT EXISTS(SELECT IMAGEID FROM TBLIMAGETAG
-			WHERE IMAGEID=@NODEID)
+			WHERE IMAGEID=@NODEID
+			  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+             AND  IsDeleted=0   
+             ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
+			)
 
 	BEGIN
 	
@@ -24,8 +28,14 @@ IF NOT EXISTS(SELECT IMAGEID FROM TBLIMAGETAG
 ELSE
 
 	BEGIN
-		DELETE FROM TBLDOCIMAGES
-		WHERE IMAGEID=@NODEID
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
+	 -- Delete code commented and update code added
+		--DELETE FROM TBLDOCIMAGES
+		--WHERE IMAGEID=@NODEID
+
+		  UPDATE TBLDOCIMAGES SET IsDeleted=1  
+          WHERE IMAGEID=@NODEID  
+		    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 
 			if @@error<>0
 					begin
@@ -33,8 +43,14 @@ ELSE
 						return 0
 					end
 
-		DELETE FROM TBLIMAGETAG
-		WHERE IMAGEID=@NODEID
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		 -- Delete code commented and update code added
+		--DELETE FROM TBLIMAGETAG
+		--WHERE IMAGEID=@NODEID
+
+		  UPDATE  TBLIMAGETAG SET IsDeleted=1  
+          WHERE IMAGEID=@NODEID  
+		    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 
 			if @@error<>0
 					begin
