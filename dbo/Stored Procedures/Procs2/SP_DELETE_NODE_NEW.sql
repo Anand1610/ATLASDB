@@ -9,41 +9,78 @@ BEGIN
 	--N for Node & F for File
 	IF (@SZ_TYPE = 'N') --N
 	BEGIN
-		DELETE
-		FROM tblDocImages
-		WHERE ImageID IN (
-				SELECT ImageID
-				FROM tblImageTag
-				WHERE TagID = @SZ_NODEID
-					AND DomainId = @DomainId
-				)
+	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 
-		DELETE
-		FROM tblDocImages
-		WHERE ImageID IN (
-				SELECT ImageID
-				FROM tblImageTag
-				WHERE TagID IN (
-						SELECT NodeId
-						FROM tblTags
-						WHERE ParentID = @SZ_NODEID
-							AND DomainId = @DomainId
-						)
-				)
-
-		DELETE
-		FROM tblImageTag
-		WHERE TagID = @SZ_NODEID
-
-		DELETE
-		FROM tblImageTag
-		WHERE TagID IN (
-				SELECT NodeId
-				FROM tblTags
-				WHERE ParentID = @SZ_NODEID
-					AND DomainId = @DomainId
-				)
-
+		 --DELETE  
+  --FROM tblDocImages  
+  --WHERE ImageID IN (  
+  --  SELECT ImageID  
+  --  FROM tblImageTag  
+  --  WHERE TagID = @SZ_NODEID  
+  --   AND DomainId = @DomainId  
+  --  )  
+  
+    
+  --DELETE  
+  --FROM tblDocImages  
+  --WHERE ImageID IN (  
+  --  SELECT ImageID  
+  --  FROM tblImageTag  
+  --  WHERE TagID IN (  
+  --    SELECT NodeId  
+  --    FROM tblTags  
+  --    WHERE ParentID = @SZ_NODEID  
+  --     AND DomainId = @DomainId  
+  --    )  
+  --  )  
+  
+  --DELETE  
+  --FROM tblImageTag  
+  --WHERE TagID = @SZ_NODEID  
+  
+  --DELETE  
+  --FROM tblImageTag  
+  --WHERE TagID IN (  
+  --  SELECT NodeId  
+  --  FROM tblTags  
+  --  WHERE ParentID = @SZ_NODEID  
+  --   AND DomainId = @DomainId  
+  --  )  
+  
+  UPDATE tblDocImages SET IsDeleted=1  
+  WHERE ImageID IN (  
+    SELECT ImageID  
+    FROM tblImageTag  
+    WHERE TagID = @SZ_NODEID  
+     AND DomainId = @DomainId  
+    )  
+  
+  
+        UPDATE tblDocImages SET IsDeleted=1  
+  WHERE ImageID IN (  
+    SELECT ImageID  
+    FROM tblImageTag  
+    WHERE TagID IN (  
+      SELECT NodeId  
+      FROM tblTags  
+      WHERE ParentID = @SZ_NODEID  
+       AND DomainId = @DomainId  
+      )  
+    )  
+  
+  UPDATE tblImageTag SET IsDeleted=1  
+  WHERE TagID = @SZ_NODEID  
+  
+  UPDATE tblImageTag SET IsDeleted=1  
+  WHERE TagID IN (  
+    SELECT NodeId  
+    FROM tblTags  
+    WHERE ParentID = @SZ_NODEID  
+     AND DomainId = @DomainId  
+    )  
+  
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+  
 		DELETE
 		FROM tblTags
 		WHERE NodeID = @SZ_NODEID
@@ -65,6 +102,21 @@ BEGIN
 		JOIN tblImageTag tit(NOLOCK) ON tit.ImageID = tdi.ImageID
 		JOIN tblTags tt(NOLOCK) ON tt.NodeID = tit.TagID
 		WHERE tdi.ImageID = @SZ_NODEID
+		  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+         AND tdi.IsDeleted=0 AND tit.IsDeleted=0   
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+  
+  update tblImageTag  
+   SET IsDeleted =1  
+   WHERE ImageID = @SZ_NODEID  
+  
+  
+      update tblDocImages  
+   SET IsDeleted =1  
+   WHERE ImageID = @SZ_NODEID  
+   ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 
 		SET @Description = @fileName + ', is deleted Successfully.'
 
@@ -75,15 +127,16 @@ BEGIN
 			,@s_a_operation = 'Deleted'
 			,@s_a_log_action = @Description
 			,@i_a_Case_id = @caseId
+			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+		--DELETE
+		--FROM tblDocImages
+		--WHERE ImageID = @SZ_NODEID
 
-		DELETE
-		FROM tblDocImages
-		WHERE ImageID = @SZ_NODEID
-
-		DELETE
-		FROM tblImageTag
-		WHERE ImageID = @SZ_NODEID
-			AND DomainId = @DomainId
+		--DELETE
+		--FROM tblImageTag
+		--WHERE ImageID = @SZ_NODEID
+		--	AND DomainId = @DomainId
+		---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 
 		
 	END
