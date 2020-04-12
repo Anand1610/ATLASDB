@@ -21,6 +21,9 @@ BEGIN
 				
 				SELECT @s_l_source_path = B.PhysicalBasePath + FilePath + Filename,@s_l_file_name = Filename FROM tblDocImages I Left Join tblBasePath B on I.BasePathId=B.BasePathId
 				WHERE ImageID = @s_a_image_id and DomainId=@DomainId
+				 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                AND I.IsDeleted=0  
+                 ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 		END
 		SELECT @i_l_dest_nodeid AS nodeid,@s_a_case_id AS case_id,@s_l_source_path AS source_path,@s_l_file_name AS file_name
 END
