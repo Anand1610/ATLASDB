@@ -18,6 +18,9 @@ BEGIN
 	 SELECT @i_l_duplicate = COUNT(1) FROM tblDocImages (NOLOCK) 
 	 WHERE FilePath = @s_a_file_path AND Filename = @s_a_filename and ImageID in   
 	 (SELECT ImageID FROM tblImageTag (NOLOCK)  WHERE @DomainId = DomainId 
+	   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+  and ISdeleted=0  
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 	 AND TagID IN (SELECT NodeID 
 					FROM tblTags (NOLOCK) WHERE ltrim(rtrim( caseid)) = ltrim(rtrim( @s_a_case_id)) and DomainId=@DomainId)) and DomainId=@DomainId
 	
@@ -33,9 +36,18 @@ BEGIN
 	 END       
 	 ELSE    
 	 BEGIN
-		SELECT @i_l_max_id = imageid FROM tblDocImages  WHERE FilePath = @s_a_file_path and DomainId=@DomainId
+		SELECT @i_l_max_id = imageid FROM tblDocImages  WHERE 
+		FilePath = @s_a_file_path and DomainId=@DomainId
+		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+        and ISdeleted=0  
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 		AND Filename = @s_a_filename and DomainId = @DomainId and ImageID in 
-		(SELECT ImageID FROM tblImageTag WHERE TagID IN (SELECT NodeID FROM tblTags WHERE ltrim(rtrim( caseid)) = ltrim(rtrim( @s_a_case_id)) and DomainId=@DomainId) and DomainId=@DomainId)      
+		(SELECT ImageID FROM tblImageTag WHERE 
+		
+		 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+        ISdeleted=0 and   
+        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+		TagID IN (SELECT NodeID FROM tblTags WHERE ltrim(rtrim( caseid)) = ltrim(rtrim( @s_a_case_id)) and DomainId=@DomainId) and DomainId=@DomainId)      
 	 END    
        
 	  
