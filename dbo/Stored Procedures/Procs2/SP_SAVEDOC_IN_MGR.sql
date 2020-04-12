@@ -12,8 +12,14 @@ BEGIN
 	-- set @szCaseId = (select SUBSTRING ( @p_szCaseID , charindex('-',@p_szCaseID,0)+1,len(@p_szCaseID)))	
     set @szCaseId = @p_szCaseID
    
-	set @iDocCount = (select count(imageid) from tbldocimages where lower([filename]) = @p_szFileName
-	and lower(filepath) = @szCaseId + '/'+@p_szNodename+'/')
+	set @iDocCount = (select count(imageid) from tbldocimages where 
+	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+    IsDeleted=0 AND   
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+	lower([filename]) = @p_szFileName
+	and lower(filepath) = @szCaseId + '/'+@p_szNodename+'/'
+	
+	)
 
 	if(@iDocCount=0) 
 	begin
