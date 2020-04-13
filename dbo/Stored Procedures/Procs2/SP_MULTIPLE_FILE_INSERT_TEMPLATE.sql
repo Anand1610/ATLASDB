@@ -55,8 +55,7 @@ BEGIN
 	             
 	   SET @i_l_max_id = SCOPE_IDENTITY()            
 	      
-	   INSERT INTO tblImageTag           
-	   VALUES (@i_l_max_id,@i_a_node_id,@i_a_user_id,GETDATE(),NULL, NULL,@DomainId,0)
+		INSERT INTO tblImageTag(ImageID,TagID,LoginID,DateInserted,DateModified,DateScanned,DomainId)           	   VALUES (@i_l_max_id,@i_a_node_id,@i_a_user_id,GETDATE(),NULL, NULL,@DomainId)
 
 	  
 
