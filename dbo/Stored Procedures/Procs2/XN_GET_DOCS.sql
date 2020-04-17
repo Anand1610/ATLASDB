@@ -28,9 +28,9 @@ BEGIN
 	  --INNER JOIN dbo.tblTags T on T.NodeID = IT.TagID and T.Domainid = IT.Domainid
 	 where 
 	 replace(filepath,'/','\') like '%\2019\%' and domainid = 'glf'
-	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+	  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
      AND I.IsDeleted=0  
-     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 		--and I.domainid = 'glf'
  --   delete from tblImageTag where imageid in (
 	--select imageid delete from tbldocimages where statusdone in ('CaseIDnotExists')

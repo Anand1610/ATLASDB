@@ -43,15 +43,14 @@ set deadlock_priority 10
 		SET @i_l_max_id  = 0      
 		DECLARE @i_l_duplicate INT = 0    
 
-		 SELECT @i_l_duplicate = COUNT(*) FROM tblDocImages (NOLOCK) WHERE 
-		    ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+		 SELECT @i_l_duplicate = COUNT(*) FROM tblDocImages (NOLOCK) WHERE
+		   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
     
         tblDocImages.IsDeleted=0 AND   
        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 		 FilePath = @s_a_file_path AND Filename = @s_a_filename and ImageID in   
 		 (SELECT ImageID FROM tblImageTag  (NOLOCK) WHERE 
-		 
-		    ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+		     ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
     
         tblImageTag.IsDeleted=0 AND   
        ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
@@ -83,8 +82,5 @@ set deadlock_priority 10
 	END
 END
 
-
-
-GO
 
 

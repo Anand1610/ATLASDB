@@ -28,7 +28,7 @@ BEGIN
 					FATT.IsDeleted = 0
 					   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
                     AND FI.IsDeleted=0  
-                    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
+                    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 				ORDER BY FATT.pk_vr_fax_attachment_id ASC
 				for xml path('')
 			),1,0,' '),','),1,(LEN(ISNULL(stuff(
@@ -42,9 +42,9 @@ BEGIN
 					WHERE 
 						FATT.i_verification_id = R.i_verification_id AND
 						FATT.IsDeleted = 0
-						 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-                           AND FI.IsDeleted=0  
-                       ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+						   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                    AND FI.IsDeleted=0  
+                    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 					ORDER BY FATT.pk_vr_fax_attachment_id ASC
 					for xml path('')
 				),1,0,' '),',')))-1),
@@ -84,9 +84,9 @@ BEGIN
 				WHERE 
 					FATT.i_verification_id = R.i_verification_id AND
 					FATT.IsDeleted = 0
-					---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+					   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
                     AND FI.IsDeleted=0  
-                    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 				ORDER BY FATT.pk_vr_fax_attachment_id ASC
 				for xml path('')
 			),1,0,' '),','),1,(LEN(ISNULL(stuff(
@@ -100,9 +100,9 @@ BEGIN
 					WHERE 
 						FATT.i_verification_id = R.i_verification_id AND
 						FATT.IsDeleted = 0
-						 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-                          AND FI.IsDeleted=0  
-                       ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+						   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                    AND FI.IsDeleted=0  
+                    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 					ORDER BY FATT.pk_vr_fax_attachment_id ASC
 					for xml path('')
 				),1,0,' '),',')))-1),

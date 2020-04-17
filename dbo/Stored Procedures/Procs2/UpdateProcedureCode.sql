@@ -1,4 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[UpdateProcedureCode]
+﻿--DROP PROCEDURE UpdateProcedureCode
+
+CREATE PROCEDURE [dbo].[UpdateProcedureCode]
 @code dbo.procedurecode READONLY ,
 @DomainID varchar(50)
      

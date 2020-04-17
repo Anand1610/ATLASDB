@@ -9,10 +9,10 @@ begin transaction deletenode
 
 IF NOT EXISTS(SELECT IMAGEID FROM TBLIMAGETAG
 WHERE 
+
 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
   IsDeleted=0 AND   
 ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-  
 TAGID IN(SELECT NODEID FROM TBLTAGS
 WHERE NODEID=@NODEID))
 

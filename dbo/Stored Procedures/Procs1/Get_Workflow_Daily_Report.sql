@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Get_Workflow_Daily_Report 
+﻿CREATE PROCEDURE [dbo].[Get_Workflow_Daily_Report] 
 	@s_a_DomainId Varchar(50),
 	@s_a_App_URL varchar(500)
 AS
@@ -44,7 +44,6 @@ BEGIN
 								 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
                                 AND DI.IsDeleted=0  
                                 ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-          
 								for xml path('')),1,0,''),','),1,
 							(LEN(ISNULL(STUFF((
 								SELECT COALESCE(isnull(DI.Filename,'')+',',' - ')
@@ -53,7 +52,6 @@ BEGIN
 								 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
                                 AND DI.IsDeleted=0  
                                 ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-          
 								for xml path('')),1,0,''),',')))-1)) As [Activity Document Name]
 						,(SUBSTRING(ISNULL(STUFF((
 								SELECT COALESCE(isnull(@s_a_App_URL + REPLACE((VirtualBasePath+'/'+FilePath+Filename),'\','/'),'')+',',' - ')
@@ -63,7 +61,6 @@ BEGIN
 								 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
                                 AND DI.IsDeleted=0  
                                 ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-          
 								for xml path('')),1,0,''),','),1,
 							(LEN(ISNULL(STUFF((
 								SELECT COALESCE(isnull(@s_a_App_URL + REPLACE((VirtualBasePath+'/'+FilePath+Filename),'\','/'),'')+',',' - ')
@@ -73,7 +70,6 @@ BEGIN
 								 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
                                 AND DI.IsDeleted=0  
                                 ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-          
 								for xml path('')),1,0,''),',')))-1)) As [Activity Document Link]
 						--,D.Filename AS [Activity Document Name]
 						--,@s_a_App_URL + REPLACE((VirtualBasePath+'/'+FilePath+Filename),'\','/') AS [Activity Document Link]

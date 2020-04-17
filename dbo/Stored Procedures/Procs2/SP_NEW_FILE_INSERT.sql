@@ -45,6 +45,3 @@ END
     
 --SP_HELP tblDocImages
 
-GO
-
-

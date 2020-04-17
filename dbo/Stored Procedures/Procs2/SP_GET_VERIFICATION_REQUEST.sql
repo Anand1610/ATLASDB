@@ -29,25 +29,25 @@ begin
 	from
 		TXN_VERIFICATION_REQUEST VR (NOLOCK)
 		LEFT JOIN tblDocImages RI (NOLOCK) ON RI.ImageID = VR.RequestImageID AND RI.DomainId = @DomainID
-				 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-        AND RI.IsDeleted=0  
+		 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+       AND RI.IsDeleted=0    
         ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 		LEFT JOIN tblBasePath RIBP (NOLOCK) ON RIBP.BasePathId = RI.BasePathId
 		LEFT JOIN tblDocImages FAI (NOLOCK) ON FAI.ImageID = VR.FaxAcknowledgementImageID AND FAI.DomainId = @DomainID
-				 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-        AND  FAI.IsDeleted =0    
+		 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+       AND FAI.IsDeleted =0   
         ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 		LEFT JOIN tblBasePath FABP (NOLOCK) ON FABP.BasePathId = FAI.BasePathId
 		LEFT JOIN tblDocImages MRI (NOLOCK) ON MRI.ImageID = VR.ManualResponseImageID AND MRI.DomainId = @DomainID
-				 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-        AND MRI.IsDeleted =0  
+		 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+         AND MRI.IsDeleted =0  
         ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 		LEFT JOIN tblBasePath MRBP (NOLOCK) ON MRBP.BasePathId = MRI.BasePathId
 		LEFT JOIN tbl_verification_type VT (NOLOCK) ON VT.vr_type_Id = VR.vr_type_Id
 	where 
 		VR.sz_case_id	=	@SZ_CASE_ID AND 
 		VR.DomainID		=	@DomainID
-
+		
 	order by
 		i_verification_id DESC
 end

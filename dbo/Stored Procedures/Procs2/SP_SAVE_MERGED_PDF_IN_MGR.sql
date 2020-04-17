@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[SP_SAVE_MERGED_PDF_IN_MGR] @DomainId NVARCHAR(50)
+﻿
+CREATE PROCEDURE [dbo].[SP_SAVE_MERGED_PDF_IN_MGR] @DomainId NVARCHAR(50)
 	,@p_szCaseID NVARCHAR(50)
 	,@p_szFileName NVARCHAR(255)
 	,@p_szYearPath NVARCHAR(255)
@@ -21,11 +22,10 @@ BEGIN
 			WHERE DomainId = @DomainId
 				AND lower([filename]) = lower(@p_szFileName)
 				AND lower(filepath) = lower(@p_szYearPath)
-						   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-                AND IsDeleted=0  
+					   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+                and IsDeleted=0  
                 ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 			)
-	
 	SET @ParentID = (
 			SELECT MIN(nodeid)
 			FROM tbltags(NOLOCK)
@@ -131,7 +131,4 @@ BEGIN
 			)
 	END
 END
-
-GO
-
 

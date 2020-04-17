@@ -35,11 +35,13 @@
     [GP_Freeze_Date]       DATETIME        NULL,
     [GBBCodeID]            VARCHAR (20)    NULL,
     [Auto_Proc_id]         INT             NULL,
-	[FeeSchedule]		   money           Null
+    [FeeSchedule]          MONEY           NULL
 );
 
 
 GO
+
+
 CREATE TRIGGER [dbo].[Trigger_CPT_Change] 
 	ON [dbo].[BILLS_WITH_PROCEDURE_CODES] 
 	AFTER INSERT, UPDATE, DELETE

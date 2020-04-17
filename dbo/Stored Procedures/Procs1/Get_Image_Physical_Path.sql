@@ -13,6 +13,7 @@ DECLARE @BASEFOLDER AS NVARCHAR(255)
 BEGIN
 
 	SELECT @BASEFOLDER=PhysicalBasePath FROM [tblBasePath] Where BasePathId = (Select BasePathId from TBLDOCIMAGES Where ImageId=@i_a_imageId
+	
 	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
     AND IsDeleted =0  
     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  

@@ -1,4 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[Report_Payment]  -- [Report_Payment] 'af',@s_a_Transactions_Type_mul='af,D'
+﻿
+/****** Object:  StoredProcedure [dbo].[Report_Payment]   
+Chnaged By :- Atul Jadhav
+Changed Date :4/8/2020
+JiraID :-
+Change  :- Added order by in procedure and removed unnecessarily added  group by 
+ Script Date: 4/8/2020 5:42:55 AM ******/
+ CREATE  PROCEDURE [dbo].[Report_Payment]  -- [Report_Payment] 'af',@s_a_Transactions_Type_mul='af,D'
  @domainId       nvarchar(50),  
  @s_a_Transactions_Date_From VARCHAR(20)='' ,  
  @s_a_Transactions_Date_To VARCHAR(20)='',  
@@ -111,6 +118,9 @@ case when cas.portfolioid is null or cas.portfolioid =0 then '' else  ISNULL(por
   
   order by trans.Case_Id,tre.BILL_NUMBER 
 
+
+
   OPTION (RECOMPILE)  
+    drop table #temp
 
 END  

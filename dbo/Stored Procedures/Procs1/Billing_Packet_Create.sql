@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[Billing_Packet_Create] 
+﻿
+CREATE PROCEDURE [dbo].[Billing_Packet_Create] 
 (
 	@DomainID VARCHAR(40),
 	@s_a_caption VARCHAR(1024),
@@ -314,7 +315,6 @@ SET NOCOUNT ON;
 				AND CID = @case_id
 				AND ACT_CASE_ID IN (SELECT case_id FROM @tblcase)
 
-
 				---- Add Documents Please note- Only path is recorded no physical file...
 				--DECLARE  @s_l_node_name VARCHAR(500),          
 				--		 @s_l_filename VARCHAR(100),          
@@ -390,7 +390,4 @@ SET NOCOUNT ON;
 	SELECT @s_l_message AS [Message], @i_l_result AS [RESULT]	
 
 END
-
-GO
-
 

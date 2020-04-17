@@ -262,10 +262,10 @@ BEGIN
 
 
 
-		  
- ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 			 --and I.IsDeleted=0 and IT.IsDeleted=0 added
 			---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+
 
 
 

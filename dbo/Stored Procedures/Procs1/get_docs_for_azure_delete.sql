@@ -20,14 +20,14 @@ BEGIN
 	  LEFT JOIN tblBasePath(NOLOCK) b on b.BasePathId=I.BasePathId --and b.DomainID = I.DomainID 
 	  inner Join dbo.tblImageTag IT on IT.ImageID=I.ImageID and IT.Domainid = I.Domainid
 	  INNER JOIN dbo.tblTags T on T.NodeID = IT.TagID and T.Domainid = IT.Domainid
-	   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-      AND I.IsDeleted=0 AND IT.IsDeleted=0  
-   ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
   where b.BasePathType=2 
   and I.statusdone ='Done'
    and T.DomainID = 'DK'
    and Filename <>''
   and I.azure_statusdone IS null  
+       ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+   AND I.IsDeleted=0 AND IT.IsDeleted=0  
+   ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
   --and statusdone is not null
   --and I.azure_statusdone like  'Done'
   --and FilePathOld is null

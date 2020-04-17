@@ -310,6 +310,7 @@ BEGIN
        @POMId  
       )  
    
+		print @AtlasCaseID
 		set @TreatmentId=SCOPE_IDENTITY()
 		exec InsertProcedureCode  @Treatment_Details =@TreatmentDetails,@Bill_Number =@SZ_BILL_NUMBER,@Treatment_Id= @TreatmentId ,@Case_Id =@AtlasCaseID,@DomainID =@DOMAINID
 
@@ -501,6 +502,7 @@ BEGIN
      )  
      
         
+		print @AtlasCaseID
 		set @TreatmentId=SCOPE_IDENTITY()
 		exec InsertProcedureCode  @Treatment_Details =@TreatmentDetails,@Bill_Number =@SZ_BILL_NUMBER,@Treatment_Id= @TreatmentId ,@Case_Id =@AtlasCaseID,@DomainID =@DOMAINID
 

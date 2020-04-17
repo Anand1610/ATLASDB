@@ -15,7 +15,7 @@ BEGIN
 
     -- Insert statements for procedure here
 	select  B.PhysicalBasePath + filepath + [filename],[filename],filepath from tbldocimages D left join tblBasePath B ON B.BasePathId = D.BasePathId where imageid =@i_a_Image_id and DomainId=@DomainId 
-	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+	---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
   AND D.IsDeleted=0   
     ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
 END

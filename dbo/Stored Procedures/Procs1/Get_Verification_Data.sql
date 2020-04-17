@@ -42,14 +42,14 @@ BEGIN
 		   INNER JOIN tblTreatment tre (NOLOCK)  ON VR.SZ_CASE_ID=tre.Case_Id 
 		   INNER JOIN tblcase cas (NOLOCK) on VR.SZ_CASE_ID = cas.Case_Id and GB_CASE_ID IS NOT NULL 
 		   LEFT JOIN tblDocImages RI (NOLOCK) ON RI.ImageID = VR.RequestImageID AND RI.DomainId = VR.DomainID 
-		    ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
-		  AND RI.IsDeleted=0 
+		   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		 AND RI.IsDeleted=0 
          ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		   LEFT JOIN tblBasePath RIBP (NOLOCK) ON RIBP.BasePathId = RI.BasePathId                        
 		WHERE                            
 		 dt_verification_received BETWEEN @FROMDate AND @ToDate+1
 		 AND RIBP.BasePathType=2 
-		
+		  
 		ORDER BY i_verification_id DESC
 	END
 	ELSE IF(@Param = 'File')
@@ -64,14 +64,13 @@ BEGIN
 		   INNER JOIN tblTreatment Tre (NOLOCK)  ON VR.SZ_CASE_ID=tre.Case_Id 
 		   INNER JOIN tblcase cas on VR.SZ_CASE_ID = cas.Case_Id and GB_CASE_ID IS NOT NULL 
 		   LEFT JOIN tblDocImages RI (NOLOCK) ON RI.ImageID = VR.RequestImageID AND RI.DomainId = VR.DomainID 
-		     ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
-		  AND RI.IsDeleted=0
+		      ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+		 AND RI.IsDeleted=0
          ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		   LEFT JOIN tblBasePath RIBP (NOLOCK) ON RIBP.BasePathId = RI.BasePathId                         
 		WHERE                            
 		 dt_verification_received BETWEEN @FROMDate AND @ToDate+1
 		
-		 
 		 --AND RIBP.BasePathType != 2
 		ORDER BY i_verification_id DESC
 	END

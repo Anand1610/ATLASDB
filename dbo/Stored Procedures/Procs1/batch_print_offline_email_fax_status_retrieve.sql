@@ -32,9 +32,7 @@ AS BEGIN
 		ISNULL(BPEF.isDeleted,0)	=	0	AND
 		BPEF.DomainID				=	@DomainID	AND
 		fk_batch_print_id			=	@fk_batch_print_id
-
 		
-
 	ORDER BY
 		pk_bp_ef_status_id ASC
 END

@@ -1,4 +1,4 @@
-﻿create procedure [dbo].[GetPhysicalFile]
+﻿CREATE procedure [dbo].[GetPhysicalFile]
 @imageid int,
 @DomainId varchar(10)
 as

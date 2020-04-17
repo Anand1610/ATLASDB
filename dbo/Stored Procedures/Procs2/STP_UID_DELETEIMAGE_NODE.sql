@@ -6,7 +6,7 @@ AS
 BEGIN
 	IF @NODETYPE='N'
 	BEGIN
-   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+		  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
    --DELETE FROM TBLDOCIMAGES WHERE IMAGEID IN (SELECT IMAGEID FROM TBLIMAGETAG WHERE TAGID=@NODEID)    
   --DELETE FROM TBLIMAGETAG WHERE TAGID=@NODEID    
   
@@ -16,7 +16,7 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+				---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
     --DELETE FROM TBLDOCIMAGES WHERE IMAGEID=@NODEID    
   --DELETE FROM TBLIMAGETAG WHERE IMAGEID=@NODEID    
   

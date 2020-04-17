@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[LCJ_AddTreatments]
+﻿
+CREATE PROCEDURE [dbo].[LCJ_AddTreatments]
 (
 	@DomainId NVARCHAR(50),
 	@Case_Id nvarchar(100),

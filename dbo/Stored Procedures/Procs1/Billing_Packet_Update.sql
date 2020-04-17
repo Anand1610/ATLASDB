@@ -178,6 +178,3 @@ DECLARE @i_l_result INT
 END
 
 
-GO
-
-

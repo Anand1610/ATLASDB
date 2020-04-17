@@ -18,7 +18,7 @@ RequestImageFileName=RI.Filename,
 		TXN_VERIFICATION_REQUEST VR (NOLOCK)
 		 JOIN tblDocImages RI (NOLOCK) ON RI.ImageID = VR.RequestImageID AND RI.DomainId = @Domain
 		 JOIN tblBasePath RIBP (NOLOCK) ON RIBP.BasePathId = RI.BasePathId
-		   ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+		 	  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
            AND RI.IsDeleted=0  
          ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 		 where  I_VERIFICATION_ID>@ID and vr.DomainID=@Domain

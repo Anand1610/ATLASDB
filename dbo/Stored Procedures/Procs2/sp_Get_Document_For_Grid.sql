@@ -46,10 +46,9 @@ BEGIN
 		left join tbl_ImageTag_Modifiedby  modified_by on modified_by.ImageId = IT.ImageID
 		left join dbo.IssueTracker_Users  usrmodified on usrmodified.UserId = modified_by.modified_by
 		WHERE T.DomainId=@DomainId
-		  ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
+		 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
         AND I.IsDeleted=0 AND IT.IsDeleted=0  
-         ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-  
+         ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 	order by order_by desc	
 	
 END

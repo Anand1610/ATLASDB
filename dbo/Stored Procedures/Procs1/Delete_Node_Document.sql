@@ -25,8 +25,7 @@ BEGIN
 	WHERE tblTags.DomainID = @DomainID AND tblImageTag.ImageID=@i_a_Image_id 
 	 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
     and tblImageTag.IsDeleted=0  
-    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude  
-   
+    ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude 
 
 	   BEGIN TRAN
 	IF (ISNuLL(@s_l_Existing_Tag_IDS,'') != '')

@@ -51,6 +51,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		    AND tit.IsDeleted=0
             ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
+			
 			) AND T.ParentID IS NOT NULL  
 		UNION ALL
 		SELECT DISTINCT  
@@ -65,7 +66,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 			JOIN tblimagetag tit ON t.nodeid = tit.tagid  
 		WHERE
 			CaseID = @s_a_fk_case_id AND 
-			parentid IS NOT NULL    
+			parentid IS NOT NULL 
 			---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 	    	AND  tit.IsDeleted=0
             ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude

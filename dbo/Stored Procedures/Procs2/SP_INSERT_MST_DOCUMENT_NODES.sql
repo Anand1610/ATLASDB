@@ -443,6 +443,3 @@ BEGIN
 		END
 END  
 
-GO
-
-

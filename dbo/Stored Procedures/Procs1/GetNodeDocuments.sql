@@ -1,6 +1,6 @@
 ﻿
 
-create Procedure [dbo].[GetNodeDocuments]
+CREATE Procedure [dbo].[GetNodeDocuments]
 @DOMAINID varchar(20),
 @CASEID varchar(50),
 @NODENAME varchar(50)
@@ -17,12 +17,9 @@ from tblTags tgs with(nolock)
 
 where tgs.nodename in ('Correspondence' ,'Defense pleadings','DISCOVERY','MOTIONS/RESPONSES','Plaintiff pleadings','Proof of Notice','Checks and Releases','Settlement Letter')
 and tgs.caseid=@CASEID and tgs.DomainId=@DOMAINID 
-
-
 ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 	AND tblImg.IsDeleted=0 AND docimg.IsDeleted=0 	
 ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
-
 end
 else
 begin

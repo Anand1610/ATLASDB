@@ -19,8 +19,10 @@ BEGIN
 		and DI.IsDeleted=0
         ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		
+		
 		),  
 		NodeID=(SELECT TOP 1 T.NodeID FROM tblTags T JOIN tblImageTag IT ON T.NodeID = IT.TagID WHERE T.CaseID = R.case_Id AND T.DomainId = R.DomainID AND IT.ImageID = R.documentImageID
+		
 		---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
 		AND   IT.IsDeleted=0 
         ---End   of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
