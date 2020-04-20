@@ -1,6 +1,3 @@
-﻿
------[LCJ_UpdateCaseDetails] 'a' ,'FDNY14-3023','','test','lblinsclaimrep','fassfirm','','test'
-
 CREATE PROCEDURE [dbo].[LCJ_UpdateCaseDetails](        
 @DomainId varchar(50),
 @Case_Id varchar(200),        
@@ -289,7 +286,9 @@ BEGIN
 
 			END -- END of Hierachy update on 12/11/07
 
-	BEGIN        
+	BEGIN    
+	IF(@fieldName <> 'Verification_Status' AND @fieldName <> 'Verification_Date')
+	BEGIN
 		IF @newValue is null
 		BEGIN
 			set @st = 'update tblcase set ' + @fieldName + '= NULL where Case_Id in ('''+@Case_Id + ''')'
@@ -301,6 +300,8 @@ BEGIN
           
 		 print @st        
 		 exec sp_Executesql @st  
+	END    
+		
 		 
    
 	END      
@@ -312,8 +313,12 @@ BEGIN
 	 set @fieldname='Assigned To'    
 	END    
 
-	set @desc = @fieldName +  ' changed from ' + @oldTextName + ' to ' + @newTextName       
-	exec LCJ_AddNotes @DomainId=@DomainId, @case_id=@Case_Id,@Notes_Type='Activity',@Ndesc = @desc,@user_Id=@User_Id,@ApplyToGroup = 0  
+	IF(@fieldName <> 'Verification_Status' AND @fieldName <> 'Verification_Date')
+	BEGIN
+		set @desc = @fieldName +  ' changed from ' + @oldTextName + ' to ' + @newTextName       
+		exec LCJ_AddNotes @DomainId=@DomainId, @case_id=@Case_Id,@Notes_Type='Activity',@Ndesc = @desc,@user_Id=@User_Id,@ApplyToGroup = 0  
+	END
+	
 	
 	-----FILING FEE ON INDEX CHANGE
 	--IF (@fieldName='IndexOrAAA_Number')
@@ -393,6 +398,37 @@ BEGIN
 	 END
 	 END
 	 
+
+	 IF(@DomainId = 'jl' AND @fieldName = 'Verification_Status')
+		BEGIN
+		IF(@newValue <> @oldTextName)
+			BEGIN
+				DECLARE @s_l_DESC varchar(1000)
+				UPDATE tblCase_additional_info SET VerificationStatus = @newValue where case_id = @Case_Id
+				SET @s_l_DESC = 'Verification Status changed from ' + @oldTextName  + ' to ' + @newValue
+				exec LCJ_AddNotes @DomainId=@DomainId, @case_id=@Case_Id,@notes_type='Activity' ,@NDesc=@s_l_DESC,@user_id=@user_id,@applytogroup=0
+			END		
+		END
+
+		IF(@DomainId = 'jl' AND @fieldName = 'Verification_Date')
+		BEGIN		
+			IF(@newValue <> @oldTextName)
+				BEGIN 
+				DECLARE @NoteDesc varchar(1000)
+					UPDATE tblCase_additional_info SET VerificationDate = @newValue where case_id = @Case_Id
+						IF(@oldTextName <> '')
+							BEGIN
+								SET @NoteDesc = 'Verification Date changed from ' + @oldTextName  + ' to ' + @newValue
+							END
+							ELSE
+								BEGIN
+									SET @NoteDesc = 'Verification Date changed to ' + @newValue
+								END
+										
+							exec LCJ_AddNotes @DomainId=@DomainId, @case_id=@Case_Id,@notes_type='Activity' ,@NDesc=@NoteDesc,@user_id=@user_id,@applytogroup=0
+				END
+			
+		END
 	  
 	  -- IF(@fieldName='DenialReasons')  
 	  --  BEGIN

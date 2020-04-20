@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[SP_ADD_VERIFICATION_REQUEST]
+CREATE PROCEDURE [dbo].[SP_ADD_VERIFICATION_REQUEST]
 	@DomainID					varchar(50),
 	@SZ_CASE_ID					VARCHAR(20),
 	@SZ_VERIFICATION_RECEIVED	DATETIME = NULL, 
@@ -101,6 +101,10 @@ BEGIN
 					 exec LCJ_AddNotes @DomainId=@DomainId, @case_id=@SZ_CASE_ID,@notes_type='Activity' ,@NDesc=@s_l_DESC,@user_id=@SZ_USER_ID,@applytogroup=0
 					END
 
+					IF @DomainID  = 'JL'
+						BEGIN
+							UPDATE tblCase_additional_info SET VerificationStatus = @s_l_NewStatus,VerificationDate = @SZ_VERIFICATION_RECEIVED where case_id = @SZ_CASE_ID
+						END
 					
 				END
 			END
@@ -158,6 +162,11 @@ BEGIN
 					SET @s_l_DESC = 'Can not change the status from ' + @s_l_OldStatus  + ' to ' + @s_l_NewStatus
 					 exec LCJ_AddNotes @DomainId=@DomainId, @case_id=@SZ_CASE_ID,@notes_type='Activity' ,@NDesc=@s_l_DESC,@user_id=@SZ_USER_ID,@applytogroup=0
 					END
+
+					IF @DomainID  = 'JL'
+						BEGIN
+							UPDATE tblCase_additional_info SET VerificationStatus = @s_l_NewStatus,VerificationDate = @SZ_VERIFICATION_REPLIED where case_id = @SZ_CASE_ID
+						END
 
 
 		END	

@@ -2573,5 +2573,7 @@
     <Build Include="dbo\Stored Procedures\Procs2\GET_MONTHLY_CASE_COUNT.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Check_Case_Claim_Amount.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\InsertProcedureCode.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\TestProcedurre.sql" />
+    <Build Include="dbo\Tables\TestTable.sql" />
   </ItemGroup>
 </Project>

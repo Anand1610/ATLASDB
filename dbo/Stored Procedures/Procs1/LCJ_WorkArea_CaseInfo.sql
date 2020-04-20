@@ -1,5 +1,4 @@
-﻿      
-CREATE PROCEDURE [dbo].[LCJ_WorkArea_CaseInfo]-- LCJ_WorkArea_CaseInfo @DomainId = 'JL', @strCaseId = 'JL19-101086'       
+CREATE PROCEDURE [dbo].[LCJ_WorkArea_CaseInfo]-- LCJ_WorkArea_CaseInfo @DomainId = 'JL', @strCaseId = 'JL20-114217'       
 (          
  @DomainId VARCHAR(40),      
  @strCaseId VARCHAR(40)          
@@ -159,6 +158,10 @@ BEGIN
 		 WHERE   tblDenialReasons.DomainId=ab.DomainID and tblDenialReasons.DenialReasons_Id in(SELECT items FROM dbo.SplitStringInt(MainDenialReasonsId,',')) FOR XML PATH('')) AS  [Maindenialreason_type]
 	 , CASE WHEN ISNULL(ab.Date_BillSent,'') <> '' THEN CAST(DATEDIFF(DAY,ab.Date_BillSent,GETDATE()) AS varchar(10)) 
 		ELSE '' END [POMStatusAge]
+		,CASE WHEN VerificationStatus IS NOT NULL THEN VerificationStatus
+		WHEN STATUS IS NOT NULL AND (STATUS = 'VER REQUESTED' OR STATUS = 'VER ANSWERED') THEN STATUS
+		ELSE NULL END [VerificationStatus]
+		,VerificationDate
  FROM        
     dbo.tblcase   AS ab  (NOLOCK)      
  LEFT OUTER JOIN  dbo.tblStatus WITH (NOLOCK) ON ab.Status = dbo.tblStatus.Status_Abr  and ab.DomainId=tblStatus.DomainId      
@@ -175,6 +178,7 @@ BEGIN
  LEFT OUTER JOIN  tbl_attorneyFirm AF WITH (NOLOCK) ON ab.AttorneyFirmId=af.id      
  LEFT OUTER JOIN  dbo.Assigned_Attorney (NOLOCK) ON ab.Assigned_Attorney = dbo.Assigned_Attorney.PK_Assigned_Attorney_ID      
  LEFT OUTER JOIN  dbo.tblCase_Date_Details (NOLOCK) ON ab.DomainId = tblCase_Date_Details.DomainId AND ab.Case_Id = dbo.tblCase_Date_Details.Case_Id 
+ LEFT OUTER JOIN  dbo.tblCase_additional_info (NOLOCK) ON ab.Case_Id = dbo.tblCase_additional_info.Case_Id AND ab.DomainId = dbo.tblCase_additional_info.DomainId
  WHERE ab.DomainId = @DomainId and ab.Case_Id = @strCaseId   
  AND ISNULL(ab.IsDeleted,0) = 0      
     SET TRANSACTION ISOLATION LEVEL READ COMMITTED; -- turn it off  

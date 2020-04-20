@@ -14,6 +14,8 @@
     [Our_Attorney_Law_Firm]            NVARCHAR (100)  NULL,
     [Balance_On_Policy]                DECIMAL (10, 2) NULL,
     [Balance_On_Policy_Bit]            BIT             NULL,
-    [CaseFinalStatus]                  NVARCHAR (510)  NULL
+    [CaseFinalStatus]                  NVARCHAR (510)  NULL,
+	[VerificationStatus]				VARCHAR(100)	NULL,
+	[VerificationDate]					DATETIME NULL
 );
 
