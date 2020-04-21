@@ -90,6 +90,10 @@ DECLARE @Treatment_Id INT
 		exec LCJ_AddNotes @DomainId=@DomainId, @case_id=@case_id,@notes_type='Activity',@Ndesc=@NOTES,@User_id=@UserID,@Applytogroup=0
 
 		COMMIT TRAN
+
+	    IF(@DenialReason_ID IS NOT NULL)
+		exec Update_Denial_Case @Case_Id
+
 		IF(@DomainId='AMT')
 		BEGIN
 			
