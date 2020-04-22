@@ -4,7 +4,7 @@ Description:Dos Change
 Date: 4/22/2020
 LastChangeedBy:SYSTEM
 */
-CREATE PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
+create PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
 (    
  @DomainId  VARCHAR(40) = '' ,    
  @s_a_case_id NVARCHAR(2000) = '',    
@@ -325,7 +325,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	   AND (CAS.Domainid = 'DK' OR T.Treatment_Id NOT IN 
 		   (select Treatment_Id from TXN_tblTreatment where DenialReasons_ID IN   
 			  (SELECT DenialReasons_Id from tblDenialReasons where DenialReasons_Type like 'PAID IN FULL')))),    
-		DOS_START =   (select CONVERT(VARCHAR(10),MIN(T.DateOfService_End), 101) from tblTreatment T (NOLOCK) where CAS.Case_Id = T.Case_Id  
+		DOS_START =   (select CONVERT(VARCHAR(10),MIN(T.DateOfService_Start), 101) from tblTreatment T (NOLOCK) where CAS.Case_Id = T.Case_Id  
 		and (CAS.Domainid = 'DK' OR convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0))- 
 	   convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) > 0) 
 	   AND (CAS.Domainid = 'DK' OR ISNULL(T.DenialReason_ID,0) NOT 
@@ -1038,3 +1038,4 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
     
 SET NOCOUNT OFF            
 END    
+
