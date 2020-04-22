@@ -1,8 +1,9 @@
-﻿
-
-
-
--- Template_Case_Details_Retrieve 'TEST','TEST19-100018',1111    
+﻿/*
+Changed By: Priyanks Kale
+Description:Dos Change
+Date: 4/22/2020
+LastChangeedBy:SYSTEM
+*/
 CREATE PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
 (    
  @DomainId  VARCHAR(40) = '' ,    
@@ -316,7 +317,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		--DOS_END =   CONVERT(NVARCHAR(12),CONVERT(DATETIME, CAS.DATEOFSERVICE_END), 101),    
 		--DOS_START =   CONVERT(NVARCHAR(12),CONVERT(DATETIME, CAS.DATEOFSERVICE_START), 101),    
 
-		DOS_END =   (select MAX(CONVERT(NVARCHAR(12),CONVERT(DATETIME, T.DateOfService_End), 101)) from tblTreatment T (NOLOCK) where CAS.Case_Id = T.Case_Id  
+		DOS_END =   (select CONVERT(VARCHAR(10),MAX(T.DateOfService_End), 101) from tblTreatment T (NOLOCK) where CAS.Case_Id = T.Case_Id  
 		and (CAS.Domainid = 'DK' OR convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0))- 
 	   convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) > 0) 
 	   AND (CAS.Domainid = 'DK' OR ISNULL(T.DenialReason_ID,0) NOT 
@@ -324,14 +325,15 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	   AND (CAS.Domainid = 'DK' OR T.Treatment_Id NOT IN 
 		   (select Treatment_Id from TXN_tblTreatment where DenialReasons_ID IN   
 			  (SELECT DenialReasons_Id from tblDenialReasons where DenialReasons_Type like 'PAID IN FULL')))),    
-		DOS_START =   (select MIN(CONVERT(NVARCHAR(12),CONVERT(DATETIME, T.DateOfService_Start), 101)) from tblTreatment T (NOLOCK) where CAS.Case_Id = T.Case_Id  
+		DOS_START =   (select CONVERT(VARCHAR(10),MIN(T.DateOfService_End), 101) from tblTreatment T (NOLOCK) where CAS.Case_Id = T.Case_Id  
 		and (CAS.Domainid = 'DK' OR convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0))- 
 	   convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) > 0) 
 	   AND (CAS.Domainid = 'DK' OR ISNULL(T.DenialReason_ID,0) NOT 
 	   IN(SELECT DenialReasons_Id from tblDenialReasons where DenialReasons_Type like 'PAID IN FULL'))   
 	   AND (CAS.Domainid = 'DK' OR T.Treatment_Id NOT IN 
 		   (select Treatment_Id from TXN_tblTreatment where DenialReasons_ID IN   
-			  (SELECT DenialReasons_Id from tblDenialReasons where DenialReasons_Type like 'PAID IN FULL'))) ),
+			  (SELECT DenialReasons_Id from tblDenialReasons where DenialReasons_Type like 'PAID IN FULL'))) )
+,
 
 		--DOS_RANGE_ALL = STUFF((SELECT '^p' +CONVERT(VARCHAR,DateOfService_Start,101) + '-' + CONVERT(VARCHAR,DateOfService_End,101) FROM tblTreatment     
 		--     WHERE case_id = cas.Case_Id ORDER BY DateOfService_Start ASC FOR XML PATH('')), 1, 2, ''),     
