@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[Case_Search_Billing_Packet] -- [Case_Search_Billing_Packet] 'glf'
+﻿-- changes for LSS-500 done on 27 APRIL 2020  By Tushar Chandgude 
+CREATE PROCEDURE [dbo].[Case_Search_Billing_Packet] -- [Case_Search_Billing_Packet] 'glf'
 	(
 	@DomainID VARCHAR(50)
 	,@s_a_ProviderNameGroupSel VARCHAR(MAX) = ''
