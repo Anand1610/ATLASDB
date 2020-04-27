@@ -85,9 +85,16 @@ BEGIN
 					)
 				)
 			AND (
-				Auto_Billing_Packet_Info.CASE_ID LIKE 'ACT%'
-				OR Auto_Billing_Packet_Info.Initial_Status = 'PRE-ARB'
-				OR Auto_Billing_Packet_Info.DomainID = 'BT'
+				     Auto_Billing_Packet_Info.CASE_ID LIKE 'ACT%'
+				  ---Start of  changes for LSS-500 done on 27 APRIL 2020  By Tushar Chandgude 
+				  --OR Auto_Billing_Packet_Info.Initial_Status = 'PRE-ARB'
+				  --OR Auto_Billing_Packet_Info.DomainID = 'BT'
+				  OR (Auto_Billing_Packet_Info.Initial_Status = 'PRE-ARB' and cas.status not in   ('BILLING SENT','BILLING VR ANSWERED'))
+				  OR (Auto_Billing_Packet_Info.Initial_Status in ('ARB','PRE-ARB')   
+                  AND @DomainId='BT' AND cas.Status in ('BILLING SENT','BILLING VR ANSWERED') AND 
+				  CONVERT(INT, CONVERT(VARCHAR, DATEDIFF(dd, cas.date_status_Changed, GETDATE())))>=90)  
+				  OR (Auto_Billing_Packet_Info.DomainID = 'BT'  and cas.status not in   ('BILLING SENT','BILLING VR ANSWERED'))
+				  ---End   of  changes for LSS-500 done on 27 APRIL 2020  By Tushar Chandgude  
 				) --and status <> 'IN ARB OR LIT'
 			AND (
 				@s_a_CurrentStatusGroupSel = ''
