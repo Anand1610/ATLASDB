@@ -2575,5 +2575,8 @@
     <Build Include="dbo\Stored Procedures\Procs2\InsertProcedureCode.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\TestProcedurre.sql" />
     <Build Include="dbo\Tables\TestTable.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Withdrawn_Cases_For_Months.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_New_Cases_For_Months.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_Invoices.sql" />
   </ItemGroup>
 </Project>
