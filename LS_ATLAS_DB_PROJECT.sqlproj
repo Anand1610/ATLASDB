@@ -2578,5 +2578,6 @@
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Withdrawn_Cases_For_Months.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_New_Cases_For_Months.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_Invoices.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Node_Level.sql" />
   </ItemGroup>
 </Project>
