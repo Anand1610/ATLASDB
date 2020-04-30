@@ -2579,5 +2579,6 @@
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_New_Cases_For_Months.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_Invoices.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_Node_Level.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\GetVerificationReqStatusCount.sql" />
   </ItemGroup>
 </Project>
