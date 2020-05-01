@@ -2581,4 +2581,7 @@
     <Build Include="dbo\Stored Procedures\Procs2\Get_Node_Level.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\GetVerificationReqStatusCount.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Stored Procedures\Procs2\LCJ_GETCLIENTFILINGFEE.sql" />
+  </ItemGroup>
 </Project>
