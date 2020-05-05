@@ -476,7 +476,7 @@ BEGIN
 		join #temp tmp on cas.Case_Id=tmp.case_id
 		INNER JOIN tblprovider pro (NOLOCK) on cas.provider_id=pro.provider_id 
 		INNER JOIN tblinsurancecompany ins (NOLOCK) on cas.insurancecompany_id=ins.insurancecompany_id
-		INNER JOIN dbo.tblStatus sta (NOLOCK) on cas.Status=sta.Status_Type AND cas.DomainId= sta.DomainId
+		LEFT JOIN dbo.tblStatus sta (NOLOCK) on cas.Status=sta.Status_Type AND cas.DomainId= sta.DomainId
 		LEFT OUTER JOIN tblTreatment (NOLOCK) tre on tre.Case_Id= cas.Case_Id
 		LEFT OUTER JOIN TXN_CASE_PEER_REVIEW_DOCTOR (NOLOCK) prdoc on prdoc.TREATMENT_ID = tre.treatment_id
 		LEFT OUTER JOIN TXN_tblTreatment t_tre (NOLOCK) on t_tre.Treatment_Id = tre.treatment_id
@@ -811,7 +811,7 @@ BEGIN
 		join #temp tmp on cas.Case_Id=tmp.case_id
 		INNER JOIN tblprovider pro (NOLOCK) on cas.provider_id=pro.provider_id 
 		INNER JOIN tblinsurancecompany ins (NOLOCK) on cas.insurancecompany_id=ins.insurancecompany_id
-		INNER JOIN dbo.tblStatus sta (NOLOCK) on cas.Status=sta.Status_Type AND cas.DomainId= sta.DomainId
+		LEFT JOIN dbo.tblStatus sta (NOLOCK) on cas.Status=sta.Status_Type AND cas.DomainId= sta.DomainId
 		LEFT OUTER JOIN tblTreatment (NOLOCK) tre on tre.Case_Id= cas.Case_Id
 		LEFT OUTER JOIN TXN_CASE_PEER_REVIEW_DOCTOR (NOLOCK) prdoc on prdoc.TREATMENT_ID = tre.treatment_id
 		LEFT OUTER JOIN TXN_tblTreatment t_tre (NOLOCK) on t_tre.Treatment_Id = tre.treatment_id
@@ -1138,7 +1138,7 @@ BEGIN
 		join #temp tmp on cas.Case_Id=tmp.case_id
 		INNER JOIN tblprovider pro (NOLOCK) on cas.provider_id=pro.provider_id 
 		INNER JOIN tblinsurancecompany ins (NOLOCK) on cas.insurancecompany_id=ins.insurancecompany_id
-		INNER JOIN dbo.tblStatus sta (NOLOCK) on cas.Status=sta.Status_Type AND cas.DomainId= sta.DomainId
+		LEFT JOIN dbo.tblStatus sta (NOLOCK) on cas.Status=sta.Status_Type AND cas.DomainId= sta.DomainId
 		LEFT OUTER JOIN tblTreatment (NOLOCK) tre on tre.Case_Id= cas.Case_Id
 		LEFT OUTER JOIN TXN_CASE_PEER_REVIEW_DOCTOR (NOLOCK) prdoc on prdoc.TREATMENT_ID = tre.treatment_id
 		LEFT OUTER JOIN TXN_tblTreatment t_tre (NOLOCK) on t_tre.Treatment_Id = tre.treatment_id
@@ -1457,7 +1457,7 @@ BEGIN
 		join #temp tmp on cas.Case_Id=tmp.case_id
 		INNER JOIN tblprovider pro (NOLOCK) on cas.provider_id=pro.provider_id 
 		INNER JOIN tblinsurancecompany ins (NOLOCK) on cas.insurancecompany_id=ins.insurancecompany_id
-		INNER JOIN dbo.tblStatus sta (NOLOCK) on cas.Status=sta.Status_Type AND cas.DomainId= sta.DomainId
+		LEFT JOIN dbo.tblStatus sta (NOLOCK) on cas.Status=sta.Status_Type AND cas.DomainId= sta.DomainId
 		LEFT OUTER JOIN tblTreatment (NOLOCK) tre on tre.Case_Id= cas.Case_Id
 		LEFT OUTER JOIN TXN_CASE_PEER_REVIEW_DOCTOR (NOLOCK) prdoc on prdoc.TREATMENT_ID = tre.treatment_id
 		LEFT OUTER JOIN TXN_tblTreatment t_tre (NOLOCK) on t_tre.Treatment_Id = tre.treatment_id
