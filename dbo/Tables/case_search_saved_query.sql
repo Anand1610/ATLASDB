@@ -20,7 +20,7 @@
     [claimno]                  VARCHAR (100)  NULL,
     [billnumber]               VARCHAR (200)  NULL,
     [indexoraaano]             VARCHAR (100)  NULL,
-    [denailreasonid]           VARCHAR(1000)            NULL,
+    [denailreasonid]           VARCHAR (1000) NULL,
     [courtsel]                 VARCHAR (MAX)  NULL,
     [defendantsel]             INT            NULL,
     [reviewingdoctor]          INT            NULL,

@@ -1,4 +1,5 @@
 ﻿
+
 CREATE PROCEDURE [dbo].[LCJ_AddTreatments]
 (
 	@DomainId NVARCHAR(50),
@@ -91,7 +92,7 @@ DECLARE @Treatment_Id INT
 
 		COMMIT TRAN
 
-	    ---Start of  changes for LSS-440 done on 21 APRIL 2020  By Tushar Chandgude
+		---Start of  changes for LSS-440 done on 21 APRIL 2020  By Tushar Chandgude
            IF(@DenialReason_ID IS NOT NULL)
 		exec Update_Denial_Case @Case_Id
          ---End   of  changes for LSS-440 done on 21 APRIL 2020  By Tushar Chandgude

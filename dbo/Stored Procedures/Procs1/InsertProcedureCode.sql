@@ -41,7 +41,7 @@ print @Case_Id
 							InsuranceFeeSchedule
 							)
 							SELECT	TreatmentCodeID,
-							TreatmentCode,
+							ltrim(rtrim(TreatmentCode)) [TreatmentCode],
 							TreatmentDescription,
 							Specialty,
 							DOS,
@@ -81,44 +81,45 @@ print @Case_Id
 							end
 							set @ServiceType_ID=(select ServiceType_ID from  tblserviceType where ServiceType=@Specialty and DomainId=@DomainID)
 
-							select #temp.TreatmentCode,
-							#temp.TreatmentDescription,
-							#temp.Amount,
-							#temp.Specialty,
-							#temp.InsuranceFeeSchedule,
-							t2.Auto_Proc_id into #temp2
-							from #temp
-							left join MST_PROCEDURE_CODES t2 on #temp.TreatmentCode=t2.Code and
-											#temp.TreatmentDescription=t2.Description and
-											#temp.Amount=t2.Amount and 
-											#temp.Specialty=t2.Specialty
-											and  t2.DomainId=@DomainID
-											where t2.Auto_Proc_id is null
+							--select #temp.TreatmentCode,
+							--#temp.TreatmentDescription,
+							--#temp.Amount,
+							--#temp.Specialty,
+							--#temp.InsuranceFeeSchedule,
+							--t2.Auto_Proc_id into #temp2
+							--from #temp
+							--left join MST_PROCEDURE_CODES t2 on #temp.TreatmentCode=t2.Code and
+							--				#temp.TreatmentDescription=t2.Description and
+							--				#temp.Amount=t2.Amount and 
+							--				#temp.Specialty=t2.Specialty
+							--				and  t2.DomainId=@DomainID
+							--				where t2.Auto_Proc_id is null
 
-							insert into MST_PROCEDURE_CODES(Code,Description,Amount,Specialty,ins_fee_schedule,ServiceTypeID,DomainId,CreatedBY,CreatedDate) 
-							select  #temp2.TreatmentCode,
-							#temp2.TreatmentDescription,
-							#temp2.Amount,
-							#temp2.Specialty,
-							#temp2.InsuranceFeeSchedule,
-							@ServiceType_ID,
-							@DomainID,
-							'system',
-							getdate()
-							from #temp2
+							--insert into MST_PROCEDURE_CODES(Code,Description,Amount,Specialty,ins_fee_schedule,ServiceTypeID,DomainId,CreatedBY,CreatedDate) 
+							--select  #temp2.TreatmentCode,
+							--#temp2.TreatmentDescription,
+							--#temp2.Amount,
+							--#temp2.Specialty,
+							--#temp2.InsuranceFeeSchedule,
+							--@ServiceType_ID,
+							--@DomainID,
+							--'system',
+							--getdate()
+							--from #temp2
 
 							select #temp.*,
 							t2.Auto_Proc_id into #temp3
 							from #temp
-							left join MST_PROCEDURE_CODES t2 on #temp.TreatmentCode=t2.Code and
-											#temp.TreatmentDescription=t2.Description and
+							left join DistinctCPTCodes t2 on #temp.TreatmentCode=t2.Code and											
 											#temp.Amount=t2.Amount and 
 											#temp.Specialty=t2.Specialty
 											and  t2.DomainId=@DomainID
-
+						
+						if not exists ( select CPT_ATUO_ID from BILLS_WITH_PROCEDURE_CODES where BillNumber=@Bill_Number and Case_ID=@Case_Id)
+						begin
 							insert into BILLS_WITH_PROCEDURE_CODES 
 							(BillNumber,Code,Description,Amount,DOS,Specialty,ins_fee_schedule,Case_ID,fk_Treatment_Id,UNITS,DomainID,created_by_user,created_date,GBBCodeID,Auto_Proc_id)
-							select	@Bill_Number,
+							select distinct	@Bill_Number,
 							t.TreatmentCode,
 							t.TreatmentDescription,
 							t.Amount,
@@ -134,18 +135,28 @@ print @Case_Id
 							t.TreatmentCodeID,
 							t.Auto_Proc_id
 
-							from	#temp3 t
+							from	#temp3 t	
+							
 							if(@DomainID='AF')
 							begin
 								declare @RegionIvAmount money
 								select @RegionIvAmount=sum(isnull(t2.RegionIVfeeScheduleAmount,0)) from BILLS_WITH_PROCEDURE_CODES t1
-								join MST_PROCEDURE_CODES t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
+								join DistinctCPTCodes t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
 								where t1.fk_Treatment_Id=@Treatment_Id and t1.DomainID=@DomainID
 
 								update tblTreatment 
 								set Fee_Schedule=@RegionIvAmount 
 								where tblTreatment.Treatment_Id=@Treatment_Id
+
+								update t1
+								set  t1.FeeSchedule=t2.RegionIVfeeScheduleAmount
+								from BILLS_WITH_PROCEDURE_CODES t1
+								join DistinctCPTCodes t2 on t1.Auto_Proc_id=t2.Auto_Proc_id
+								and t1.BillNumber=@Bill_Number
 							end
+					end
+
+							
 
 			COMMIT TRAN
    END TRY

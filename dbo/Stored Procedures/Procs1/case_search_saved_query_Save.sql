@@ -19,7 +19,7 @@
 	@s_a_ClaimNo					VARCHAR(100)	=	'',
 	@s_a_BillNumber					VARCHAR(500)	=	'',
 	@s_a_IndexOrAAANo				VARCHAR(100)	=	'',
-	@i_a_DenailReason				INT				=	0,
+	@i_a_DenailReason				varchar(1000)   =	'',
 	@i_a_Court						INT				=	0,
 	@i_a_Defendant					INT				=	0,
 	@i_a_ReviewingDoctor			INT				=	0,

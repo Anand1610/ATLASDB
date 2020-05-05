@@ -1,10 +1,9 @@
-﻿/*
-Changed By: Priyanks Kale
-Description:Dos Change
-Date: 4/22/2020
-LastChangeedBy:SYSTEM
-*/
-create PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
+﻿
+
+
+
+-- Template_Case_Details_Retrieve 'BT','BT20-114131',1111    
+CREATE PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
 (    
  @DomainId  VARCHAR(40) = '' ,    
  @s_a_case_id NVARCHAR(2000) = '',    
@@ -1038,4 +1037,3 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
     
 SET NOCOUNT OFF            
 END    
-

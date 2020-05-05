@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[case_search_advance] -- [case_search_advance]  @DomainID
 	@s_a_ClaimNo					VARCHAR(100)	=	'',
 	@s_a_BillNumber					VARCHAR(500)	=	'',
 	@s_a_IndexOrAAANo				VARCHAR(100)	=	'',
-	@i_a_DenailReason				INT				=	0,
+	@i_a_DenailReason				varchar(1000)	=	'',
 	@i_a_Court						VARCHAR(MAX)          ,
 	@i_a_Defendant					INT				=	0,
 	@i_a_ReviewingDoctor			INT				=	0,
@@ -512,7 +512,7 @@ BEGIN
 
 		AND (@s_a_ProviderGroup ='' OR pro.Provider_GroupName = @s_a_ProviderGroup )
 		AND (@s_a_InsuranceGroup='' OR ins.InsuranceCompany_GroupName = @s_a_InsuranceGroup )		
-		AND (@i_a_DenailReason = 0 OR t_tre.DenialReasons_Id = @i_a_DenailReason)
+		AND (@i_a_DenailReason = '' OR t_tre.DenialReasons_Id IN (SELECT s FROM dbo.SplitString(@i_a_DenailReason,',')))
 		AND (@i_a_Court = '' OR cas.Court_Id IN (SELECT items FROM dbo.SplitStringInt(@i_a_Court,',')))
 
 		AND ((@CompanyType != 'funding' AND (@i_a_Defendant = 0 OR cas.defendant_Id = @i_a_Defendant)) OR
@@ -846,7 +846,7 @@ BEGIN
 
 		AND (@s_a_ProviderGroup ='' OR pro.Provider_GroupName = @s_a_ProviderGroup )
 		AND (@s_a_InsuranceGroup='' OR ins.InsuranceCompany_GroupName = @s_a_InsuranceGroup )		
-		AND (@i_a_DenailReason = 0 OR t_tre.DenialReasons_Id = @i_a_DenailReason)
+		AND (@i_a_DenailReason = '' OR t_tre.DenialReasons_Id IN (SELECT s FROM dbo.SplitString(@i_a_DenailReason,',')))
 		AND (@i_a_Court = '' OR cas.Court_Id IN (SELECT items FROM dbo.SplitStringInt(@i_a_Court,',')))
 
 		AND ((@CompanyType != 'funding' AND (@i_a_Defendant = 0 OR cas.defendant_Id = @i_a_Defendant)) OR
@@ -1173,7 +1173,7 @@ BEGIN
 
 		AND (@s_a_ProviderGroup ='' OR pro.Provider_GroupName = @s_a_ProviderGroup )
 		AND (@s_a_InsuranceGroup='' OR ins.InsuranceCompany_GroupName = @s_a_InsuranceGroup )		
-		AND (@i_a_DenailReason = 0 OR t_tre.DenialReasons_Id = @i_a_DenailReason)
+		AND (@i_a_DenailReason = '' OR t_tre.DenialReasons_Id IN (SELECT s FROM dbo.SplitString(@i_a_DenailReason,',')))
 		AND (@i_a_Court = '' OR cas.Court_Id IN (SELECT items FROM dbo.SplitStringInt(@i_a_Court,',')))
 
 		AND ((@CompanyType != 'funding' AND (@i_a_Defendant = 0 OR cas.defendant_Id = @i_a_Defendant)) OR
@@ -1491,7 +1491,7 @@ BEGIN
 
 		AND (@s_a_ProviderGroup ='' OR pro.Provider_GroupName = @s_a_ProviderGroup )
 		AND (@s_a_InsuranceGroup='' OR ins.InsuranceCompany_GroupName = @s_a_InsuranceGroup )		
-		AND (@i_a_DenailReason = 0 OR t_tre.DenialReasons_Id = @i_a_DenailReason)
+		AND (@i_a_DenailReason = '' OR t_tre.DenialReasons_Id IN (SELECT s FROM dbo.SplitString(@i_a_DenailReason,',')))
 		AND (@i_a_Court = '' OR cas.Court_Id IN (SELECT items FROM dbo.SplitStringInt(@i_a_Court,',')))
 
 		AND ((@CompanyType != 'funding' AND (@i_a_Defendant = 0 OR cas.defendant_Id = @i_a_Defendant)) OR

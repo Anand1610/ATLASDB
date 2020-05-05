@@ -123,12 +123,12 @@ SET NOCOUNT ON;
 					GetDate(),  
 					--Last_Status,  
 					--'ARB' AS Initial_Status, 
-						CASE WHEN @DomainID = 'GLF' THEN Initial_Status 
+					CASE WHEN @DomainID = 'GLF' THEN Initial_Status 
 					--START Change done by Tushar Chandgude 29 APRIL 2020--
 					when  @DomainID = 'AF' AND @s_l_ARBType='LIT PREP' THEN 'LIT'  
 					--END Change done by Tushar Chandgude 29 APRIL 2020--
 					
-					ELSE 'ARB' END,   
+					ELSE 'ARB' END, 
 					Memo,  
 					'Admin' AS opened_by,	
 					GB_CASE_ID,

@@ -3,10 +3,10 @@
 -- Create date: <Create Date,,>  
 -- Description: <Description,,>  
 -- =============================================  
-CREATE PROCEDURE [dbo].[Downlaod_Documents]-- [Downlaod_Documents] 'GLF18-103507','GLF'  
+CREATE PROCEDURE [dbo].[Downlaod_Documents]-- [Downlaod_Documents] 'DK20-91831','DK'  
  (  
-  @s_a_case_id varchar(max)= 'GLF18-100001',--'RFA14-166802'  
-  @s_a_DomainID VARCHAR(50)='GLF'  
+  @s_a_case_id varchar(max)= CaseID,--'RFA14-166802'  
+  @s_a_DomainID VARCHAR(50)='DK'  
  )-- Add the parameters for the stored procedure here  
 AS  
 BEGIN  
@@ -26,12 +26,12 @@ BEGIN
  LEFT OUTER JOIN dbo.tblBasePath b (nolock)  ON I.BasePathID = b.BasePathID  
  WHERE -- T.CaseID IN (SELECT LTRIM(RTRIM(items)) FROM dbo.STRING_SPLIT(@s_a_case_id,','))  
  --AND
-  T.DomainId  = 'bt' and  NodeName like '%VERIFICATION RESPONSE%' and
-   CaseID in ('BT19-103580'
-
-
-)
-  --and filepath like '%LGM%'
+  T.DomainId  = 'DK' 
+  --and  NodeName like '%VERIFICATION RESPONSE%' 
+ and   CaseID in ('DK20-95441',
+'DK20-95439',
+'DK20-95487')
+--  and filepath like '%LGM%'
 --and filepath not like 'glf\glf%'
 --and filepath not like 'glf/glf%'
 --and filepath not like 'glf\act%'

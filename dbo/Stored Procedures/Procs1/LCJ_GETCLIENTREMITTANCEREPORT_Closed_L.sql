@@ -261,7 +261,11 @@ BEGIN
 				'FFB'
 				,'EXP'
 				)
+			--AND sts.Final_Status = 'Closed_L'
 			AND sts.Final_Status = 'Closed_L'
+
+		
+
 		)
 	SELECT DISTINCT provider_id
 		,Transactions_Id
