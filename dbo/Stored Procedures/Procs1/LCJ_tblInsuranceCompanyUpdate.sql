@@ -3,7 +3,7 @@
 @DomainId					    nvarchar(50),
 @InsuranceCompany_Id			nvarchar(100),
 @InsuranceCompany_Name			nvarchar(200),
-@InsuranceCompany_SuitName		nvarchar(200),
+@InsuranceCompany_SuitName		nvarchar(250),
 @InsuranceCompany_Type		 	varchar(40),
 @InsuranceCompany_Local_Address 	varchar(255),
 @InsuranceCompany_Local_City		varchar(100),
