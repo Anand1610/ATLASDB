@@ -1,9 +1,13 @@
 ﻿
+/*
+Last changed:System.
+Changeed by :shashank 
+Date Changed:05/07/2020
+Decription  :Added new Tag
 
-
-
+*/
 -- Template_Case_Details_Retrieve 'BT','BT20-114131',1111    
-CREATE PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
+create PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
 (    
  @DomainId  VARCHAR(40) = '' ,    
  @s_a_case_id NVARCHAR(2000) = '',    
@@ -232,6 +236,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
   CASE_EVALUATION_DATE   VARCHAR(MAX),    
   FACILITATION_DATE    VARCHAR(MAX),    
   SETTLEMENT_CONFERENCE_DATE      VARCHAR(MAX),    
+  SERVICE_TYPE VARCHAR(MAX),
   -- For Packeted Cases    
   PROVIDER_NAME_ALL VARCHAR(MAX),    
   INJURED_NAME_ALL VARCHAR(MAX),    
@@ -610,6 +615,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		CASE_EVALUATION_DATE = ISNULL((Select TOP 1 ISNULL(Convert(Varchar(50), CASE_EVALUATION_DATE, 101),'') AS CASE_EVALUATION_DATE from tblCase_Date_Details Where Case_Id = @s_a_case_id),''),    
 		FACILITATION_DATE  = ISNULL((Select TOP 1 ISNULL(Convert(Varchar(50), FACILITATION_DATE, 101),'') AS FACILITATION_DATE from tblCase_Date_Details Where Case_Id = @s_a_case_id),''),    
 		SETTLEMENT_CONFERENCE_DATE = ISNULL((Select TOP 1 ISNULL(Convert(Varchar(50), SETTLEMENT_CONFERENCE_DATE, 101),'') AS SETTLEMENT_CONFERENCE_DATE from tblCase_Date_Details Where Case_Id = @s_a_case_id),'') ,    
+		SERVICE_TYPE = STUFF((SELECT distinct ',' + p1.Service_type FROM tblTreatment p1 WHERE CAS.Case_Id = p1.Case_Id FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,1,''),
 		--- Packet Data    
 		PROVIDER_NAME_ALL =UPPER(ISNULL(PRO.PROVIDER_SUITNAME,'')),    
 		INJURED_NAME_ALL = UPPER(ISNULL(CAS.INJUREDPARTY_FIRSTNAME, N'')) + N' ' + UPPER(ISNULL(CAS.INJUREDPARTY_LASTNAME, N'')),    
@@ -990,6 +996,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		CASE_EVALUATION_DATE = ISNULL((SELECT TOP 1 ISNULL(Convert(Varchar(50), CASE_EVALUATION_DATE, 101),'') AS CASE_EVALUATION_DATE from tblCase_Date_Details Where Case_Id = @s_a_case_id),''),    
 		FACILITATION_DATE =ISNULL((SELECT TOP 1 ISNULL(Convert(Varchar(50), FACILITATION_DATE, 101),'') AS FACILITATION_DATE from tblCase_Date_Details Where Case_Id = @s_a_case_id),''),    
 		SETTLEMENT_CONFERENCE_DATE = ISNULL((SELECT TOP 1 ISNULL(Convert(Varchar(50), SETTLEMENT_CONFERENCE_DATE, 101),'') AS SETTLEMENT_CONFERENCE_DATE from tblCase_Date_Details Where Case_Id = @s_a_case_id),''),    
+		SERVICE_TYPE = STUFF((SELECT distinct ',' + p1.Service_type FROM tblTreatment p1 WHERE CAS.Case_Id = p1.Case_Id FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,1,''),
 		--- Packet Data    
 		PROVIDER_NAME_ALL = @PROVIDER_NAME_ALL,    
 		INJURED_NAME_ALL = @INJURED_NAME_ALL,    
