@@ -2583,5 +2583,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Stored Procedures\Procs2\LCJ_GETCLIENTFILINGFEE.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\Update_InsInjPartyName.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\Get_InsInjPartyName.sql" />
   </ItemGroup>
 </Project>
