@@ -19,6 +19,8 @@ BEGIN
 	Our_Attorney_Law_Firm,
 	Law_Suit_Type,
 	Settledby_First_Party_Litigation  
+	,Purchase_Balance
+	,Purchase_Price
   FROM tblCase_additional_info ci  (NOLOCK)
   --LEFT OUTER JOIN tblcase c on ci.case_id = c.case_id and ci.domainid = c.DomainId 
   WHERE  ci.DomainID = @s_a_DomainID  and ci.case_id = @s_a_case_id
