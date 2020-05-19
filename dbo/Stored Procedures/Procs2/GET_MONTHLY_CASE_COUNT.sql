@@ -17,7 +17,7 @@ BEGIN
 		,CaseOpenedYear INT
 		)
 
-	DECLARE @FromDateOpened DATE = CONVERT(DATE, DATEADD(MONTH, - @PreviousMonths, GETDATE()))
+	DECLARE @FromDateOpened DATE = CONVERT(DATE, DATEADD(MONTH, - @PreviousMonths, GETDATE()- DAY(GETDATE()) + 1))
 	DECLARE @ToDateOpened DATE = EOMONTH(@FromDateOpened)
 	DECLARE @Counter INT = 1
 
@@ -33,8 +33,8 @@ BEGIN
 			,@Year [CaseOpenedYear]
 		FROM #temp t
 		LEFT JOIN tblcase tc(NOLOCK) ON tc.DomainId = t.DomainID
-			AND CONVERT(DATE, Date_Opened) BETWEEN @FromDateOpened
-				AND @ToDateOpened
+			AND CONVERT(DATE, Date_Opened) BETWEEN CONVERT(DATE,@FromDateOpened)
+				AND CONVERT(DATE,@ToDateOpened)
 			AND isnull(IsDeleted, 0) = 0
 		GROUP BY t.DomainId
 
