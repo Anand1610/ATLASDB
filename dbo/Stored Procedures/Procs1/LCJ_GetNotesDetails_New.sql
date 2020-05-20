@@ -15,6 +15,7 @@ BEGIN
    left outer join tblNotesType WITH(NOLOCK) on tblNotes.Notes_Type=tblNotesType.Notes_Type  and tblNotes.DomainId=tblNotesType.DomainId  
     WHERE Case_Id = @Case_Id      
 	AND tblnotes.DomainId=@DomainId    
+	and (@Notes_Type=' ---ALL--- ' or tblNotesType.Notes_Type=@Notes_Type) 
    ORDER BY Notes_Id DESC,Notes_Date ASC    
       
 -- END      
