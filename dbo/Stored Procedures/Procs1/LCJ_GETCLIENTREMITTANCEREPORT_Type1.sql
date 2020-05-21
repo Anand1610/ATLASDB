@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[LCJ_GETCLIENTREMITTANCEREPORT_Type1] 
+﻿CREATE PROCEDURE [dbo].[LCJ_GETCLIENTREMITTANCEREPORT_Type1] 
 	-- Add the parameters for the stored procedure here
 	@DomainId NVARCHAR(50),
 	@Client_id nvarchar(50)
@@ -61,12 +60,25 @@ BEGIN
 	,A.TRANSACTIONS_ID
 	, CASE 	   
 		   WHEN Vendor_Fee_Type ='Flat Fee'  and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP') 
+		    AND 
+		   A.Case_Id NOT IN (Select Case_Id from tblTransactions where 
+		   Transactions_status='FREEZED' AND Transactions_Type IN ('PreC','C','PreCToP') and Case_Id=A.Case_Id ) 
+
 		   THEN ISNULL(Vendor_Fee,0.00)
 
+
 		   WHEN Vendor_Fee_Type ='%' and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP') 
+
+		    AND 
+		   A.Case_Id NOT IN (Select Case_Id from tblTransactions where 
+		   Transactions_status='FREEZED' AND Transactions_Type IN ('PreC','C','PreCToP') and Case_Id=A.Case_Id ) 
+
 		   THEN CAST(ISNULL(ABS(ISNULL(convert(money,(A.TRANSACTIONS_AMOUNT * ISNULL(Vendor_Fee,0.00) /100 )),0.00)),0.00) as  decimal(10,2))
 
-		   WHEN Vendor_Fee_Type ='Slab Based'  
+		   WHEN Vendor_Fee_Type ='Slab Based'   and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
+		    AND 
+		   A.Case_Id NOT IN (Select Case_Id from tblTransactions where 
+		   Transactions_status='FREEZED' AND Transactions_Type IN ('PreC','C','PreCToP') and Case_Id=A.Case_Id ) 
 		   THEN
 				  case when (select top 1 AmountType from tblprovider_slabs where providerid = B.Provider_id) = 0 then 
 				 (select ISNULL(Vendorfee,0.00) from tblprovider_slabs where providerid = B.Provider_id 
@@ -191,7 +203,7 @@ order by A.case_id) AS  Rownum,
 	 END AS TRANSACTIONS_dESCRIPTION
 	 ,A.TRANSACTIONS_ID,
 	 CASE 	   
-		   WHEN Vendor_Fee_Type ='Flat Fee' 
+		   WHEN Vendor_Fee_Type ='Flat Fee'   and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
 		   THEN  (CASE WHEN  exists(select top 1 case_id from Billing_Packet with(nolock) where Packeted_Case_ID =  B.case_id) THEN 
 
 		         (
@@ -216,7 +228,7 @@ order by A.case_id) AS  Rownum,
 				)
 		   WHEN Vendor_Fee_Type ='%' and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
 		   THEN CAST(ISNULL(ABS(ISNULL(convert(money,(A.TRANSACTIONS_AMOUNT * ISNULL(Vendor_Fee,0.00) /100 )),0.00)),0.00) as decimal(10,2))
-		    WHEN Vendor_Fee_Type ='Slab Based' 
+		    WHEN Vendor_Fee_Type ='Slab Based'  and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
 			THEN
 				 
 				  ISNULL( case when (select top 1 AmountType from tblprovider_slabs where providerid = B.Provider_id) = 0 then 
@@ -341,11 +353,11 @@ order by A.case_id) AS  Rownum,
 	 END AS TRANSACTIONS_dESCRIPTION
 	 ,A.TRANSACTIONS_ID,
 	 CASE 	   
-		   WHEN Vendor_Fee_Type ='Flat Fee' 
+		   WHEN Vendor_Fee_Type ='Flat Fee'  and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
 		   THEN ISNULL(Vendor_Fee,0.00)
 		   WHEN Vendor_Fee_Type ='%' and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
 		   THEN cast(ISNULL(ABS(ISNULL(convert(money,(A.TRANSACTIONS_AMOUNT * ISNULL(Vendor_Fee,0.00) /100 )),0.00)),0.00) as decimal(10,2))
-		    WHEN Vendor_Fee_Type ='Slab Based'
+		    WHEN Vendor_Fee_Type ='Slab Based'  and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
 			THEN
 				 
 				  ISNULL( case when (select top 1 AmountType from tblprovider_slabs where providerid = B.Provider_id) = 0 then 
@@ -708,4 +720,7 @@ order by A.case_id) AS  Rownum,
 					
 					END
 					END
+
+GO
+
 
