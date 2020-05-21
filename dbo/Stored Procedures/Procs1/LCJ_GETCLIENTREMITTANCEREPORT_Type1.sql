@@ -204,6 +204,10 @@ order by A.case_id) AS  Rownum,
 	 ,A.TRANSACTIONS_ID,
 	 CASE 	   
 		   WHEN Vendor_Fee_Type ='Flat Fee'   and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
+		    AND 
+		   A.Case_Id NOT IN (Select Case_Id from tblTransactions where 
+		   Transactions_status='FREEZED' AND Transactions_Type IN ('PreC','C','PreCToP') and Case_Id=A.Case_Id ) 
+
 		   THEN  (CASE WHEN  exists(select top 1 case_id from Billing_Packet with(nolock) where Packeted_Case_ID =  B.case_id) THEN 
 
 		         (
@@ -227,7 +231,12 @@ order by A.case_id) AS  Rownum,
 				 ELSE  ISNULL(Vendor_Fee,0.00) END
 				)
 		   WHEN Vendor_Fee_Type ='%' and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
+		    AND 
+		   A.Case_Id NOT IN (Select Case_Id from tblTransactions where 
+		   Transactions_status='FREEZED' AND Transactions_Type IN ('PreC','C','PreCToP') and Case_Id=A.Case_Id ) 
+
 		   THEN CAST(ISNULL(ABS(ISNULL(convert(money,(A.TRANSACTIONS_AMOUNT * ISNULL(Vendor_Fee,0.00) /100 )),0.00)),0.00) as decimal(10,2))
+
 		    WHEN Vendor_Fee_Type ='Slab Based'  and   TRANSACTIONS_TYPE IN ('C','PreC','PreCToP')
 			THEN
 				 
@@ -720,7 +729,4 @@ order by A.case_id) AS  Rownum,
 					
 					END
 					END
-
-GO
-
 
