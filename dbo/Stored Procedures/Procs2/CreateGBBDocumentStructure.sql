@@ -1,12 +1,4 @@
-﻿USE [LS_ATLAS_DB_PROJECT]
-GO
-/****** Object:  StoredProcedure [dbo].[CreateGBBDocumentStructure]    Script Date: 5/22/2020 1:32:45 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
- ALTER PROCEDURE [dbo].[CreateGBBDocumentStructure]
+﻿CREATE PROCEDURE [dbo].[CreateGBBDocumentStructure]
  @NodeName varchar(1000)=''  ,
  @FilePath varchar(1000)=''  ,
  @DocumentName varchar(1000)='P_8177_201607011026332633.pdf',
