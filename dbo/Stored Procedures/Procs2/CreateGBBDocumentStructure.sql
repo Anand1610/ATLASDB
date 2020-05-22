@@ -1,4 +1,12 @@
-﻿CREATE PROCEDURE [dbo].[CreateGBBDocumentStructure]
+﻿USE [LS_ATLAS_DB_PROJECT]
+GO
+/****** Object:  StoredProcedure [dbo].[CreateGBBDocumentStructure]    Script Date: 5/22/2020 1:32:45 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ ALTER PROCEDURE [dbo].[CreateGBBDocumentStructure]
  @NodeName varchar(1000)=''  ,
  @FilePath varchar(1000)=''  ,
  @DocumentName varchar(1000)='P_8177_201607011026332633.pdf',
@@ -12,6 +20,8 @@
  SET @UserId =(Select top 1 UserId from IssueTracker_Users where UserName ='system')
  
  set @BasePathId = (SELECT top 1 AtlasbasPathID FROM dbo.[tblBasePathAtlasGybMap] where GybBasePathid=@BasePathId)
+
+ Declare @Domainid varchar(30)=(select top 1 DomainiD from tblcase with(nolock) where case_id=@Case_id)
 
  declare @i_l_max_id int 
  Declare @Nodes Table
@@ -59,11 +69,11 @@
      WHERE CASEID = @Case_id  
      AND NodeName ='Addition Documents from GreenBills' AND ParentID =@i_l_node_id and NodeLevel=1)
 	 BEGIN
-     INSERT INTO tblTags(NodeName,Expanded,ParentID,CaseID,NodeLevel)           
+     INSERT INTO tblTags(NodeName,Expanded,ParentID,CaseID,NodeLevel, DomainId)           
      --SELECT 'Addition Documents from GreenBills', 0 , @i_l_node_id,@Case_id,1 FROM @Nodes   
      --WHERE nodeid = 0  
 
-	  SELECT 'Addition Documents from GreenBills', 0 , @i_l_node_id,@Case_id,1  
+	  SELECT 'Addition Documents from GreenBills', 0 , @i_l_node_id,@Case_id,1 , @DomainId
   
 
 	 set @NodeiD=SCOPE_IDENTITY()
@@ -87,8 +97,8 @@
     ) and (parentid = (Select nodeid from tbltags where CaseID=@Case_id  and  nodelevel=@Nodelevel-1 and NodeName=( SELECT NodeName FROM @Nodes   
      WHERE nodeid = @Counter-1)) or parentid=@NodeiD))
 	 BEGIN
-     INSERT INTO tblTags(NodeName,Expanded,ParentID,CaseID,NodeLevel)           
-     SELECT NodeName, 0 , @NodeiD,@Case_id,@Nodelevel FROM @Nodes   
+     INSERT INTO tblTags(NodeName,Expanded,ParentID,CaseID,NodeLevel, DomainId)           
+     SELECT NodeName, 0 , @NodeiD,@Case_id,@Nodelevel,@Domainid FROM @Nodes   
      WHERE nodeid = @Counter  
 	 set @NodeiD=SCOPE_IDENTITY()
 	 END
@@ -116,13 +126,13 @@
 	BEGIN    
 
 
-	INSERT INTO  tblDocImages(Filename,FilePath,OCRData,Status,from_flag, BasePathId)                
-    VALUES (@DocumentName,@FilePath  ,'',1  ,1, @BasePathId)  
+	INSERT INTO  tblDocImages(Filename,FilePath,OCRData,Status,from_flag, BasePathId, DomainID)                
+    VALUES (@DocumentName,@FilePath  ,'',1  ,1, @BasePathId, @DomainID)  
                 
     SET @i_l_max_id = SCOPE_IDENTITY()              
          
-    INSERT INTO tblImageTag(ImageID,TagID,LoginID,DateInserted,DateModified,DateScanned)            
-    VALUES (@i_l_max_id,@NodeiD,@UserId,GETDATE(),NULL, NULL)  
+    INSERT INTO tblImageTag(ImageID,TagID,LoginID,DateInserted,DateModified,DateScanned, DomainID)            
+    VALUES (@i_l_max_id,@NodeiD,@UserId,GETDATE(),NULL, NULL, @DomainID)  
 
 
 	       
