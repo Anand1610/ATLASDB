@@ -1,5 +1,4 @@
-﻿
--- =============================================
+﻿-- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
@@ -16,7 +15,7 @@ BEGIN
 
     -- Insert statements for procedure here
 	INSERT INTO Auto_Billing_Packet (DomainId,Case_Id)
-	VALUES(@DomainID,(SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
+	SELECT @DomainID, s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')
 
 	INSERT INTO Auto_Billing_Packet_Info
 	SELECT distinct
