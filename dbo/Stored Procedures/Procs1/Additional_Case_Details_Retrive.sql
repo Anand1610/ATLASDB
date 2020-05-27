@@ -18,7 +18,7 @@ BEGIN
 	Our_Attorney,
 	Our_Attorney_Law_Firm,
 	Law_Suit_Type,
-	Settledby_First_Party_Litigation  
+	Settledby_First_Party_Litigation 
 	,Purchase_Balance
 	,Purchase_Price
   FROM tblCase_additional_info ci  (NOLOCK)

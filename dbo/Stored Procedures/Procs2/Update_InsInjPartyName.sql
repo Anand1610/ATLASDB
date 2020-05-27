@@ -20,6 +20,3 @@ where case_id=@CaseId
 END
 
 END
-GO
-
-

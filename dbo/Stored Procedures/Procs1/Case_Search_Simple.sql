@@ -73,7 +73,7 @@ BEGIN
 					  ORDER BY    
           
     
-					   CASE WHEN @SortBy  = 'Case_Id' and  @SortOrder = 'Descending' THEN tblcase.Case_Id END DESC,    
+					   CASE WHEN @SortBy  = 'Case_Id' and  @SortOrder = 'Descending' THEN tblcase.Case_AutoID END DESC,    
 					   CASE WHEN @SortBy  = 'Case_Age' and  @SortOrder = 'Descending' THEN DateDiff(dd, Date_Opened, GETDATE()) END DESC,    
 					   CASE WHEN @SortBy  = 'Status_Age' and  @SortOrder = 'Descending' THEN DateDiff(dd, ISNULL(Date_Status_Changed, Date_Opened), GETDATE()) END DESC,  
 					   --CASE WHEN @SortBy  = 'InjuredParty_Name' and  @SortOrder = 'Descending' THEN InjuredParty_LastName END DESC, 
@@ -81,7 +81,7 @@ BEGIN
 					   CASE WHEN @SortBy  = 'Provider_Name' and  @SortOrder = 'Descending' THEN Provider_Name END DESC,    
            
            
-					   CASE @SortBy WHEN 'Case_Id' THEN tblcase.Case_Id END,    
+					   CASE @SortBy WHEN 'Case_Id' THEN tblcase.Case_AutoID END,    
 					   CASE @SortBy WHEN 'Case_Age' THEN DateDiff(dd, Date_Opened, GETDATE()) END,    
 					   CASE @SortBy WHEN 'Status_Age' THEN DateDiff(dd, ISNULL(Date_Status_Changed, Date_Opened), GETDATE()) END,    
 					   CASE @SortBy WHEN 'InjuredParty_Name' THEN (LTRIM(InjuredParty_LastName) + ',' + LTRIM(InjuredParty_FirstName)) END ASC,  
@@ -739,6 +739,7 @@ BEGIN
 			,StatusDisposition
 			,DateDiff(dd, ISNULL(Date_Status_Changed, Date_Opened), GETDATE()) AS Status_Age
 			,DateDiff(dd, Date_Opened, GETDATE()) AS Case_Age
+			
 			,(
 				SELECT TOP 1 ChequeNo
 				FROM tblTransactions(NOLOCK)
@@ -942,14 +943,14 @@ BEGIN
 				)
 		--ORDER BY Case_AutoId DESC
 		ORDER BY
-	   CASE WHEN @SortBy  = 'Case_Id' and  @SortOrder = 'Descending' THEN Case_Id END DESC,    
+	   CASE WHEN @SortBy  = 'Case_Id' and  @SortOrder = 'Descending' THEN Case_AutoID END DESC,    
        CASE WHEN @SortBy  = 'Case_Age' and  @SortOrder = 'Descending' THEN DateDiff(dd, Date_Opened, GETDATE()) END DESC,    
        CASE WHEN @SortBy  = 'Status_Age' and  @SortOrder = 'Descending' THEN DateDiff(dd, ISNULL(Date_Status_Changed, Date_Opened), GETDATE()) END DESC,    
        CASE WHEN @SortBy  = 'InjuredParty_Name' and  @SortOrder = 'Descending' THEN (LTRIM(InjuredParty_LastName) + ',' + LTRIM(InjuredParty_FirstName)) END DESC,   
 	   --CASE WHEN @SortBy  = 'InjuredParty_Name' and  @SortOrder = 'Descending' THEN InjuredParty_LastName END DESC,   
        CASE WHEN @SortBy  = 'Provider_Name' and  @SortOrder = 'Descending' THEN Provider_Name END DESC,    
     
-	  CASE @SortBy WHEN 'Case_Id' then Case_Id  END,    
+	  CASE @SortBy WHEN 'Case_Id' then Case_AutoID  END,    
 	  CASE @SortBy WHEN 'Case_Age' THEN DateDiff(dd, Date_Opened, GETDATE()) END,    
 	  CASE @SortBy WHEN 'Status_Age' THEN DateDiff(dd, ISNULL(Date_Status_Changed, Date_Opened), GETDATE()) END,    
 	  CASE @SortBy WHEN 'InjuredParty_Name' THEN (LTRIM(InjuredParty_LastName) + ',' + LTRIM(InjuredParty_FirstName)) END,  

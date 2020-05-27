@@ -80,7 +80,7 @@ begin
 			 AND Treatment_Id = @s_a_Treatment_id   
 			 AND t.Case_Id = @s_a_Case_id  
 	  ORDER BY   
-			DOS ,Code    
+			DOS ,b.Code    
 end
 END  
   

@@ -1,6 +1,10 @@
-﻿
+﻿/*    ==Scripting Parameters==
 
-
+    Changed by : Abhay W
+	Description : Added new column for Old_Status and WHO _CHANGE_TO_THE_CURRENT_STATUS
+	Date: 05/21/2020
+	Last Change By: System
+*/
 CREATE PROCEDURE [dbo].[case_search_advance] -- [case_search_advance]  @DomainID='amt',@s_a_MainDenialID='2'
 (
 	@DomainID						VARCHAR(50),
@@ -17,7 +21,7 @@ CREATE PROCEDURE [dbo].[case_search_advance] -- [case_search_advance]  @DomainID
 	@s_a_ClaimNo					VARCHAR(100)	=	'',
 	@s_a_BillNumber					VARCHAR(500)	=	'',
 	@s_a_IndexOrAAANo				VARCHAR(100)	=	'',
-	@i_a_DenailReason				varchar(1000)	=	'',
+	@i_a_DenailReason				VARCHAR(1000)	=	'',
 	@i_a_Court						VARCHAR(MAX)          ,
 	@i_a_Defendant					INT				=	0,
 	@i_a_ReviewingDoctor			INT				=	0,
@@ -179,7 +183,8 @@ BEGIN
 			[Status] varchar(50) NULL,
 			[StatusDisposition] varchar(1000) NULL,
 			[userId] nvarchar(200) NULL,
-			[DefAttorneyFileNo] varchar(100) NULL
+			[DefAttorneyFileNo] varchar(100) NULL,
+			[Old_Status] varchar(100) NULL
 
 			
 				)
@@ -214,7 +219,8 @@ BEGIN
 								Status,
 								StatusDisposition,
 								userId,
-								DefAttorneyFileNo
+								DefAttorneyFileNo,
+								Old_Status
 																								)
 
 								SELECT Case_Id,
@@ -247,7 +253,8 @@ BEGIN
 								Status,
 								StatusDisposition,
 								userId,
-								Attorney_FileNumber
+								Attorney_FileNumber,
+								Old_Status
 								FROM TBLCASE with(NOLOCK) WHERE DomainId=@DomainID
 
 
@@ -468,7 +475,9 @@ BEGIN
 	cas.batchCode,
 	DateDiff(dd, ISNULL(casDate.Date_Status_Changed, casDate.Date_Opened), GETDATE()) AS Status_Age,
 	SUM(ISNULL(tre.Claim_Amount,0.00)) - SUM(ISNULL(tre.Paid_Amount,0.00)) - SUM(ISNULL(tre.WriteOff,0.00)) As Total_Balance,
-	DefAttorneyFileNo
+	DefAttorneyFileNo,
+	Old_Status AS Old_Status,
+	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS]
 	FROM
 		@CaseData cas 
 		INNER JOIN @CaseAmounts casAmt ON cas.Case_Id = casAmt.Case_Id
@@ -621,7 +630,8 @@ BEGIN
 		Settlements.Settlement_Af,
 		Settlements.Settlement_Ff,
 		casDate.Date_BillSent--,
-		,cas.DefAttorneyFileNo
+		,cas.DefAttorneyFileNo,
+		cas.Old_Status
 		--Event_Date
 		) tbl
 		WHERE tbl.ROWID >= @StartIndex AND tbl.ROWID <= @EndIndex
@@ -803,7 +813,9 @@ BEGIN
 	cas.batchCode,
 	DateDiff(dd, ISNULL(casDate.Date_Status_Changed, casDate.Date_Opened), GETDATE()) AS Status_Age,
 	SUM(ISNULL(tre.Claim_Amount,0.00)) - SUM(ISNULL(tre.Paid_Amount,0.00)) - SUM(ISNULL(tre.WriteOff,0.00)) As Total_Balance,
-	DefAttorneyFileNo
+	DefAttorneyFileNo,
+	Old_Status AS Old_Status,
+	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS]
 	FROM
 		@CaseData cas 
 		INNER JOIN @CaseAmounts casAmt ON cas.Case_Id = casAmt.Case_Id
@@ -953,7 +965,8 @@ BEGIN
 		Settlements.Settlement_Af,
 		Settlements.Settlement_Ff,
 		casDate.Date_BillSent--,
-		,cas.DefAttorneyFileNo
+		,cas.DefAttorneyFileNo,
+		cas.Old_Status
 		--Event_Date
 		) tbl
 		WHERE tbl.ROWID >= @StartIndex AND tbl.ROWID <= @EndIndex
@@ -1130,7 +1143,9 @@ BEGIN
 	cas.batchCode,
 	DateDiff(dd, ISNULL(casDate.Date_Status_Changed, casDate.Date_Opened), GETDATE()) AS Status_Age,
 	SUM(ISNULL(tre.Claim_Amount,0.00)) - SUM(ISNULL(tre.Paid_Amount,0.00)) - SUM(ISNULL(tre.WriteOff,0.00)) As Total_Balance,
-	DefAttorneyFileNo
+	DefAttorneyFileNo,
+	Old_Status AS Old_Status,
+	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS]
 	FROM
 		@CaseData cas 
 		INNER JOIN @CaseAmounts casAmt ON cas.Case_Id = casAmt.Case_Id
@@ -1278,7 +1293,8 @@ BEGIN
 		sett.Settlement_Date,
 		casDate.Date_BillSent--,
 		--Event_Date
-		,cas.DefAttorneyFileNo
+		,cas.DefAttorneyFileNo,
+		cas.Old_Status
 	ORDER BY 
 		Case_AutoId	desc
 		END
@@ -1449,7 +1465,9 @@ BEGIN
 	cas.batchCode,
 	DateDiff(dd, ISNULL(casDate.Date_Status_Changed, casDate.Date_Opened), GETDATE()) AS Status_Age,
 	SUM(ISNULL(tre.Claim_Amount,0.00)) - SUM(ISNULL(tre.Paid_Amount,0.00)) - SUM(ISNULL(tre.WriteOff,0.00)) As Total_Balance,
-	DefAttorneyFileNo
+	DefAttorneyFileNo,
+	Old_Status AS Old_Status,
+	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS]
 	FROM
 		@CaseData cas 
 		INNER JOIN @CaseAmounts casAmt ON cas.Case_Id = casAmt.Case_Id
@@ -1594,7 +1612,8 @@ BEGIN
 		sett.Settlement_Date,
 		casDate.Date_BillSent--,
 		--Event_Date
-		,cas.DefAttorneyFileNo
+		,cas.DefAttorneyFileNo,
+		cas.Old_Status
 	ORDER BY 
 		Case_AutoId	desc
 

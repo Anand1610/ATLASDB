@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[MST_PROCEDURE_CODES] (
     [Code]                      VARCHAR (32)   NULL,
-    [Description]               NVARCHAR (255) NULL,
+    [Description]               VARCHAR (MAX)  NULL,
     [Amount]                    MONEY          NULL,
     [Specialty]                 NVARCHAR (255) NULL,
     [ins_fee_schedule]          MONEY          NULL,

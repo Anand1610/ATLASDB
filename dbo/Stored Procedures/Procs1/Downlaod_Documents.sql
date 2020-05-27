@@ -25,12 +25,11 @@ BEGIN
  inner Join dbo.tblTags T (nolock)  on T.NodeID = IT.TagID   
  LEFT OUTER JOIN dbo.tblBasePath b (nolock)  ON I.BasePathID = b.BasePathID  
  WHERE -- T.CaseID IN (SELECT LTRIM(RTRIM(items)) FROM dbo.STRING_SPLIT(@s_a_case_id,','))  
+  
  --AND
-  T.DomainId  = 'DK' 
+  T.DomainId  = @s_a_DomainID
   --and  NodeName like '%VERIFICATION RESPONSE%' 
- and   CaseID in ('DK20-95441',
-'DK20-95439',
-'DK20-95487')
+ and   CaseID in (select value from string_split(@s_a_case_id ,','))
 --  and filepath like '%LGM%'
 --and filepath not like 'glf\glf%'
 --and filepath not like 'glf/glf%'

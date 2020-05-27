@@ -16,6 +16,7 @@
     [Expense_Due]       MONEY          NULL,
     [Account_Id_old]    INT            NULL,
     [Rebuttal_Fee]      MONEY          NULL,
+    [Invoice_Image_old] NTEXT          NULL,
     CONSTRAINT [PK_tblClientAccount] PRIMARY KEY CLUSTERED ([Account_Id] ASC) WITH (FILLFACTOR = 90)
 );
 

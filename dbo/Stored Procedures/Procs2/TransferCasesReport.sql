@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[TransferCasesReport] -- [TransferCasesReport] 'CO000000000000000438', 'Gyb' ,'BT'  
+﻿
+CREATE PROCEDURE [dbo].[TransferCasesReport] -- [TransferCasesReport] 'CO000000000000000438', 'Gyb' ,'BT'  
 (  
 	 @LawFirmID VARCHAR(100) = null,  
 	 @Gbb_Type VARCHAR(10) = null,  

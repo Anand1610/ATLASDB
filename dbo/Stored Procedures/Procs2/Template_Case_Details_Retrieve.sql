@@ -1,13 +1,10 @@
 ﻿
-/*
-Last changed:System.
-Changeed by :shashank 
-Date Changed:05/07/2020
-Decription  :Added new Tag
+--Last change by System.
+--Changes done by shashank 05/07/2020
 
-*/
+
 -- Template_Case_Details_Retrieve 'BT','BT20-114131',1111    
-create PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
+CREATE PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
 (    
  @DomainId  VARCHAR(40) = '' ,    
  @s_a_case_id NVARCHAR(2000) = '',    

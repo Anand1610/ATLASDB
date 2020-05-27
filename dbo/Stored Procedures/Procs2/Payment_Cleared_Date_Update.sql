@@ -20,6 +20,6 @@ BEGIN
 		BEGIN
 		    Update tbl_CPT_Payment_Details 
 			set LIT_Cleared_Date = CONVERT(datetime, @dt_a_clear_date)
-			where CPT_Pay_Id in (Select items from dbo.STRING_SPLIT(@s_a_Ids, ',') ) and DomainId = @s_a_DomainId
+			where CPT_Pay_Id in (Select items from  dbo.STRING_SPLIT(@s_a_Ids, ',') ) and DomainId = @s_a_DomainId
 		END
 END
