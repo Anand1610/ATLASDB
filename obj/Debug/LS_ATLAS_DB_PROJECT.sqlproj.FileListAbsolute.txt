@@ -1,0 +1,9 @@
+E:\Project\AtlasDb\ATLASDB\bin\Debug\LS_ATLAS_DB_PROJECT.dacpac
+E:\Project\AtlasDb\ATLASDB\obj\Debug\Model.xml
+E:\Project\AtlasDb\ATLASDB\obj\Debug\refactor.xml
+E:\Project\AtlasDb\ATLASDB\obj\Debug\postdeploy.sql
+E:\Project\AtlasDb\ATLASDB\obj\Debug\predeploy.sql
+E:\Project\AtlasDb\ATLASDB\obj\Debug\LS_ATLAS_DB_PROJECT.dll
+E:\Project\AtlasDb\ATLASDB\obj\Debug\LS_ATLAS_DB_PROJECT.pdb
+E:\Project\AtlasDb\ATLASDB\bin\Debug\LS_ATLAS_DB_PROJECT.dll
+E:\Project\AtlasDb\ATLASDB\bin\Debug\LS_ATLAS_DB_PROJECT.pdb

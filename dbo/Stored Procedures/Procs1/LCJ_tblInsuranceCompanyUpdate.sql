@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[LCJ_tblInsuranceCompanyUpdate]
+﻿
+CREATE PROCEDURE [dbo].[LCJ_tblInsuranceCompanyUpdate]
 (
 @DomainId					    nvarchar(50),
 @InsuranceCompany_Id			nvarchar(100),
@@ -6,6 +7,8 @@
 @InsuranceCompany_SuitName		nvarchar(250),
 @InsuranceCompany_Type		 	varchar(40),
 @InsuranceCompany_Local_Address 	varchar(255),
+@InsuranceCompany_Local_Address_1 	varchar(255),
+
 @InsuranceCompany_Local_City		varchar(100),
 @InsuranceCompany_Local_State		varchar(100),
 @InsuranceCompany_Local_Zip		varchar(50),
@@ -47,6 +50,7 @@ UPDATE tblInsuranceCompany  SET
 	InsuranceCompany_suitName = @InsuranceCompany_SuitName,
 	InsuranceCompany_Type = @InsuranceCompany_Type,
 	InsuranceCompany_Local_Address = @InsuranceCompany_Local_Address,
+	InsuranceCompany_Local_Address_1 = @InsuranceCompany_Local_Address_1,
 	InsuranceCompany_Local_City = @InsuranceCompany_Local_City,
 	InsuranceCompany_Local_State = @InsuranceCompany_Local_State,
 	InsuranceCompany_Local_Zip = @InsuranceCompany_Local_Zip,

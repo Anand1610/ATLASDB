@@ -4,6 +4,7 @@
     [InsuranceCompany_SuitName]         VARCHAR (250)   NULL,
     [InsuranceCompany_Type]             VARCHAR (40)    NULL,
     [InsuranceCompany_Local_Address]    VARCHAR (250)   NULL,
+	InsuranceCompany_Local_Address_1    varchar(255)    NULL,
     [InsuranceCompany_Local_City]       VARCHAR (100)   NULL,
     [InsuranceCompany_Local_State]      VARCHAR (100)   NULL,
     [InsuranceCompany_Local_Zip]        VARCHAR (100)   NULL,
