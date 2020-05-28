@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[LCJ_GETCLIENTREMITTANCEREPORT_Type1] 
+﻿CREATE PROCEDURE [dbo].[LCJ_GETCLIENTREMITTANCEREPORT_Type1] 
 	-- Add the parameters for the stored procedure here
 	@DomainId NVARCHAR(50),
 	@Client_id nvarchar(50)
