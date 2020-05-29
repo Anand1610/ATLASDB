@@ -2569,12 +2569,10 @@
     <Build Include="dbo\Tables\ImportNewCPT_1.sql" />
     <Build Include="dbo\Tables\NodesImport.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\Get_Total_Client_Invoices.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\CreateGBBDocumentStructure.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\Get_Client_Initial_Status.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\Get_Client_Invoices.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\Get_Withdrawn_Cases_For_Months.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\Get_Total_Withdrawn_Cases_For_Months.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTFILINGFEE.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\GET_MONTHLY_CASE_COUNT.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\Get_InsInjPartyName.sql" />
     <Build Include="dbo\Stored Procedures\Procs1\Get_Node_Level.sql" />
@@ -2613,10 +2611,8 @@
     <Build Include="dbo\Stored Procedures\Procs2\SP_Get_Settlement_Reports.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\SP_Get_Settlement_Total_Details.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\SP_GetClientStatusWiseReport.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="dbo\Stored Procedures\Procs2\LCJ_GETCLIENTFILINGFEE.sql" />
-    <None Include="dbo\Stored Procedures\Procs2\Update_InsInjPartyName.sql" />
-    <None Include="dbo\Stored Procedures\Procs2\CreateGBBDocumentStructure.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_GETCLIENTFILINGFEE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Update_InsInjPartyName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\CreateGBBDocumentStructure.sql" />
   </ItemGroup>
 </Project>
