@@ -2580,6 +2580,7 @@
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_Invoices.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_Node_Level.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\GetVerificationReqStatusCount.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_User_For_Admin_Report.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Stored Procedures\Procs2\LCJ_GETCLIENTFILINGFEE.sql" />
