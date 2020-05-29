@@ -6,7 +6,9 @@
 )
 AS
 BEGIN
+
 	Declare @excludedCaseIds varchar(2000) = ''
+
 	Declare @totalCases INT = 0
 	DECLARE @CurrentCaseId varchar(25)
 	DECLARE @CurrentRowId INT = 0
