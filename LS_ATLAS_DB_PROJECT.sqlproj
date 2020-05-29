@@ -1931,33 +1931,6 @@
       <AnsiNulls>Off</AnsiNulls>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateAdjusters.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateAttorneys.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateCase.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateCaseDetails.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateClientDetails.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateCourt.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateDefendant.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateDenialReasons.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateFinancialListDetails.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateFinancialListDirectTypeDetails.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdatePaymentsTransactions.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdatePaymentTreatments.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateServed.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_UpdateSettlementPctg.sql">
-      <QuotedIdentifier>Off</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_AAASearch.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_CaseInfo.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_CaseInfo_Test.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_Change_Status.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_DisplaySettlements.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_Pop_DeskAssignToInsert.sql">
-      <AnsiNulls>Off</AnsiNulls>
-      <QuotedIdentifier>Off</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_SearchCase.sql" />
-    <Build Include="dbo\Stored Procedures\Procs1\LCJ_WorkArea_SearchCase_for_provider.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCase_Old.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCaseprovider.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCaseSimple.sql" />
@@ -2570,22 +2543,80 @@
     <Build Include="dbo\User Defined Types\ProviderImport.sql" />
     <Build Include="dbo\User Defined Types\WithdrawnCaseDataType.sql" />
     <Build Include="Security\HangFire.sql" />
-    <Build Include="dbo\Stored Procedures\Procs2\GET_MONTHLY_CASE_COUNT.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Check_Case_Claim_Amount.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\InsertProcedureCode.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\TestProcedurre.sql" />
     <Build Include="dbo\Tables\TestTable.sql" />
-    <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Withdrawn_Cases_For_Months.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_New_Cases_For_Months.sql" />
-    <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_Invoices.sql" />
-    <Build Include="dbo\Stored Procedures\Procs2\Get_Node_Level.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\GetVerificationReqStatusCount.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_User_For_Admin_Report.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Client_Final_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Client_Information.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Client_New_Cases_For_Months.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Client_Settlement_Information.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Client_Status_BreakDown.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Get_Firm_Details.sql" />
+    <Build Include="dbo\Tables\CPT_NEW_1.sql" />
+    <Build Include="dbo\Tables\CPT_NEW_2.sql" />
+    <Build Include="dbo\Tables\CPT_NEW_3.sql" />
+    <Build Include="dbo\Tables\cpt_new_4.sql" />
+    <Build Include="dbo\Tables\DistinctCPTCodes.sql" />
+    <Build Include="dbo\Tables\ImportCPT.sql" />
+    <Build Include="dbo\Tables\FinalCPTCOde.sql" />
+    <Build Include="dbo\Tables\ImportCPT_RM.sql" />
+    <Build Include="dbo\Tables\ImportCptClient.sql" />
+    <Build Include="dbo\Tables\ImportNewCPT_2.sql" />
+    <Build Include="dbo\Tables\ImportNewCPT_1.sql" />
+    <Build Include="dbo\Tables\NodesImport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Total_Client_Invoices.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\CreateGBBDocumentStructure.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Client_Initial_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Client_Invoices.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Withdrawn_Cases_For_Months.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Total_Withdrawn_Cases_For_Months.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\LCJ_GETCLIENTFILINGFEE.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\GET_MONTHLY_CASE_COUNT.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_InsInjPartyName.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Node_Level.sql" />
+    <Build Include="dbo\Stored Procedures\Procs1\Get_Pre_Lit_Voluntary_payments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\GetPreLitigationInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\getSettlementReportUserNew.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateAdjusters.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateAttorneys.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateCaseDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateClientDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateCourt.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateDefendant.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateDenialReasons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateFinancialListDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateFinancialListDirectTypeDetails.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdatePaymentsTransactions.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdatePaymentTreatments.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateServed.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_UpdateSettlementPctg.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_AAASearch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_CaseInfo.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_CaseInfo_Test.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_Change_Status.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_DisplaySettlements.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_Pop_DeskAssignToInsert.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCase.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\LCJ_WorkArea_SearchCase_for_provider.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SJR_GetClientCasereportDetail.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Provider_Status_Details_Retrive.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SPGetClientFinalStatusWiseReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SpGetClientSettlementDiscons.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SPGetClientSettlementIDSReport.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_Get_Settlement_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_Get_Settlement_OverDue_Reports.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_Get_Settlement_Reports.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_Get_Settlement_Total_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\SP_GetClientStatusWiseReport.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Stored Procedures\Procs2\LCJ_GETCLIENTFILINGFEE.sql" />
     <None Include="dbo\Stored Procedures\Procs2\Update_InsInjPartyName.sql" />
-    <None Include="dbo\Stored Procedures\Procs2\Get_InsInjPartyName.sql" />
     <None Include="dbo\Stored Procedures\Procs2\CreateGBBDocumentStructure.sql" />
   </ItemGroup>
 </Project>
