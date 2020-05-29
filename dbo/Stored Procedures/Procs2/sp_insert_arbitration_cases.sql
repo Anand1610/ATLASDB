@@ -1,11 +1,17 @@
-﻿CREATE PROCEDURE [dbo].[sp_insert_arbitration_cases]
+﻿/* 
+modified by	Atul Jadhav
+Date		5/29/2020
+Description	Created for relove the web application error
+Last used by :
+*/
+CREATE  PROCEDURE [dbo].[sp_insert_arbitration_cases]
 (
 	@DomainId VARCHAR(50),
 	@Case_Id varchar(40),
 	@User_Id varchar(80),
 	@isbit bit,
 	@Status VARCHAR(200),
-	@BatchCode VARCHAR(80)
+	@BatchCode VARCHAR(80)=null
 )
 AS
 BEGIN

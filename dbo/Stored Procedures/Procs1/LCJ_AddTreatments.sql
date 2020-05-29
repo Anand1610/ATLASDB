@@ -1,4 +1,10 @@
-﻿
+﻿/* 
+modified by	Atul Jadhav
+Date		5/29/2020
+Description	Created for relove the web application error
+Last used by :
+*/
+
 
 CREATE PROCEDURE [dbo].[LCJ_AddTreatments]
 (
@@ -6,18 +12,18 @@ CREATE PROCEDURE [dbo].[LCJ_AddTreatments]
 	@Case_Id nvarchar(100),
 	@DateOfService_Start DATETIME,
 	@DateOfService_End DATETIME,
-	@Claim_Amount MONEY,
-	@Paid_Amount MONEY,
-	@Date_BillSent	DATETIME,
-	@DenialReason_ID INT,
-	@ServiceType NVARCHAR(300),
-	@PeerReviewDoctor INT,
-	@UserID nvarchar(100),
-	@Account_Number varchar(50),
-	@Fee_Schedule numeric(18,2),
-	@TreatingDoctor_ID int ,
+	@Claim_Amount MONEY=null,
+	@Paid_Amount MONEY=null,
+	@Date_BillSent	DATETIME=null,
+	@DenialReason_ID INT=null,
+	@ServiceType NVARCHAR(300)=null,
+	@PeerReviewDoctor INT =null,
+	@UserID nvarchar(100)=null,
+	@Account_Number varchar(50)=null,
+	@Fee_Schedule numeric(18,2)=null,
+	@TreatingDoctor_ID int =null,
 	@RefundDate DateTime = null,
-	@WriteOff MONEY,
+	@WriteOff MONEY=null,
 	@DeductibleAmount DECIMAL(19,2) = 0.00
 	--@DenialReasons_Type nvarchar(200)
             --@Treatment_Id int
