@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[Billing_Packet_Create] 
+﻿CREATE PROCEDURE [dbo].[Billing_Packet_Create] 
 (
 	@DomainID VARCHAR(40),
 	@s_a_caption VARCHAR(1024),
@@ -201,10 +200,35 @@ SET NOCOUNT ON;
 				ORDER BY DateOfService_Start
 
 
-				     if exists(select top 1 * from tbltreatment where case_id=@Case_Id and DenialReason_Id is not null)
-					 BEGIN
+				INSERT INTO TXN_tblTreatment
+				(
+				Treatment_Id,
+				DenialReasons_Id,
+				Action_Type,
+				DomainId,
+				DenialReasons_Date,
+				IMEDate,
+				NOTES,
+				Denial_Posted_Date)
+				select 
+				tx1.Treatment_Id,
+				txntreatment.DenialReasons_Id, txntreatment.Action_Type,txntreatment.DomainId, txntreatment.DenialReasons_Date,
+				txntreatment.IMEDate, txntreatment.NOTES,txntreatment.Denial_Posted_Date from tblTreatment tx1
+
+				inner JOIN tblTreatment tx2 on tx1.ACT_CASE_ID= tx2.Case_Id and (tx1.DenialReason_ID=tx2.DenialReason_ID or tx1.DenialReason_ID is null)
+				and tx1.DomainId=tx2.DomainId
+				outer apply(select treatment_id,DenialReasons_Id, Action_Type,DomainId, DenialReasons_Date,IMEDate, NOTES,Denial_Posted_Date
+				
+				from TXN_tblTreatment where Treatment_Id =tx2.Treatment_Id) as txntreatment
+				where tx1.case_id=@Case_Id and txntreatment.treatment_id is not null
+				--and (tx1.DenialReason_ID!=0 and tx1.DenialReason_ID is not null)
+
+
+
+				  --   if exists(select top 1 * from tbltreatment where case_id=@Case_Id and DenialReason_Id is not null)
+					 --BEGIN
 					 EXEC Update_Denial_Case @Caseid =@Case_Id
-					 END
+					 --END
 
 
 				--Remove Deductible Amount For AF

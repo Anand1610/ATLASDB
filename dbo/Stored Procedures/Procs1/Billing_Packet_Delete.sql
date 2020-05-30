@@ -1,9 +1,4 @@
-﻿-- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[Billing_Packet_Delete] ----  [Billing_Packet_Delete] 'jl','JL20-105455','admin'
+﻿CREATE PROCEDURE [dbo].[Billing_Packet_Delete] ----  [Billing_Packet_Delete] 'jl','JL20-105455','admin'
 	-- Add the parameters for the stored procedure here
 	@DomainID VARCHAR(50),
 	@s_a_PktCaseID VARCHAR(100),	
@@ -76,6 +71,7 @@ print @s_l_Existing_Case_IDS
 		DELETE from tbl_Case_Status_Hierarchy WHERE case_id =@s_a_PktCaseID AND DomainId=@DomainID
 		DELETE from dbo.tbl_document_log WHERE pk_case_id =@s_a_PktCaseID AND DomainId=@DomainID
 		DELETE from dbo.tblNotes WHERE Case_Id =@s_a_PktCaseID AND DomainId=@DomainID
+		DELETE from dbo.TXN_tblTreatment WHERE Treatment_Id in (select Treatment_Id from dbo.tblTreatment WHERE Case_Id =@s_a_PktCaseID AND DomainId=@DomainID)
 		DELETE from dbo.tblTreatment WHERE Case_Id =@s_a_PktCaseID AND DomainId=@DomainID
 		DELETE from dbo.tblTransactions WHERE Case_Id =@s_a_PktCaseID AND DomainId=@DomainID
 		DELETE from dbo.tblSettlements WHERE Case_Id =@s_a_PktCaseID  AND DomainId=@DomainID

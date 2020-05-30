@@ -32,7 +32,11 @@ BEGIN
   
   BEGIN TRAN  
 	  -- Delete case from tbltreatment  
-	   Delete from tblTreatment where  ACT_Case_ID IN (SELECT CaseID FROM @tblPacketDel) AND DomainId=@DomainID    
+	   Delete from tblTreatment where  ACT_Case_ID IN (SELECT CaseID FROM @tblPacketDel) AND DomainId=@DomainID  
+	   
+	    Delete from txn_tbltreatment  where treatment_id 
+	   in (select Treatment_Id from tblTreatment where  ACT_Case_ID IN (SELECT CaseID FROM @tblPacketDel) AND DomainId=@DomainID)
+
    
 	  -- Unpacket the packded cases  
   
@@ -113,6 +117,13 @@ BEGIN
      SET @s_l_message = 'Packet not found. No data available for '+ @DomainID+ ' => '+ @s_a_MultipleCase_ID   
 	SET @i_l_result  =  0  
  END  
+
+
+    Declare @Packeted_Case_ID varchar(50) =  (select top 1 Packeted_Case_ID FROM @tblPacketDel)
+
+	  
+	   
+       exec Update_Denial_Case @Packeted_Case_ID
 
 
  SELECT @s_l_message AS [Message], @i_l_result AS [RESULT]  

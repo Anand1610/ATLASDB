@@ -81,6 +81,39 @@ DECLARE @i_l_result INT
 					AND Case_Id IN ((SELECT case_id FROM @tblcase))
 				ORDER BY DateOfService_Start
 
+				 INSERT INTO TXN_tblTreatment
+				(
+				Treatment_Id,
+				DenialReasons_Id,
+				Action_Type,
+				DomainId,
+				DenialReasons_Date,
+				IMEDate,
+				NOTES,
+				Denial_Posted_Date)
+				select 
+				tx1.Treatment_Id,
+				txntreatment.DenialReasons_Id, txntreatment.Action_Type,txntreatment.DomainId, txntreatment.DenialReasons_Date,
+				txntreatment.IMEDate, txntreatment.NOTES,txntreatment.Denial_Posted_Date from tblTreatment tx1
+
+				inner JOIN tblTreatment tx2 on tx1.ACT_CASE_ID= tx2.Case_Id and (tx1.DenialReason_ID=tx2.DenialReason_ID or  tx1.DenialReason_ID is null)
+				and tx1.DomainId=tx2.DomainId
+			
+				outer apply(select Treatment_id, DenialReasons_Id, Action_Type,DomainId, DenialReasons_Date,IMEDate, NOTES,Denial_Posted_Date
+				
+				from TXN_tblTreatment where Treatment_Id =tx2.Treatment_Id) as txntreatment
+				where tx1.case_id=@s_a_PktCaseID 
+				--and (tx1.DenialReason_ID!=0 and tx1.DenialReason_ID is not null)
+					AND tx1.ACT_CASE_ID in (select case_Id from @tblcase) and txntreatment.Treatment_id is not null
+
+
+					 --    if exists(select top 1 * from tbltreatment where case_id=@Case_Id and DenialReason_Id is not null)
+					 --BEGIN
+					 EXEC Update_Denial_Case @Caseid =@s_a_PktCaseID
+					 --END
+
+
+
 				---- Add Documents Please note- Only path is recorded no physical file...
 				--DECLARE  @s_l_node_name VARCHAR(500),          
 				--		 @s_l_filename VARCHAR(100),          
