@@ -28,5 +28,8 @@ DELETE from TXN_CASE_Treating_Doctor where Treatment_Id = + @Treatment_Id
 DELETE from tblTreatment where Treatment_Id = + @Treatment_Id
 DELETE FROM BILLS_WITH_PROCEDURE_CODES WHERE fk_Treatment_Id=@Treatment_Id
 
+
+exec Update_Denial_Case @CASE_ID
+
 end
 
