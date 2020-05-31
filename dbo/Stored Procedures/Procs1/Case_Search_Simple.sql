@@ -1,4 +1,5 @@
 ﻿
+
 CREATE PROCEDURE [dbo].[Case_Search_Simple] ( 
 	@strCaseId VARCHAR(50) = ''
 	,@Status VARCHAR(50) = ''
@@ -236,7 +237,7 @@ BEGIN
 			LEFT OUTER JOIN dbo.Assigned_Attorney a_att(NOLOCK) ON tblcase.Assigned_Attorney = a_att.PK_Assigned_Attorney_ID
 			WHERE tblcase.DomainId = @DomainId
 				AND ISNULL(tblcase.IsDeleted, 0) = 0
-				AND tblCase.STATUS <> 'IN ARB OR LIT'
+				AND (tblcase.domainid = 'DK' OR tblCase.STATUS <> 'IN ARB OR LIT')
 				
 				AND (
 					@strCaseId = ''
@@ -434,6 +435,9 @@ BEGIN
 		LEFT OUTER JOIN dbo.Assigned_Attorney a_att(NOLOCK) ON tblcase.Assigned_Attorney = a_att.PK_Assigned_Attorney_ID
 		WHERE tblcase.DomainId = @DomainId
 			AND ISNULL(tblcase.IsDeleted, 0) = 0
+			--AND (tblcase.domainid = 'DK' OR )
+			
+			-- tblCase.STATUS <> 'IN ARB OR LIT'
 			AND (tblcase.domainid = 'DK' OR tblCase.STATUS <> 'IN ARB OR LIT')
 			
 			AND (
@@ -762,8 +766,8 @@ BEGIN
 		LEFT OUTER JOIN dbo.Assigned_Attorney a_att(NOLOCK) ON tblcase.Assigned_Attorney = a_att.PK_Assigned_Attorney_ID
 		WHERE tblcase.DomainId = @DomainId
 			AND ISNULL(tblcase.IsDeleted, 0) = 0
-			AND tblCase.STATUS <> 'IN ARB OR LIT'
-			
+			--AND tblCase.STATUS <> 'IN ARB OR LIT'
+			AND (tblcase.domainid = 'DK' OR tblCase.STATUS <> 'IN ARB OR LIT')
 			AND (
 				@strCaseId = ''
 				OR tblcase.Case_Id LIKE '%' + @strCaseId + '%'
