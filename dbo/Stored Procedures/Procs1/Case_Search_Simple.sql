@@ -1,6 +1,4 @@
-﻿
-
-CREATE PROCEDURE [dbo].[Case_Search_Simple] ( 
+﻿CREATE PROCEDURE [dbo].[Case_Search_Simple] ( 
 	@strCaseId VARCHAR(50) = ''
 	,@Status VARCHAR(50) = ''
 	,@InjuredParty_LastName VARCHAR(50) = ''
