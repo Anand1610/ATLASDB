@@ -7,3 +7,12 @@ E:\Project\AtlasDb\ATLASDB\obj\Debug\LS_ATLAS_DB_PROJECT.dll
 E:\Project\AtlasDb\ATLASDB\obj\Debug\LS_ATLAS_DB_PROJECT.pdb
 E:\Project\AtlasDb\ATLASDB\bin\Debug\LS_ATLAS_DB_PROJECT.dll
 E:\Project\AtlasDb\ATLASDB\bin\Debug\LS_ATLAS_DB_PROJECT.pdb
+D:\LawSpades\ATLASDB\bin\Debug\LS_ATLAS_DB_PROJECT.dacpac
+D:\LawSpades\ATLASDB\bin\Debug\LS_ATLAS_DB_PROJECT.dll
+D:\LawSpades\ATLASDB\bin\Debug\LS_ATLAS_DB_PROJECT.pdb
+D:\LawSpades\ATLASDB\obj\Debug\Model.xml
+D:\LawSpades\ATLASDB\obj\Debug\refactor.xml
+D:\LawSpades\ATLASDB\obj\Debug\postdeploy.sql
+D:\LawSpades\ATLASDB\obj\Debug\predeploy.sql
+D:\LawSpades\ATLASDB\obj\Debug\LS_ATLAS_DB_PROJECT.dll
+D:\LawSpades\ATLASDB\obj\Debug\LS_ATLAS_DB_PROJECT.pdb
