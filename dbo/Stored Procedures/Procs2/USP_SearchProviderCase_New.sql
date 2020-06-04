@@ -89,7 +89,7 @@ SELECT @InvestorId=InvestorId FROM Tbl_Investor WHERE UserId = @SZ_USER_ID
 		left JOIN dbo.tblStatus sta (NOLOCK) on tblcase.Status=sta.Status_Type AND tblcase.DomainId= sta.DomainId
 		left join tblPacket p (NOLOCK) on tblcase.FK_Packet_ID = p.Packet_Auto_ID
 		-- left join tblTransactions tra (NOLOCK) on tblcase.case_id = tra.Case_Id
-		WHERE tblcase.DomainId= @DomainId  
+		WHERE tblcase.DomainId= @DomainId  and tblcase.IsDeleted=0
 		  AND (@strCaseId ='' or tblcase.Case_Id Like '%' + @strCaseId + '%')    
 		  AND (@Reference_CaseId ='' OR tblCase.case_code like '%' + @Reference_CaseId + '%')  
 		  AND (STATUS = @Status OR @Status = '' OR @Status = '0' OR @Status = 'all')  
