@@ -38,7 +38,25 @@ DECLARE @s_l_PacketID VARCHAR(40) = ''
 				, PRO.Provider_Suitname
 				, convert(decimal(38,2),T.Claim_Amount)[Claim_Amount]
 				, convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00)) + convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00))[Paid_Amount] 
-				, convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0) ) - convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) [Balance_Amount]  
+				
+				,case when CS.DomainId='JL' then 
+				convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0) ) - convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+				- isnull((
+				Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(Treatment_Id as varchar) = cast(TreatmentIds as varchar)
+				
+				),0.00) 
+				- isnull((
+				Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(TreatmentIds as varchar) in (select cast(Treatment_id as varchar) from tbltreatment where Act_case_Id =@CaseID)
+			
+				),0.00) 
+				
+				
+				else convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0) ) - convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00))  end 
+				
+				[Balance_Amount] 
+
 				, CONVERT(VARCHAR,T.DateOfService_Start,101) + ' - ' + CONVERT(VARCHAR,T.DateOfService_End,101) [DOS_Range]  
 				, CONVERT(VARCHAR, t.Date_BillSent, 101) [Date_BillSent]  
 				, CONVERT(VARCHAR,T.DateOfService_Start,101) AS DateOfService_Start
@@ -66,7 +84,25 @@ DECLARE @s_l_PacketID VARCHAR(40) = ''
 				, PRO.Provider_Suitname
 				, convert(decimal(38,2),T.Claim_Amount)[Claim_Amount]
 				, convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00)) + convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00))[Paid_Amount] 
-				, convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0) ) - convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) [Balance_Amount]  
+				
+				, 
+				case when CS.DomainID='JL' then 
+				convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0) ) - convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+				- isnull((
+				Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and cast(Treatment_Id as varchar) = cast(TreatmentIds as varchar)
+				
+				),0.00)
+				- isnull((
+				Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(TreatmentIds as varchar) in (select cast(Treatment_id as varchar) from tbltreatment where Act_case_Id =@CaseID)
+			
+				),0.00) 
+				else 
+					convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0) ) - convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+				end
+				[Balance_Amount]  
+
 				, CONVERT(VARCHAR,T.DateOfService_Start,101) + ' - ' + CONVERT(VARCHAR,T.DateOfService_End,101) [DOS_Range]  
 				, CONVERT(VARCHAR, t.Date_BillSent, 101) [Date_BillSent]  
 				, CONVERT(VARCHAR,T.DateOfService_Start,101) AS DateOfService_Start
@@ -122,7 +158,19 @@ DECLARE @s_l_PacketID VARCHAR(40) = ''
 		  , PRO.Provider_Suitname
 		  , convert(decimal(38,2),T.Claim_Amount)[Claim_Amount] 
 		  , convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00))+ convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) AS [Paid_Amount] 
-		  , convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) - convert(decimal(38,2),ISNULL(T.WriteOff,0))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) [Balance_Amount]  
+		  
+		  ,Case When CS.DomainId='JL' then 
+		  convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) - convert(decimal(38,2),ISNULL(T.WriteOff,0))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+		 - isnull((
+				Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Case_Id=CS.Case_Id AND Transactions_Type in ('C') 
+				and Treatment_Id = TreatmentIds
+				
+				),0.00)
+		  else
+		  convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) - convert(decimal(38,2),ISNULL(T.WriteOff,0))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+		  end
+		  [Balance_Amount]  
+
 		  , CONVERT(VARCHAR,T.DateOfService_Start,101) + ' - ' + CONVERT(VARCHAR,T.DateOfService_End,101) [DOS_Range]  
 		  , CONVERT(VARCHAR, t.Date_BillSent, 101) [Date_BillSent]  
 		  , CONVERT(VARCHAR,T.DateOfService_Start,101) AS DateOfService_Start
@@ -153,7 +201,16 @@ DECLARE @s_l_PacketID VARCHAR(40) = ''
 		  , PRO.Provider_Suitname
 		  , convert(decimal(38,2),T.Claim_Amount)[Claim_Amount] 
 		  , convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00))+ convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) AS [Paid_Amount] 
-		  , convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) - convert(decimal(38,2),ISNULL(T.WriteOff,0))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) [Balance_Amount]  
+	        ,Case when CS.DomainID='JL' then convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) - convert(decimal(38,2),ISNULL(T.WriteOff,0))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+		  - isnull((
+				Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Case_Id=CS.Case_Id AND Transactions_Type in ('C') 
+				and Treatment_Id = TreatmentIds
+				
+				),0.00)
+		  else
+		  convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) - convert(decimal(38,2),ISNULL(T.WriteOff,0))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+		  end
+		  [Balance_Amount]    
 		  , CONVERT(VARCHAR,T.DateOfService_Start,101) + ' - ' + CONVERT(VARCHAR,T.DateOfService_End,101) [DOS_Range]  
 		  , CONVERT(VARCHAR, t.Date_BillSent, 101) [Date_BillSent]  
 		  , CONVERT(VARCHAR,T.DateOfService_Start,101) AS DateOfService_Start

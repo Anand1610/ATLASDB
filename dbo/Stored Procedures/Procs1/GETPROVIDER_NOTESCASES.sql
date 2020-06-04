@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[GETPROVIDER_NOTESCASES]  --[GETPROVIDER_NOTESCASES] 'JL','5363',0,'Brian.Natanov'  
+﻿CREATE PROCEDURE [dbo].[GETPROVIDER_NOTESCASES]  --[GETPROVIDER_NOTESCASES] 'JL','5363',0,'Brian.Natanov'  
  @DomainId nvarchar(50),  
  @PROVIDER_ID INT=NULL,  
  @BIT_NOTES_CASES INT,  
@@ -44,7 +43,7 @@ BEGIN
   INNER JOIN TBLPROVIDER (NOLOCK) AS TBLPROVIDER ON TBLCASE.PROVIDER_ID = TBLPROVIDER.Provider_Id and TBLCASE.DomainId=TBLPROVIDER.DomainId  
   INNER JOIN TBLINSURANCECOMPANY (NOLOCK) as TBLINSURANCECOMPANY ON TBLCASE.INSURANCECOMPANY_ID = TBLINSURANCECOMPANY.INSURANCECOMPANY_ID and TBLCASE.DomainId=TBLINSURANCECOMPANY.DomainId  
   LEFT OUTER JOIN tblsettlements (NOLOCK) on tblcase.Case_Id=tblsettlements.Case_Id  
-  WHERE TBLPROVIDER.PROVIDER_ID in(select provider_id from TXN_PROVIDER_LOGIN (NOLOCK) where DomainId=''+ @DomainId + '' and user_id in  
+  WHERE TBLCASE.IsDeleted=0 AND TBLPROVIDER.PROVIDER_ID in(select provider_id from TXN_PROVIDER_LOGIN (NOLOCK) where DomainId=''+ @DomainId + '' and user_id in  
   (select userid from IssueTracker_Users  where username= @UserName  and DomainId=@DomainId  )) and tblcase.DomainId= @DomainId  
   and status <> 'IN ARB OR LIT'  
   and ( TBLCASE.PROVIDER_ID = @PROVIDER_ID  or @PROVIDER_ID=0 or  @PROVIDER_ID is null)
@@ -58,7 +57,7 @@ BEGIN
   FROM  
    tblcase  as tblcase (NOLOCK)   
    INNER JOIN tblNotes  TBLNOTES (NOLOCK)  ON TBLCASE.CASE_ID = TBLNOTES.CASE_ID and tblcase.DomainId = tblNotes.DomainId  
-  WHERE TBLCASE.PROVIDER_ID = @PROVIDER_ID  
+  WHERE TBLCASE.IsDeleted=0 AND TBLCASE.PROVIDER_ID = @PROVIDER_ID  
   AND tblcase.DomainId=@DomainId  
   AND NOTES_TYPE='PROVIDER'  
  END  

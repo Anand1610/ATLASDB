@@ -1,5 +1,8 @@
-﻿
-create PROCEDURE [dbo].[Update_Cases_Current_Status_New_AAA]
+﻿/*
+Updated By :Atul jadhav
+Updated Date : 06/02/2020
+*/
+CREATE PROCEDURE [dbo].[Update_Cases_Current_Status_New_AAA]
 @DomainId NVARCHAR(50),
 @status varchar(100)='',
 @case_status varchar(100)='',
@@ -14,7 +17,8 @@ create PROCEDURE [dbo].[Update_Cases_Current_Status_New_AAA]
 @InsuranceCompany_Id varchar(100)='',
 @Portfolio_Id varchar(20)='',
 @Adjuster_Id int=0,
-@Attorney_Id varchar(50)=''
+@Attorney_Id varchar(50)='',
+@StatusDisposition varchar(1000)=''
 AS	
 BEGIN
 declare   @Notes table (Notes_Desc varchar(3000),Notes_Type varchar(50),Notes_Priority varchar(50),Case_Id varchar(50),Notes_Date datetime,User_Id varchar(50),  DomainId varchar(50))
@@ -144,6 +148,16 @@ declare   @Notes table (Notes_Desc varchar(3000),Notes_Type varchar(50),Notes_Pr
 		where t1.Initial_Status<>@case_status
 	end
 
+	if(@StatusDisposition<>'')
+	begin
+		 insert into @Notes 
+			SELECT 'Status Disposition changed from '+ ISNULL(t1.StatusDisposition,'') +' to ' +  ISNULL(@StatusDisposition,'') 
+		,'Activity',1,t1.Case_Id,getdate(),@User_Id,@DomainId
+		from  tblcase t1 
+		JOIN @Cases t2  On t1.IndexOrAAA_Number = t2.CaseId   and t1.DomainId=@DomainId
+		where t1.StatusDisposition<>@StatusDisposition
+	end
+
 	 if(@status<>'')
 	begin
 		declare @satushierachyN int
@@ -179,7 +193,8 @@ declare   @Notes table (Notes_Desc varchar(3000),Notes_Type varchar(50),Notes_Pr
 		t1.Initial_Status=case when @case_status ='' then t1.Initial_Status else @case_status end,
 		[Status]=case when @status ='' then t1.Status else case when @satushierachy>= isnull(t3.Status_Hierarchy,0) then @status else t1.Status end end,
 		t1.Adjuster_Id= case when @Adjuster_Id <>0  then  @Adjuster_Id else t1.Adjuster_Id end,
-		t1.Attorney_Id= case when @Attorney_Id =''  then t1.Attorney_Id else @Attorney_Id end
+		t1.Attorney_Id= case when @Attorney_Id =''  then t1.Attorney_Id else @Attorney_Id end,
+		t1.StatusDisposition= case when @StatusDisposition='' then t1.StatusDisposition else @StatusDisposition end
 		
 		from tblcase t1
 		join @Cases t2 on t2.CaseId=t1.IndexOrAAA_Number

@@ -1,5 +1,4 @@
-﻿
---Last change by System.
+﻿--Last change by System.
 --Changes done by shashank 05/07/2020
 
 
@@ -74,7 +73,8 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
   -- Insurance Details    
   INSURANCECOMPANY_SUITNAME  VARCHAR(2000),    
   INSURANCECOMPANY_NAME VARCHAR(2000),    
-  INSURANCECOMPANY_LOCAL_ADDRESS VARCHAR(2000),    
+  INSURANCECOMPANY_LOCAL_ADDRESS VARCHAR(2000),   
+  INSURANCECOMPANY_LOCAL_ADDRESS_1 VARCHAR(2000),
   INSURANCECOMPANY_LOCAL_CITY VARCHAR(2000),    
   INSURANCECOMPANY_LOCAL_COUNTY VARCHAR(2000),    
   INSURANCECOMPANY_LOCAL_STATE VARCHAR(2000),    
@@ -311,7 +311,22 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		CLAIM_AMOUNT =   CONVERT(VARCHAR, CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) as money),1),    
 		PAID_AMOUNT = CONVERT(VARCHAR, CAST(ISNULL(CAS.PAID_AMOUNT,0.00) as money),1),     
 		--BALANCE_AMOUNT = CONVERT(VARCHAR,(convert(MONEY, (CONVERT(FLOAT, isnull(CAS.CLAIM_AMOUNT,0.00)) - CONVERT(FLOAT, isnull(CAS.PAID_AMOUNT,0.00)))))),     
-		BALANCE_AMOUNT = CONVERT(VARCHAR, CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) - ISNULL(CAS.PAID_AMOUNT,0.00) - ISNULL(CAS.writeOff,0.00) - @s_l_DeductibleAmount  as money),1),    
+		
+		BALANCE_AMOUNT = 
+		CASE WHEN CAS.DOMAINID='JL' THEN
+		CONVERT(VARCHAR, CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) - ISNULL(CAS.PAID_AMOUNT,0.00) - ISNULL(CAS.writeOff,0.00) - @s_l_DeductibleAmount  as money),1)
+		- isnull((  
+			Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C')   
+			 AND case_id=CAs.Case_ID
+      
+			),0.00) 
+
+		ELSE
+		CONVERT(VARCHAR, CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) - ISNULL(CAS.PAID_AMOUNT,0.00) - ISNULL(CAS.writeOff,0.00) - @s_l_DeductibleAmount  as money),1)
+		    
+
+		END
+		,
 		INDEXORAAA_NUMBER= UPPER(ISNULL(CAS.INDEXORAAA_NUMBER,'')),    
 		Date_Index_Number_Purchased = CONVERT(VARCHAR(10),ISNULL(CAS.Date_Index_Number_Purchased,''),101),    
     
@@ -377,7 +392,8 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		-- Insurance Details    
 		INSURANCECOMPANY_SUITNAME  =  UPPER(ISNULL(INS.INSURANCECOMPANY_SUITNAME,'')),    
 		INSURANCECOMPANY_NAME =   UPPER(ISNULL(INS.INSURANCECOMPANY_NAME,'')),    
-		INSURANCECOMPANY_LOCAL_ADDRESS =   ISNULL(REPLACE(REPLACE(INS.INSURANCECOMPANY_LOCAL_ADDRESS, CHAR(13), ' '), CHAR(10), ' '),''), --ISNULL(INS.INSURANCECOMPANY_LOCAL_ADDRESS,''),    
+		INSURANCECOMPANY_LOCAL_ADDRESS =   ISNULL(REPLACE(REPLACE(INS.INSURANCECOMPANY_LOCAL_ADDRESS, CHAR(13), ' '), CHAR(10), ' '),''), --ISNULL(INS.INSURANCECOMPANY_LOCAL_ADDRESS,''), 
+		INSURANCECOMPANY_LOCAL_ADDRESS_1 =   ISNULL(REPLACE(REPLACE(INS.INSURANCECOMPANY_LOCAL_ADDRESS_1, CHAR(13), ' '), CHAR(10), ' '),''), --ISNULL(INS.INSURANCECOMPANY_LOCAL_ADDRESS,''),
 		INSURANCECOMPANY_LOCAL_CITY =   ISNULL(INS.INSURANCECOMPANY_LOCAL_CITY,''),    
 		INSURANCECOMPANY_LOCAL_COUNTY =   ISNULL(INS.InsuranceCompany_Local_County,''),    
 		INSURANCECOMPANY_LOCAL_STATE =   ISNULL(INS.INSURANCECOMPANY_LOCAL_STATE,''),    
@@ -616,7 +632,16 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		--- Packet Data    
 		PROVIDER_NAME_ALL =UPPER(ISNULL(PRO.PROVIDER_SUITNAME,'')),    
 		INJURED_NAME_ALL = UPPER(ISNULL(CAS.INJUREDPARTY_FIRSTNAME, N'')) + N' ' + UPPER(ISNULL(CAS.INJUREDPARTY_LASTNAME, N'')),    
-		BALANCE_AMOUNT_ALL= convert(varchar,(convert(Money, (CONVERT(FLOAT, isnull(cas.CLAIM_AMOUNT,0)) - CONVERT(FLOAT, isnull(cas.PAID_AMOUNT,0)))))),     
+		BALANCE_AMOUNT_ALL= case when CAS.DOMAINID='JL' THEN
+		convert(varchar,(convert(Money, (CONVERT(FLOAT, isnull(cas.CLAIM_AMOUNT,0)) - CONVERT(FLOAT, isnull(cas.PAID_AMOUNT,0))))))
+		-isnull((  
+			Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C')   
+			 AND case_id=CAs.Case_ID
+      
+			),0.00) 
+		else
+		convert(varchar,(convert(Money, (CONVERT(FLOAT, isnull(cas.CLAIM_AMOUNT,0)) - CONVERT(FLOAT, isnull(cas.PAID_AMOUNT,0))))))
+		end ,     
 		PROVIDER_ADDRESS_ALL=  UPPER(ISNULL(Provider_Name,''))+' ^p '+ UPPER(ISNULL(Provider_Local_Address,'')) +' ^p '+ UPPER(ISNULL(Provider_Local_City,'')) +' ' + UPPER(ISNULL(Provider_Local_State,'')) +' ' + UPPER(ISNULL(Provider_Local_Zip,'')) +' ' + UPPER(ISNULL(Provider_Local_Phone,'')) + ' ' + UPPER(ISNULL(Provider_Local_Fax,'')) + ' ^p^p ' ,    
 		DOSEND60DAY = CONVERT(NVARCHAR(12), CONVERT(DATETIME, dateadd(day,+60, cast(DateOfService_End as date))), 101)   ,
 		POM_DATE =  (select   top 1   ISNULL(CONVERT(VARCHAR(10), TD.Proof_of_Service_Date, 101),'') from tblCase_Date_Details TD with(nolock)    
@@ -702,7 +727,15 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		CLAIM_AMOUNT =   CONVERT(VARCHAR,SUM(CONVERT(MONEY, CAS.CLAIM_AMOUNT)),1),    
 		PAID_AMOUNT = CONVERT(VARCHAR,SUM(CONVERT(MONEY, CAS.Paid_Amount)),1),    
 		--BALANCE_AMOUNT = CONVERT(VARCHAR,ISNULL(SUM(CONVERT(MONEY, CAS.CLAIM_AMOUNT)),0) - ISNULL(SUM(CONVERT(MONEY, CAS.Paid_Amount)),0)) ,    
-		BALANCE_AMOUNT = @BALANCE_AMOUNT_ALL, --CONVERT(VARCHAR, SUM(CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) - ISNULL(CAS.PAID_AMOUNT,0.00) - ISNULL(CAS.WriteOff,0.00) - @s_l_DeductibleAmount as money)),1),     
+		BALANCE_AMOUNT= @BALANCE_AMOUNT_ALL -
+		
+		-(Case when Cas.DomainID='JL' then - isnull((  
+			Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C')   
+			 AND case_id=CAs.Case_ID
+      
+			),0.00) else 0.00 end),
+		
+		--CONVERT(VARCHAR, SUM(CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) - ISNULL(CAS.PAID_AMOUNT,0.00) - ISNULL(CAS.WriteOff,0.00) - @s_l_DeductibleAmount as money)),1),     
 		INDEXORAAA_NUMBER= UPPER(ISNULL(MAX(CAS.INDEXORAAA_NUMBER),'')),    
 		Date_Index_Number_Purchased = CONVERT(VARCHAR(10),ISNULL(MAX(CAS.Date_Index_Number_Purchased),''),101),    
     
@@ -767,7 +800,8 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		-- Insurance Details    
 		INSURANCECOMPANY_SUITNAME  =  UPPER(ISNULL(MAX(INS.INSURANCECOMPANY_SUITNAME),'')),    
 		INSURANCECOMPANY_NAME =   UPPER(ISNULL(MAX(INS.INSURANCECOMPANY_NAME),'')),    
-		INSURANCECOMPANY_LOCAL_ADDRESS =   ISNULL(MAX(INS.INSURANCECOMPANY_LOCAL_ADDRESS),''),    
+		INSURANCECOMPANY_LOCAL_ADDRESS =   ISNULL(MAX(INS.INSURANCECOMPANY_LOCAL_ADDRESS),''), 
+		INSURANCECOMPANY_LOCAL_ADDRESS_1 =   ISNULL(MAX(INS.INSURANCECOMPANY_LOCAL_ADDRESS_1),''), 
 		INSURANCECOMPANY_LOCAL_CITY =   ISNULL(MAX(INS.INSURANCECOMPANY_LOCAL_CITY),''),    
 		INSURANCECOMPANY_LOCAL_COUNTY =   ISNULL(MAX(INS.InsuranceCompany_Local_County),''),    
 		INSURANCECOMPANY_LOCAL_STATE =   ISNULL(MAX(INS.INSURANCECOMPANY_LOCAL_STATE),''),    
@@ -997,7 +1031,16 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		--- Packet Data    
 		PROVIDER_NAME_ALL = @PROVIDER_NAME_ALL,    
 		INJURED_NAME_ALL = @INJURED_NAME_ALL,    
-		BALANCE_AMOUNT_ALL= @BALANCE_AMOUNT_ALL,    
+		
+		BALANCE_AMOUNT_ALL= @BALANCE_AMOUNT_ALL -
+		
+		-(Case when Cas.DomainID='JL' then - isnull((  
+			Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C')   
+			 AND case_id=CAs.Case_ID
+      
+			),0.00) else 0.00 end)
+			,    
+
 		PROVIDER_ADDRESS_ALL= @PROVIDER_ADDRESS_ALL,    
 		DOSEND60DAY = @DOSEND60DAY    ,
 		POM_DATE =  (select top 1 ISNULL(CONVERT(VARCHAR(10), TD.Proof_of_Service_Date, 101),'') from tblCase_Date_Details TD with(nolock)    
@@ -1032,7 +1075,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	  WHERE     
 	   pkt.PacketID = @s_l_PacketID    
 	   and CAS.DomainId = @DomainId     
-	   group by CAS.DomainID,CAS.Case_Id,pro.provider_local_Address, pro.Provider_Local_Address, pro.Provider_Local_City, INS.InsuranceCompany_Local_Address,    
+	   group by CAS.DomainID,CAS.Case_Id,pro.provider_local_Address, pro.Provider_Local_Address, pro.Provider_Local_City, INS.InsuranceCompany_Local_Address,   INS.InsuranceCompany_Local_Address_1,  
 	   INS.InsuranceCompany_Local_City, INS.InsuranceCompany_Perm_Address, INS.InsuranceCompany_Perm_City, Court.Court_Venue,
 	   PK_TPA_Group_ID, TPA_Group_Name, TPA.Address, TPA.City, TPA.State,TPA.ZipCode,TPA.Email
  END    
