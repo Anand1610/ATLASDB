@@ -316,7 +316,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		PAID_AMOUNT = CONVERT(VARCHAR, CAST(ISNULL(CAS.PAID_AMOUNT,0.00) as money),1)
 		
 		
-		+ ISNULL( (case when CAS.DomainId='JL' then 
+		+ CAST(ISNULL( (case when CAS.DomainId='JL' then 
 				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) 
 				where
 				
@@ -325,23 +325,23 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 			   
 				
 				
-				else 0.00 end),0.00)
-				+ISNULL( ( case when CAS.DomainId='JL' then 
+				else 0.00 end),0.00) as money)
+				+ CAST(ISNULL( ( case when CAS.DomainId='JL' then 
 				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
 				and  cast(TreatmentIds as varchar) in (select cast(Treatment_id as varchar) from tbltreatment where Act_case_Id =CAS.Case_ID))
 			
-				else 0.00 end),0.00)
+				else 0.00 end),0.00) as Money)
 		,     
 		--BALANCE_AMOUNT = CONVERT(VARCHAR,(convert(MONEY, (CONVERT(FLOAT, isnull(CAS.CLAIM_AMOUNT,0.00)) - CONVERT(FLOAT, isnull(CAS.PAID_AMOUNT,0.00)))))),     
 		
 		BALANCE_AMOUNT = 
 		CASE WHEN CAS.DOMAINID='JL' THEN
 		CONVERT(VARCHAR, CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) - ISNULL(CAS.PAID_AMOUNT,0.00) - ISNULL(CAS.writeOff,0.00) - @s_l_DeductibleAmount  as money),1)
-		- isnull((  
+		- cast(isnull((  
 			Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C')   
 			 AND case_id=CAs.Case_ID
       
-			),0.00) 
+			),0.00) as money)
 
 		ELSE
 		CONVERT(VARCHAR, CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) - ISNULL(CAS.PAID_AMOUNT,0.00) - ISNULL(CAS.writeOff,0.00) - @s_l_DeductibleAmount  as money),1)
@@ -656,11 +656,11 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		INJURED_NAME_ALL = UPPER(ISNULL(CAS.INJUREDPARTY_FIRSTNAME, N'')) + N' ' + UPPER(ISNULL(CAS.INJUREDPARTY_LASTNAME, N'')),    
 		BALANCE_AMOUNT_ALL= case when CAS.DOMAINID='JL' THEN
 		convert(varchar,(convert(Money, (CONVERT(FLOAT, isnull(cas.CLAIM_AMOUNT,0)) - CONVERT(FLOAT, isnull(cas.PAID_AMOUNT,0))))))
-		-isnull((  
+		-cast(isnull((  
 			Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C')   
 			 AND case_id=CAs.Case_ID
       
-			),0.00) 
+			),0.00) as money)
 		else
 		convert(varchar,(convert(Money, (CONVERT(FLOAT, isnull(cas.CLAIM_AMOUNT,0)) - CONVERT(FLOAT, isnull(cas.PAID_AMOUNT,0))))))
 		end ,     
@@ -749,7 +749,7 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		CLAIM_AMOUNT =   CONVERT(VARCHAR,SUM(CONVERT(MONEY, CAS.CLAIM_AMOUNT)),1),    
 		PAID_AMOUNT = CONVERT(VARCHAR,SUM(CONVERT(MONEY, CAS.Paid_Amount)),1)
 		
-				+ ISNULL( (case when CAS.DomainId='JL' then 
+				+ cast(ISNULL( (case when CAS.DomainId='JL' then 
 				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) 
 				where
 				
@@ -758,20 +758,20 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 			   
 				
 				
-				else 0.00 end),0.00)
-				+ISNULL( ( case when CAS.DomainId='JL' then 
+				else 0.00 end),0.00) as money)
+				+cast(ISNULL( ( case when CAS.DomainId='JL' then 
 				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
 				and  cast(TreatmentIds as varchar) in (select cast(Treatment_id as varchar) from tbltreatment where Act_case_Id =CAS.Case_ID))
 			
-				else 0.00 end),0.00),    
+				else 0.00 end),0.00) as money),    
 		--BALANCE_AMOUNT = CONVERT(VARCHAR,ISNULL(SUM(CONVERT(MONEY, CAS.CLAIM_AMOUNT)),0) - ISNULL(SUM(CONVERT(MONEY, CAS.Paid_Amount)),0)) ,    
 		BALANCE_AMOUNT= @BALANCE_AMOUNT_ALL -
 		
-		-(Case when Cas.DomainID='JL' then - isnull((  
+		-cast((Case when Cas.DomainID='JL' then - isnull((  
 			Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C')   
 			 AND case_id=CAs.Case_ID
       
-			),0.00) else 0.00 end),
+			),0.00) else 0.00 end) as money),
 		
 		--CONVERT(VARCHAR, SUM(CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) - ISNULL(CAS.PAID_AMOUNT,0.00) - ISNULL(CAS.WriteOff,0.00) - @s_l_DeductibleAmount as money)),1),     
 		INDEXORAAA_NUMBER= UPPER(ISNULL(MAX(CAS.INDEXORAAA_NUMBER),'')),    
@@ -1072,11 +1072,11 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		
 		BALANCE_AMOUNT_ALL= @BALANCE_AMOUNT_ALL -
 		
-		-(Case when Cas.DomainID='JL' then - isnull((  
+		-cast((Case when Cas.DomainID='JL' then - isnull((  
 			Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C')   
 			 AND case_id=CAs.Case_ID
       
-			),0.00) else 0.00 end)
+			),0.00) else 0.00 end) as money)
 			,    
 
 		PROVIDER_ADDRESS_ALL= @PROVIDER_ADDRESS_ALL,    
