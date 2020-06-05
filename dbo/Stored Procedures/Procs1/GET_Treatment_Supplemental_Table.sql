@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GET_Treatment_Supplemental_Table]  -- [GET_Treatment_Supplemental_Table] 'AF19-103683'  
+﻿CREATE PROCEDURE [dbo].[GET_Treatment_Supplemental_Table]  -- [GET_Treatment_Supplemental_Table] 'JL19-104633'  
  @CaseID VARCHAR(40)  
 AS  
 BEGIN  
@@ -37,7 +37,21 @@ DECLARE @s_l_PacketID VARCHAR(40) = ''
 				--, PRO.Provider_Name
 				, PRO.Provider_Suitname
 				, convert(decimal(38,2),T.Claim_Amount)[Claim_Amount]
-				, convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00)) + convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00))[Paid_Amount] 
+				, convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00)) + convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00))
+				+ ISNULL( (case when CS.DomainId='JL' then 
+				
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(Treatment_Id as varchar) = cast(TreatmentIds as varchar))
+			   
+				
+				
+				else 0.00 end),0.00)
+				+ISNULL( ( case when CS.DomainId='JL' then 
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(TreatmentIds as varchar) in (select cast(Treatment_id as varchar) from tbltreatment where Act_case_Id =@CaseID))
+			
+				else 0.00 end),0.00)
+				[Paid_Amount] 
 				
 				,case when CS.DomainId='JL' then 
 				convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0) ) - convert(decimal(38,2),ISNULL(T.WriteOff,0.00))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
@@ -83,7 +97,21 @@ DECLARE @s_l_PacketID VARCHAR(40) = ''
 				--, PRO.Provider_Name
 				, PRO.Provider_Suitname
 				, convert(decimal(38,2),T.Claim_Amount)[Claim_Amount]
-				, convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00)) + convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00))[Paid_Amount] 
+				, convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00)) + convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00))
+				+ ISNULL((case when CS.DomainId='JL' then 
+				
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(Treatment_Id as varchar) = cast(TreatmentIds as varchar))
+				
+				else 0.00 end),0.00)
+				+ISNULL( ( case when CS.DomainId='JL' then 
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(TreatmentIds as varchar) in (select cast(Treatment_id as varchar) from tbltreatment where Act_case_Id =@CaseID))
+			
+				else 0.00 end),0.00)
+
+				
+				[Paid_Amount] 
 				
 				, 
 				case when CS.DomainID='JL' then 
@@ -157,7 +185,14 @@ DECLARE @s_l_PacketID VARCHAR(40) = ''
 		  --, PRO.Provider_Name
 		  , PRO.Provider_Suitname
 		  , convert(decimal(38,2),T.Claim_Amount)[Claim_Amount] 
-		  , convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00))+ convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) AS [Paid_Amount] 
+		  , convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00))+ convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+		  + ISNULL((case when CS.DomainId='JL' then 
+				
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(Treatment_Id as varchar) = cast(TreatmentIds as varchar))
+				
+				else 0.00 end),0.00)
+		  AS [Paid_Amount] 
 		  
 		  ,Case When CS.DomainId='JL' then 
 		  convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) - convert(decimal(38,2),ISNULL(T.WriteOff,0))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
@@ -200,7 +235,15 @@ DECLARE @s_l_PacketID VARCHAR(40) = ''
 		  --, PRO.Provider_Name
 		  , PRO.Provider_Suitname
 		  , convert(decimal(38,2),T.Claim_Amount)[Claim_Amount] 
-		  , convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00))+ convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) AS [Paid_Amount] 
+		  , convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) + convert(decimal(38,2),ISNULL(T.WriteOff,0.00))+ convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
+		  + ISNULL((case when CS.DomainId='JL' then 
+				
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(Treatment_Id as varchar) = cast(TreatmentIds as varchar))
+				
+				else 0.00 end),0.00)
+		  
+		  AS [Paid_Amount] 
 	        ,Case when CS.DomainID='JL' then convert(decimal(38,2),T.Claim_Amount) - convert(decimal(38,2),ISNULL(T.Paid_Amount,0)) - convert(decimal(38,2),ISNULL(T.WriteOff,0))-convert(decimal(38,2),ISNULL(T.DeductibleAmount,0.00)) 
 		  - isnull((
 				Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Case_Id=CS.Case_Id AND Transactions_Type in ('C') 

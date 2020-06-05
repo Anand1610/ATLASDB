@@ -1,7 +1,10 @@
-﻿--Last change by System.
---Changes done by shashank 05/07/2020
+﻿/*
+Last changed:System.
+Changeed by :shashank 
+Date Changed:05/07/2020
+Decription  :Added new Tag
 
-
+*/
 -- Template_Case_Details_Retrieve 'BT','BT20-114131',1111    
 CREATE PROCEDURE [dbo].[Template_Case_Details_Retrieve]    
 (    
@@ -10,7 +13,8 @@ CREATE PROCEDURE [dbo].[Template_Case_Details_Retrieve]
  @i_a_user_id INT    = 0 ,
  @dt_NOW  DATETIME = NULL   
 )    
-AS    
+AS   
+    
 BEGIN    
 SET NOCOUNT ON    
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED 
@@ -309,7 +313,25 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		CASE_ID =   ISNULL(CAS.CASE_ID,''),    
 		PACKET_OR_CASE_ID =   ISNULL(CAS.CASE_ID,''),    
 		CLAIM_AMOUNT =   CONVERT(VARCHAR, CAST(ISNULL(CAS.CLAIM_AMOUNT,0.00) as money),1),    
-		PAID_AMOUNT = CONVERT(VARCHAR, CAST(ISNULL(CAS.PAID_AMOUNT,0.00) as money),1),     
+		PAID_AMOUNT = CONVERT(VARCHAR, CAST(ISNULL(CAS.PAID_AMOUNT,0.00) as money),1)
+		
+		
+		+ ISNULL( (case when CAS.DomainId='JL' then 
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) 
+				where
+				
+				Transactions_Type in ('C') 
+				and   cast(TreatmentIds as varchar) in (select  cast(Treatment_Id as varchar) from tbltreatment where case_id=@s_a_case_id))
+			   
+				
+				
+				else 0.00 end),0.00)
+				+ISNULL( ( case when CAS.DomainId='JL' then 
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(TreatmentIds as varchar) in (select cast(Treatment_id as varchar) from tbltreatment where Act_case_Id =CAS.Case_ID))
+			
+				else 0.00 end),0.00)
+		,     
 		--BALANCE_AMOUNT = CONVERT(VARCHAR,(convert(MONEY, (CONVERT(FLOAT, isnull(CAS.CLAIM_AMOUNT,0.00)) - CONVERT(FLOAT, isnull(CAS.PAID_AMOUNT,0.00)))))),     
 		
 		BALANCE_AMOUNT = 
@@ -725,7 +747,23 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 		CASE_ID = @s_a_case_id,    
 		PACKET_OR_CASE_ID =   ISNULL(MAX(PacketID),''),    
 		CLAIM_AMOUNT =   CONVERT(VARCHAR,SUM(CONVERT(MONEY, CAS.CLAIM_AMOUNT)),1),    
-		PAID_AMOUNT = CONVERT(VARCHAR,SUM(CONVERT(MONEY, CAS.Paid_Amount)),1),    
+		PAID_AMOUNT = CONVERT(VARCHAR,SUM(CONVERT(MONEY, CAS.Paid_Amount)),1)
+		
+				+ ISNULL( (case when CAS.DomainId='JL' then 
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) 
+				where
+				
+				Transactions_Type in ('C') 
+				and   cast(TreatmentIds as varchar) in (select  cast(Treatment_Id as varchar) from tbltreatment where case_id=@s_a_case_id))
+			   
+				
+				
+				else 0.00 end),0.00)
+				+ISNULL( ( case when CAS.DomainId='JL' then 
+				(Select sum(isnull(Transactions_Amount,0.00)) from tblTransactions with(nolock) where Transactions_Type in ('C') 
+				and  cast(TreatmentIds as varchar) in (select cast(Treatment_id as varchar) from tbltreatment where Act_case_Id =CAS.Case_ID))
+			
+				else 0.00 end),0.00),    
 		--BALANCE_AMOUNT = CONVERT(VARCHAR,ISNULL(SUM(CONVERT(MONEY, CAS.CLAIM_AMOUNT)),0) - ISNULL(SUM(CONVERT(MONEY, CAS.Paid_Amount)),0)) ,    
 		BALANCE_AMOUNT= @BALANCE_AMOUNT_ALL -
 		
