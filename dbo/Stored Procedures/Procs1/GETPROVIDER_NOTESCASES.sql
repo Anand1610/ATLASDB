@@ -14,8 +14,24 @@ BEGIN
    inner join tblEventType T (NOLOCK) on E.EventTypeId = T.EventTypeId  
    inner join tblEventStatus S (NOLOCK) on E.EventStatusId = S.EventStatusId  
    WHERE EventStatusName in('AAA HEARING SET','MOTION') and Case_id =tblcase.Case_Id) AS [HEARING_SET/MOTION],  
-   (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type IN ('PriC','C') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Principal_Received,  
-   (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type='I' and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Interest_Received,  
+   --(select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type IN ('PriC','C') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Principal_Received,  
+   (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type IN ('PreC','C') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Principal_Received,  
+   (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where (Transactions_type='PreI' 
+   OR Transactions_type='I' OR Transactions_type='D')
+   
+   and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Interest_Received,  
+   --(select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type='I' and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Interest_Received,  
+    (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where (Transactions_type='PreC' 
+   OR Transactions_type='PrecTop'  )
+   
+   and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Voluntary_Payment, 
+
+     (select convert(decimal(38,2),isnull(sum(transactions_amount),0))
+	 from tbltransactions where   Transactions_Type='C' and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId and tblcase.case_id in (select case_id from tblSettlements 
+	 where  Case_Id=tblcase.Case_ID))
+   as Principal_Settlement_Amount, 
+
+
    ISNULL(DBO.TBLCASE.INJUREDPARTY_FIRSTNAME, N'') + N'  ' + ISNULL(DBO.TBLCASE.INJUREDPARTY_LASTNAME, N'') AS INJUREDPARTY_NAME,  
    TBLPROVIDER.Provider_Name,  
    INSURANCECOMPANY_NAME,  
