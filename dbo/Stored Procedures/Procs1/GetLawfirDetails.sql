@@ -52,6 +52,7 @@ BEGIN
    FROM		tblclientpayment 
    WHERE	provider_id=@ProviderID
 			and DomainId= @DomainId
+			order by payment_date
 
 	SELECT	
 			isnull(sum(payment_amount),0) [Total_payment_amount]			
