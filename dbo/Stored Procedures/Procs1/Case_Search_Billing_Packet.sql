@@ -1,4 +1,4 @@
-﻿-- changes for LSS-500 done on 27 APRIL 2020  By Tushar Chandgude 
+﻿/*  Created by : atul jDescription : ADDED ISNULL 0 FOR CLAIM AMOUNT AND PAID AMOUNTDate: 6/8/2020Last Change By: tUSHAR CC*/
 
 CREATE PROCEDURE [dbo].[Case_Search_Billing_Packet] -- [Case_Search_Billing_Packet] 'glf'
 	(
@@ -252,7 +252,7 @@ BEGIN
 				Case_AutoId,
 				Case_Code,
 				Case_Id,
-				Claim_Amount,
+				isnull(Claim_Amount,0)[Claim_Amount],
 				Date_BillSent,
 				Date_Opened,
 				date_status_Changed,
@@ -266,7 +266,7 @@ BEGIN
 				ins.InsuranceCompany_Id,
 				InsuredParty_FirstName,
 				InsuredParty_LastName,
-				Paid_Amount,
+				isnull(Paid_Amount,0) [Paid_Amount],
 				Policy_Number,
 				PortfolioId,
 				cas.Provider_Id,
