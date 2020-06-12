@@ -1,6 +1,4 @@
-﻿--case_entity_emailids_retrieve 'localhost','ACT18-109361'
-
-CREATE PROCEDURE [dbo].[case_entity_emailids_retrieve]
+﻿CREATE PROCEDURE [dbo].[case_entity_emailids_retrieve]
 (
 	@DomainId	VARCHAR(MAX),
 	@case_id	VARCHAR(MAX)
@@ -207,6 +205,21 @@ BEGIN
 		ISNULL(Firm_Email,'')	<> ''
 	ORDER BY
 		Firm_Name + ' (LawFirm)' ASC
+
+
+		 IF @DomainId='PDC'
+		BEGIN
+
+    INSERT INTO #TBL_ENTITY_EMAILS
+   	SELECT  COALESCE(isnull(Attorney_FirstName, '') + SPACE(1) + isnull( Attorney_LastName,''),' - ') + ' (Opposing Counsel)',
+	Attorney_Email, 'Opposing Counsel'
+					FROM tblAttorney_Case_Assignment aa (NOLOCK) 
+					inner join tblAttorney_Master am (NOLOCK) on am.Attorney_Id = aa.Attorney_Id inner join tblAttorney_Type atp (NOLOCK) 
+					on atp.Attorney_Type_ID = am.Attorney_Type_Id
+					Where   Lower(Attorney_Type) = 'opposing counsel' and aa.DomainId =@DomainId and aa.Case_Id =	@case_id	AND
+		            ISNULL(Attorney_Email,'')	<> ''
+					END
+
 	
 	SELECT DISTINCT
 		name,
