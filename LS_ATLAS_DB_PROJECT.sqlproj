@@ -2619,10 +2619,14 @@
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_filed_Cases_For_Months.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\GetClaimAmountForLSOP.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\CheckBatchTypeCaseExists.sql" />
+    <Build Include="dbo\Tables\case_search_User_View.sql" />
+    <Build Include="dbo\Tables\tbl_display_column_Case_Search.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Stored Procedures\Procs2\MotionType_Add.sql" />
     <None Include="dbo\Stored Procedures\Procs2\MotionType_Delete.sql" />
     <None Include="dbo\Stored Procedures\Procs2\MotionType_Retrive.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\case_search_user_view_retrieve.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\case_search_User_View_Save.sql" />
   </ItemGroup>
 </Project>
