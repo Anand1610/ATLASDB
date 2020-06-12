@@ -2620,4 +2620,9 @@
     <Build Include="dbo\Stored Procedures\Procs2\GetClaimAmountForLSOP.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\CheckBatchTypeCaseExists.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Stored Procedures\Procs2\MotionType_Add.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\MotionType_Delete.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\MotionType_Retrive.sql" />
+  </ItemGroup>
 </Project>
