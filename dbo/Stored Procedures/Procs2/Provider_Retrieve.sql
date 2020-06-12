@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[Provider_Retrieve]	
+﻿/*  Created by : atul jDescription : ADDED ISNULL 0 FOR CLAIM AMOUNT AND PAID AMOUNTDate: 6/12/2020Last Change By: SYSYTEM*/
+CREATE PROCEDURE [dbo].[Provider_Retrieve]	
 	(
 		@DomainId nvarchar(50),
 		@i_a_Provider_Id INT		
@@ -72,7 +73,7 @@ BEGIN
 		ISNULL(P.Email_For_Invoices,'') AS Email_For_Invoices,
 		ISNULL(P.Email_For_Closing_Reports,'') AS Email_For_Closing_Reports,
 		ISNULL(P.Email_For_Monthly_Report,'') AS Email_For_Monthly_Report,
-		ISNULL(Vendor_Service,'') AS Vendor_Service,
+		ISNULL(Vendor_Service,0) AS Vendor_Service,
 		ISNULL(Vendor_Fee_Type,'') AS Vendor_Fee_Type,
 		ISNULL(Vendor_Fee,0) AS Vendor_Fee,
 		ISNULL(Vendor_Name,'') AS Vendor_Name
