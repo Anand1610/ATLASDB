@@ -2617,5 +2617,7 @@
     <Build Include="dbo\Views\SJR_Filed_Case_report.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_Filed_Cases_For_Months.sql" />
     <Build Include="dbo\Stored Procedures\Procs2\Get_Total_Client_filed_Cases_For_Months.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\GetClaimAmountForLSOP.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\CheckBatchTypeCaseExists.sql" />
   </ItemGroup>
 </Project>

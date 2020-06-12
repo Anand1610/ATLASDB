@@ -1,8 +1,9 @@
 ﻿/*
 Updated By : abhay.w
-Updated Date : 06/02/2020
+Updated Date : 06/12/2020
 */
-CREATE PROCEDURE [dbo].[Check_Case_Claim_Amount]  -- Check_Case_Claim_Amount 'PDC20-101101,PDC20-101100,PDC20-100965','PDC','Complaint Packet-Over $8000-Non Conforming'
+
+cREATE PROCEDURE [dbo].[Check_Case_Claim_Amount]  -- Check_Case_Claim_Amount 'PDC20-101101,PDC20-101100,PDC20-100965','PDC','Complaint Packet-Over $8000-Non Conforming'
 (
 	@CaseId varchar(2000),
 	@DomainId varchar(10),
