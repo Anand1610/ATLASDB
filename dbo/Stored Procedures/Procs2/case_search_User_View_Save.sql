@@ -13,6 +13,9 @@ BEGIN
  SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED  
  DECLARE @s_l_message NVARCHAR(MAX)  
  DECLARE @i_l_result int  
+
+
+
  IF not exists(select * from case_search_User_View where userid=@i_a_UserId)  
  BEGIN  
   INSERT INTO case_search_User_View
@@ -27,9 +30,9 @@ BEGIN
   )  
   VALUES  
   (  
-   @DomainID, 
-    @s_column_value,  
-    @s_a_column_name,  
+    @DomainID, 
+    dbo.[UDF_Remove_Duplicate_Entry](@s_column_value,  ','),
+    dbo.[UDF_Remove_Duplicate_Entry](@s_a_column_name, ','),
     @s_a_query_name,  
     @i_a_UserId,  
      
@@ -47,8 +50,8 @@ BEGIN
   SET  
    query_name     = @s_a_query_name,  
    modified_userid    = @i_a_UserId,  
-   column_value    = @s_column_value,  
-   column_name     = @s_a_column_name,  
+   column_value    = dbo.[UDF_Remove_Duplicate_Entry](@s_column_value,  ','),
+   column_name     =  dbo.[UDF_Remove_Duplicate_Entry](@s_a_column_name, ','),
    modified_date    = getdate()
   
   WHERE  
@@ -61,3 +64,6 @@ BEGIN
  SET @s_l_message = 'Search query details saved successfully'  
  SELECT @s_l_message AS [Message],@i_l_result as Result  
 END  
+
+
+

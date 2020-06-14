@@ -14,7 +14,7 @@ BEGIN
 	END
 	ELSE
 	BEGIN
-		SET @s_l_message = 'Delete Operation Failed, Only created user can delete the Qyery...!!'
+		SET @s_l_message = 'Delete Operation Failed, Only created user can delete the Query...!!'
 	END
 	
 	SELECT @s_l_message AS [Message]
