@@ -749,8 +749,10 @@ BEGIN
 					AND case_id = tblcase.case_id
 					AND domainid = tblcase.DomainID
 				) 
-				--AS ChequeNo
-				AS 'Check Number'
+				AS ChequeNo
+				--AS 
+				
+				--'Check Number'
 		FROM tblcase AS tblcase(NOLOCK)
 		LEFT JOIN tblprovider AS tblprovider(NOLOCK) ON tblcase.provider_id = tblprovider.provider_id
 		LEFT JOIN tblinsurancecompany AS tblinsurancecompany(NOLOCK) ON tblcase.insurancecompany_id = tblinsurancecompany.insurancecompany_id
