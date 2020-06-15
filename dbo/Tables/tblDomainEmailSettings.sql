@@ -7,6 +7,8 @@
     [SMTP_Server_Name]   VARCHAR (MAX) NOT NULL,
     [isSSLEnabled]       BIT           NOT NULL,
     [ReplyToEmailId]     VARCHAR (MAX) NULL,
+    [EmailCC] VARCHAR(1000) NULL, 
+    [EmailBCC] VARCHAR(1000) NULL, 
     CONSTRAINT [PK_tblDomainEmailSettings] PRIMARY KEY CLUSTERED ([pk_domain_email_id] ASC)
 );
 
