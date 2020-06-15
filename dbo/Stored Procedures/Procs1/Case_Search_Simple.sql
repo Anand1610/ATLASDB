@@ -35,7 +35,9 @@
 	,@StartIndex INT
 	,@EndIndex INT
 	,@SortBy VARCHAR(50) = 'Case_Id'    
-    ,@SortOrder VARCHAR(50)='Descending'   
+    ,@SortOrder VARCHAR(50)='Descending' 
+	,@i_a_Court	VARCHAR(MAX) ='0'      
+	,@i_a_Defendant	INT	=	0
 	)
 	WITH RECOMPILE
 AS
@@ -43,6 +45,8 @@ BEGIN
 	SET NOCOUNT ON
 	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 	SET @strCaseId = (LTRIM(RTRIM(@strCaseId)))
+
+	
 
 	DECLARE @strsql AS VARCHAR(max)
 	DECLARE @InvestorId AS INT = 0
@@ -221,7 +225,24 @@ BEGIN
 					WHERE ISNULL(ChequeNo, '') <> ''
 						AND case_id = tblcase.case_id
 						AND domainid = tblcase.DomainID
-					) AS ChequeNo
+					) AS ChequeNo,
+					court.Court_Name,
+								(SUBSTRING(ISNULL(STUFF((
+			SELECT COALESCE(isnull(Attorney_FirstName, '') + SPACE(1) + isnull( Attorney_LastName,'')+', ',' - ')
+					FROM tblAttorney_Case_Assignment aa (NOLOCK) 
+					inner join tblAttorney_Master am (NOLOCK) on am.Attorney_Id = aa.Attorney_Id inner join tblAttorney_Type atp (NOLOCK) on atp.Attorney_Type_ID = am.Attorney_Type_Id
+					Where aa.Case_Id = tblcase.Case_Id  and Lower(Attorney_Type) = 'opposing counsel' and aa.DomainId = @DomainId 
+					AND (@i_a_Defendant = 0 OR aa.Attorney_Id = @i_a_Defendant) AND @CompanyType = 'funding'
+			for xml path('')
+		),1,0,''),','),1,(LEN(ISNULL(STUFF(
+		(
+			SELECT COALESCE(isnull(Attorney_FirstName, '') + SPACE(1) + isnull( Attorney_LastName,'')+', ',' - ')
+					FROM tblAttorney_Case_Assignment aa (NOLOCK) 
+					inner join tblAttorney_Master am (NOLOCK) on am.Attorney_Id = aa.Attorney_Id inner join tblAttorney_Type atp (NOLOCK) on atp.Attorney_Type_ID = am.Attorney_Type_Id
+					Where aa.Case_Id = tblcase.Case_Id and Lower(Attorney_Type) = 'opposing counsel' and aa.DomainId = @DomainId
+					AND (@i_a_Defendant = 0 OR aa.Attorney_Id = @i_a_Defendant) AND @CompanyType = 'funding'
+			for xml path('')
+		),1,0,''),',')))-1)) AS Opposing_Counsel
 			FROM tblcase AS tblcase(NOLOCK)
 			LEFT JOIN tblprovider AS tblprovider(NOLOCK) ON tblcase.provider_id = tblprovider.provider_id
 			LEFT JOIN tblinsurancecompany AS tblinsurancecompany(NOLOCK) ON tblcase.insurancecompany_id = tblinsurancecompany.insurancecompany_id
@@ -233,6 +254,8 @@ BEGIN
 			LEFT JOIN tblAttorney att(NOLOCK) ON tblcase.Attorney_Id = att.Attorney_Id
 			LEFT JOIN tblAdjusters adj(NOLOCK) ON tblcase.Adjuster_Id = adj.Adjuster_Id
 			LEFT OUTER JOIN dbo.Assigned_Attorney a_att(NOLOCK) ON tblcase.Assigned_Attorney = a_att.PK_Assigned_Attorney_ID
+			LEFT JOIN tblCourt court(nolock) ON tblcase.Court_id=court.court_id
+			LEFT JOIN tblDefendant d(NOLOCK) ON tblcase.Defendant_id = d.Defendant_Id
 			WHERE tblcase.DomainId = @DomainId
 				AND ISNULL(tblcase.IsDeleted, 0) = 0
 				AND (tblcase.domainid = 'DK' OR tblCase.STATUS <> 'IN ARB OR LIT')
@@ -396,12 +419,22 @@ BEGIN
 					)
 				AND (
 					@s_a_FinalStatus = ''
-					OR ISNULL(sta.Final_Status, '') = @s_a_FinalStatus
+					OR ISNULL(sta.Final_Status, '') = @s_a_FinalStatus OR 
+					(ISNULL(sta.Final_Status, '') = (Case when @s_a_FinalStatus= 'OPEN AND CLOSED'   then  ('OPEN')   end)
+					OR ISNULL(sta.Final_Status, '') = (Case when @s_a_FinalStatus= 'OPEN AND CLOSED' then  ('CLOSED') end))
+					
 					)
 				AND (
 					@s_a_Forum = ''
 					OR ISNULL(sta.forum, '') = @s_a_Forum
 					)
+			     AND (@i_a_Court = '0' OR tblcase.Court_Id =@i_a_Court)
+
+				 AND ((@CompanyType != 'funding' AND (@i_a_Defendant = 0 OR tblcase.defendant_Id = @i_a_Defendant)) OR
+		     @CompanyType = 'funding' AND(@i_a_Defendant = 0 OR (Select Count(*) from tblAttorney_Case_Assignment aca where
+			aca.Attorney_Id = @i_a_Defendant and Case_Id = tblcase.Case_Id and DomainId = @DomainId) > 0))
+
+
 				AND (
 					@s_a_PacketId = ''
 					OR p.PacketID LIKE '%' + @s_a_PacketId + '%'
@@ -431,6 +464,8 @@ BEGIN
 		LEFT JOIN tblAttorney att(NOLOCK) ON tblcase.Attorney_Id = att.Attorney_Id
 		LEFT JOIN tblAdjusters adj(NOLOCK) ON tblcase.Adjuster_Id = adj.Adjuster_Id
 		LEFT OUTER JOIN dbo.Assigned_Attorney a_att(NOLOCK) ON tblcase.Assigned_Attorney = a_att.PK_Assigned_Attorney_ID
+		LEFT JOIN tblCourt court(nolock) ON tblcase.Court_id=court.court_id
+		LEFT JOIN tblDefendant d(NOLOCK) ON tblcase.Defendant_id = d.Defendant_Id
 		WHERE tblcase.DomainId = @DomainId
 			AND ISNULL(tblcase.IsDeleted, 0) = 0
 			--AND (tblcase.domainid = 'DK' OR )
@@ -595,13 +630,21 @@ BEGIN
 				OR convert(VARCHAR, Accident_Date, 101) LIKE '%' + @AccidentDate + '%'
 				)
 			AND (
-				@s_a_FinalStatus = ''
-				OR ISNULL(sta.Final_Status, '') = @s_a_FinalStatus
-				)
+					@s_a_FinalStatus = ''
+					OR ISNULL(sta.Final_Status, '') = @s_a_FinalStatus OR 
+					(ISNULL(sta.Final_Status, '') = (Case when @s_a_FinalStatus= 'OPEN AND CLOSED'   then  ('OPEN')   end)
+					OR ISNULL(sta.Final_Status, '') = (Case when @s_a_FinalStatus= 'OPEN AND CLOSED' then  ('CLOSED') end))
+					
+					)
 			AND (
 				@s_a_Forum = ''
 				OR ISNULL(sta.forum, '') = @s_a_Forum
 				)
+	        AND (@i_a_Court = '0' OR tblcase.Court_Id =@i_a_Court)
+			AND ((@CompanyType != 'funding' AND (@i_a_Defendant = 0 OR tblcase.defendant_Id = @i_a_Defendant)) OR
+		     @CompanyType = 'funding' AND(@i_a_Defendant = 0 OR (Select Count(*) from tblAttorney_Case_Assignment aca where
+			aca.Attorney_Id = @i_a_Defendant and Case_Id = tblcase.Case_Id and DomainId = @DomainId) > 0))
+
 			AND (
 				@s_a_PacketId = ''
 				OR p.PacketID LIKE '%' + @s_a_PacketId + '%'
@@ -749,10 +792,29 @@ BEGIN
 					AND case_id = tblcase.case_id
 					AND domainid = tblcase.DomainID
 				) 
-				AS ChequeNo
+				AS ChequeNo,
 				--AS 
-				
+			
 				--'Check Number'
+					Court.Court_Name,
+
+					(SUBSTRING(ISNULL(STUFF((
+			SELECT COALESCE(isnull(Attorney_FirstName, '') + SPACE(1) + isnull( Attorney_LastName,'')+', ',' - ')
+					FROM tblAttorney_Case_Assignment aa (NOLOCK) 
+					inner join tblAttorney_Master am (NOLOCK) on am.Attorney_Id = aa.Attorney_Id inner join tblAttorney_Type atp (NOLOCK) on atp.Attorney_Type_ID = am.Attorney_Type_Id
+					Where aa.Case_Id = tblcase.Case_Id  and Lower(Attorney_Type) = 'opposing counsel' and aa.DomainId = @DomainId 
+					AND (@i_a_Defendant = 0 OR aa.Attorney_Id = @i_a_Defendant) AND @CompanyType = 'funding'
+			for xml path('')
+		),1,0,''),','),1,(LEN(ISNULL(STUFF(
+		(
+			SELECT COALESCE(isnull(Attorney_FirstName, '') + SPACE(1) + isnull( Attorney_LastName,'')+', ',' - ')
+					FROM tblAttorney_Case_Assignment aa (NOLOCK) 
+					inner join tblAttorney_Master am (NOLOCK) on am.Attorney_Id = aa.Attorney_Id inner join tblAttorney_Type atp (NOLOCK) on atp.Attorney_Type_ID = am.Attorney_Type_Id
+					Where aa.Case_Id = tblcase.Case_Id and Lower(Attorney_Type) = 'opposing counsel' and aa.DomainId = @DomainId
+					AND (@i_a_Defendant = 0 OR aa.Attorney_Id = @i_a_Defendant) AND @CompanyType = 'funding'
+			for xml path('')
+		),1,0,''),',')))-1)) AS Opposing_Counsel
+
 		FROM tblcase AS tblcase(NOLOCK)
 		LEFT JOIN tblprovider AS tblprovider(NOLOCK) ON tblcase.provider_id = tblprovider.provider_id
 		LEFT JOIN tblinsurancecompany AS tblinsurancecompany(NOLOCK) ON tblcase.insurancecompany_id = tblinsurancecompany.insurancecompany_id
@@ -764,6 +826,8 @@ BEGIN
 		LEFT JOIN tblAttorney att(NOLOCK) ON tblcase.Attorney_Id = att.Attorney_Id
 		LEFT JOIN tblAdjusters adj(NOLOCK) ON tblcase.Adjuster_Id = adj.Adjuster_Id
 		LEFT OUTER JOIN dbo.Assigned_Attorney a_att(NOLOCK) ON tblcase.Assigned_Attorney = a_att.PK_Assigned_Attorney_ID
+		LEFT JOIN tblCourt court(nolock) ON tblcase.Court_id=court.court_id
+		LEFT JOIN tblDefendant d(NOLOCK) ON tblcase.Defendant_id = d.Defendant_Id
 		WHERE tblcase.DomainId = @DomainId
 			AND ISNULL(tblcase.IsDeleted, 0) = 0
 			--AND tblCase.STATUS <> 'IN ARB OR LIT'
@@ -925,13 +989,23 @@ BEGIN
 				OR convert(VARCHAR, Accident_Date, 101) LIKE '%' + @AccidentDate + '%'
 				)
 			AND (
-				@s_a_FinalStatus = ''
-				OR ISNULL(sta.Final_Status, '') = @s_a_FinalStatus
-				)
+					@s_a_FinalStatus = ''
+					OR ISNULL(sta.Final_Status, '') = @s_a_FinalStatus OR 
+					(ISNULL(sta.Final_Status, '') = (Case when @s_a_FinalStatus= 'OPEN AND CLOSED'   then  ('OPEN')   end)
+					OR ISNULL(sta.Final_Status, '') = (Case when @s_a_FinalStatus= 'OPEN AND CLOSED' then  ('CLOSED') end))
+					
+					)
 			AND (
 				@s_a_Forum = ''
 				OR ISNULL(sta.forum, '') = @s_a_Forum
 				)
+		    AND (@i_a_Court = '0' OR tblcase.Court_Id =@i_a_Court)
+
+			AND ((@CompanyType != 'funding' AND (@i_a_Defendant = 0 OR tblcase.defendant_Id = @i_a_Defendant)) OR
+		     @CompanyType = 'funding' AND(@i_a_Defendant = 0 OR (Select Count(*) from tblAttorney_Case_Assignment aca where
+			aca.Attorney_Id = @i_a_Defendant and Case_Id = tblcase.Case_Id and DomainId = @DomainId) > 0))
+
+
 			AND (
 				@s_a_PacketId = ''
 				OR p.PacketID LIKE '%' + @s_a_PacketId + '%'
@@ -962,3 +1036,6 @@ BEGIN
 	  CASE @SortBy WHEN 'Provider_Name' THEN Provider_Name END  
 	END
 END
+GO
+
+

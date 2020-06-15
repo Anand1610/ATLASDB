@@ -2631,5 +2631,6 @@
     <None Include="dbo\Stored Procedures\Procs2\case_search_User_View_Save.sql" />
     <None Include="dbo\Stored Procedures\Procs2\case_search_user_view_Delete.sql" />
     <None Include="dbo\Stored Procedures\Procs2\display_column_retrieve_Case_Search.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\GetDefaultColumnList.sql" />
   </ItemGroup>
 </Project>
