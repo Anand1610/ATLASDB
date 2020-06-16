@@ -242,7 +242,10 @@ BEGIN
 					Where aa.Case_Id = tblcase.Case_Id and Lower(Attorney_Type) = 'opposing counsel' and aa.DomainId = @DomainId
 					AND (@i_a_Defendant = 0 OR aa.Attorney_Id = @i_a_Defendant) AND @CompanyType = 'funding'
 			for xml path('')
-		),1,0,''),',')))-1)) AS Opposing_Counsel
+		),1,0,''),',')))-1)) AS Opposing_Counsel,
+
+		   convert(decimal(38,2),(select  ISNULL(sum(DISTINCT ISNULL(Settlement_AF,0.00)),0.00) FROM tblsettlements  (NOLOCK) WHERE Case_Id = tblcase.case_id)) as  [ATTORNEYFEE],    
+           convert(decimal(38,2),(select ISNULL(sum(DISTINCT ISNULL(Settlement_FF,0.00)),0.00) FROM tblsettlements  (NOLOCK) WHERE Case_Id = tblcase.case_id)) as [FILINGFEE]
 			FROM tblcase AS tblcase(NOLOCK)
 			LEFT JOIN tblprovider AS tblprovider(NOLOCK) ON tblcase.provider_id = tblprovider.provider_id
 			LEFT JOIN tblinsurancecompany AS tblinsurancecompany(NOLOCK) ON tblcase.insurancecompany_id = tblinsurancecompany.insurancecompany_id
@@ -813,7 +816,10 @@ BEGIN
 					Where aa.Case_Id = tblcase.Case_Id and Lower(Attorney_Type) = 'opposing counsel' and aa.DomainId = @DomainId
 					AND (@i_a_Defendant = 0 OR aa.Attorney_Id = @i_a_Defendant) AND @CompanyType = 'funding'
 			for xml path('')
-		),1,0,''),',')))-1)) AS Opposing_Counsel
+		),1,0,''),',')))-1)) AS Opposing_Counsel,
+
+		 convert(decimal(38,2),(select  ISNULL(sum(DISTINCT ISNULL(Settlement_AF,0.00)),0.00) FROM tblsettlements  (NOLOCK) WHERE Case_Id = tblcase.case_id)) as  [ATTORNEYFEE],    
+          convert(decimal(38,2),(select ISNULL(sum(DISTINCT ISNULL(Settlement_FF,0.00)),0.00) FROM tblsettlements  (NOLOCK) WHERE Case_Id = tblcase.case_id)) as [FILINGFEE]
 
 		FROM tblcase AS tblcase(NOLOCK)
 		LEFT JOIN tblprovider AS tblprovider(NOLOCK) ON tblcase.provider_id = tblprovider.provider_id
@@ -1036,6 +1042,3 @@ BEGIN
 	  CASE @SortBy WHEN 'Provider_Name' THEN Provider_Name END  
 	END
 END
-GO
-
-
