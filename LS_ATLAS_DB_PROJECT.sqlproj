@@ -2622,6 +2622,12 @@
     <Build Include="dbo\Tables\case_search_User_View.sql" />
     <Build Include="dbo\Tables\tbl_display_column_Case_Search.sql" />
     <Build Include="dbo\Functions\UDF_Remove_Duplicate_Entry.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\DSH_LS_DTLS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\P_INS_tblCASEID_AGE_DETAILS.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\REPORT_LS_ATLAS_DSHBRD_TOP25NEW_CASES.sql" />
+    <Build Include="dbo\Tables\tblCaseID_Age_Details.sql" />
+    <Build Include="dbo\Tables\tblStatusWise_CaseID_CNT.sql" />
+    <Build Include="dbo\Tables\tblStatusWise_Age_Details.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Stored Procedures\Procs2\MotionType_Add.sql" />
@@ -2631,5 +2637,6 @@
     <None Include="dbo\Stored Procedures\Procs2\case_search_User_View_Save.sql" />
     <None Include="dbo\Stored Procedures\Procs2\case_search_user_view_Delete.sql" />
     <None Include="dbo\Stored Procedures\Procs2\display_column_retrieve_Case_Search.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\GetDefaultColumnList.sql" />
   </ItemGroup>
 </Project>
