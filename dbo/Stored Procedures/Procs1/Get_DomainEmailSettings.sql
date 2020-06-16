@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Get_DomainEmailSettings 
+﻿CREATE PROCEDURE [dbo].[Get_DomainEmailSettings] 
 	@s_a_Domain_Id varchar(50)
 AS
 BEGIN
@@ -11,8 +11,8 @@ BEGIN
 			,SMTP_Server_Name
 			,isSSLEnabled
 			,ReplyToEmailId
-			,EmailCC
-			,EmailBCC
+			, ISNULL(EmailCC,'') AS EmailCC
+			, ISNULL(EmailBCC,'') AS EmailBCC
 			from tblDomainEmailSettings Where Domain_Id = @s_a_Domain_Id
 
 END

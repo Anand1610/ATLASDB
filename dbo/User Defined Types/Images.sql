@@ -1,4 +1,4 @@
 ﻿CREATE TYPE [dbo].[Images] AS TABLE (
-    [CaseId]  VARCHAR (50) NULL,
+    [CaseId]  VARCHAR (255) NULL,
     [ImageId] VARCHAR (50) NULL);
 
