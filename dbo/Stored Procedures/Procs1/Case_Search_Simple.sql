@@ -668,7 +668,10 @@ BEGIN
 	ELSE
 	BEGIN
 		SELECT tblcase.Case_Id
-			,(LTRIM(InjuredParty_LastName) + ',' + LTRIM(InjuredParty_FirstName)) AS InjuredParty_Name
+			,(LTRIM(REPLACE(InjuredParty_LastName, char(9), '')  ) + ',' + LTRIM(REPLACE(InjuredParty_FirstName, char(9), '') )) AS InjuredParty_Name
+
+
+			
 			,(Attorney_LastName + ',' + Attorney_FirstName) AS Attorney_Name
 			,(Adjuster_LastName + ',' + Adjuster_FirstName) AS Adjuster_Name
 			,iif(@CompanyType != 'funding', a_att.Assigned_Attorney, SUBSTRING(ISNULL(STUFF((
@@ -708,7 +711,7 @@ BEGIN
 										FOR XML path('')
 										), 1, 0, ''), ','))
 						) - 1)) AS Assigned_Attorney
-			,Provider_Name
+			,REPLACE(Provider_Name, char(9), '')  as Provider_Name
 			,tblprovider.Provider_GroupName
 			,InsuranceCompany_Name
 			,(CASE	WHEN Accident_Date IS NULL OR Accident_Date = '' THEN ''
@@ -725,8 +728,10 @@ BEGIN
 			) AS DateOfService_End
 			,STATUS
 			,Rebuttal_Status
-			,Ins_Claim_Number
-			,Policy_Number
+			--,Ins_Claim_Number
+			, REPLACE(Ins_Claim_Number, char(9), '')  Ins_Claim_Number
+			--,Policy_Number
+			, REPLACE(Policy_Number, char(9), '')  Policy_Number
 			,
 			--convert(varchar, Date_BillSent, 101) as Date_BillSent,        
 			(CASE	WHEN tblCase.Date_BillSent IS NULL OR tblCase.Date_BillSent = '' THEN ''
@@ -766,7 +771,7 @@ BEGIN
 					AND domainid = tblcase.DomainId
 				) AS BillNumber
 			,convert(VARCHAR, ISNULL(tblCase.Date_Opened, ''), 101) AS Date_Opened
-			,IndexOrAAA_Number
+			, REPLACE(IndexOrAAA_Number, char(9), '')  IndexOrAAA_Number
 			,tblCase.Initial_Status
 			,(
 				SELECT TOP 1 a.Case_Id
@@ -784,12 +789,12 @@ BEGIN
 			,sta.forum
 			,sta.Final_Status
 			,p.PacketID
-			,StatusDisposition
+			,REPLACE(StatusDisposition, char(9), '')   StatusDisposition
 			,DateDiff(dd, ISNULL(Date_Status_Changed, Date_Opened), GETDATE()) AS Status_Age
 			,DateDiff(dd, Date_Opened, GETDATE()) AS Case_Age
 			
 			,(
-				SELECT TOP 1 ChequeNo
+				SELECT TOP 1 REPLACE(ChequeNo, char(9), '') 
 				FROM tblTransactions(NOLOCK)
 				WHERE ISNULL(ChequeNo, '') <> ''
 					AND case_id = tblcase.case_id
