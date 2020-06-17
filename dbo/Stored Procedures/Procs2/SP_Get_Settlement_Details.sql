@@ -18,5 +18,6 @@ BEGIN
 			and (@SettlementType = '' OR isnull(Settlement_Type,'') = @SettlementType)
 			and Settlement_Total <> 0 
 			and isnull(DomainId,'') = @DomainId 
+			and case_id in (select case_id from tblcase with(nolock) where case_id=[SJR-SETTLEMENTS].Case_id and ISNULL(IsDeleted,0) = 0 and DomainId=@DomainId)
 			order by settlement_date asc,provider_name asc
 END
