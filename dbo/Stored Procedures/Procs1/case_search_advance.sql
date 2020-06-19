@@ -1,5 +1,4 @@
-﻿
-/*    ==Scripting Parameters==
+﻿/*    ==Scripting Parameters==
 
     Changed by : Atul.J
 	Description : added multiple index number
@@ -505,7 +504,7 @@ BEGIN
 		INNER JOIN @Case_Packet_Status CPS ON cas.DomainId = CPS.DomainId and cas.Status = CPS.Status 
 	WHERE
 		cas.DomainId = @DomainID
-		AND	(@s_a_MultipleCase_ID ='' OR cas.Case_Id IN (SELECT CaseId FROM @CaseSearch) or  cas.IndexOrAAA_Number IN (SELECT CaseId FROM @CaseSearch))
+		AND	(@s_a_MultipleCase_ID ='' OR cas.Case_Id IN (SELECT CaseId FROM @CaseSearch) or  LTRIM(RTRIM(cas.IndexOrAAA_Number)) IN (SELECT LTRIM(RTRIM(CaseId)) FROM @CaseSearch))
 		--(SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
 		AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
 		AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))	
@@ -518,7 +517,7 @@ BEGIN
 		AND (@s_a_PolicyNo ='' OR cas.Policy_Number like '%'+ @s_a_PolicyNo + '%')
 		AND (@s_a_ClaimNo ='' OR cas.Ins_Claim_Number like '%'+ @s_a_ClaimNo + '%')
 		AND (@s_a_BillNumber ='' OR tre.BILL_NUMBER like '%'+ @s_a_BillNumber + '%')
-		AND (@s_a_IndexOrAAANo ='' OR cas.IndexOrAAA_Number like '%'+ @s_a_IndexOrAAANo + '%')
+		AND (@s_a_IndexOrAAANo ='' OR  LTRIM(RTRIM(cas.IndexOrAAA_Number)) like '%'+ @s_a_IndexOrAAANo + '%')
 
 		AND (@s_a_ProviderGroup ='' OR pro.Provider_GroupName = @s_a_ProviderGroup )
 		AND (@s_a_InsuranceGroup='' OR ins.InsuranceCompany_GroupName = @s_a_InsuranceGroup )		
@@ -842,7 +841,7 @@ BEGIN
 		LEFT OUTER JOIN @Settlements settlements    ON cas.DomainId= settlements.Domainid and cas.Case_Id = settlements.Case_Id
 	WHERE
 		cas.DomainId = @DomainID
-		AND	(@s_a_MultipleCase_ID ='' OR cas.Case_Id IN (SELECT CaseId FROM @CaseSearch) or  cas.IndexOrAAA_Number IN (SELECT CaseId FROM @CaseSearch))
+		AND	(@s_a_MultipleCase_ID ='' OR cas.Case_Id IN (SELECT CaseId FROM @CaseSearch) or  LTRIM(RTRIM(cas.IndexOrAAA_Number)) IN (SELECT LTRIM(RTRIM(CaseId)) FROM @CaseSearch))
 		--(SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
 		AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
 		AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))	
@@ -855,7 +854,7 @@ BEGIN
 		AND (@s_a_PolicyNo ='' OR cas.Policy_Number like '%'+ @s_a_PolicyNo + '%')
 		AND (@s_a_ClaimNo ='' OR cas.Ins_Claim_Number like '%'+ @s_a_ClaimNo + '%')
 		AND (@s_a_BillNumber ='' OR tre.BILL_NUMBER like '%'+ @s_a_BillNumber + '%')
-		AND (@s_a_IndexOrAAANo ='' OR cas.IndexOrAAA_Number like '%'+ @s_a_IndexOrAAANo + '%')
+		AND (@s_a_IndexOrAAANo ='' OR LTRIM(RTRIM(cas.IndexOrAAA_Number)) like '%'+ @s_a_IndexOrAAANo + '%')
 
 		AND (@s_a_ProviderGroup ='' OR pro.Provider_GroupName = @s_a_ProviderGroup )
 		AND (@s_a_InsuranceGroup='' OR ins.InsuranceCompany_GroupName = @s_a_InsuranceGroup )		
@@ -1173,7 +1172,7 @@ BEGIN
 	WHERE
 		cas.DomainId = @DomainID
 		AND	(@s_a_MultipleCase_ID ='' OR --cas.Case_Id IN (SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
-		cas.Case_Id IN (SELECT CaseID FROM @CaseSearch) or  cas.IndexOrAAA_Number IN (SELECT CaseId FROM @CaseSearch) )
+		cas.Case_Id IN (SELECT CaseID FROM @CaseSearch) or  LTRIM(RTRIM(cas.IndexOrAAA_Number)) IN (SELECT LTRIM(RTRIM(CaseId)) FROM @CaseSearch) )
 		AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
 		AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))	
 		AND (@s_a_CurrentStatusGroupSel ='' OR cas.Status IN (SELECT s FROM dbo.SplitString(@s_a_CurrentStatusGroupSel,',')))	
@@ -1494,7 +1493,7 @@ BEGIN
 	WHERE
 		cas.DomainId = @DomainID
 		AND	(@s_a_MultipleCase_ID ='' OR --cas.Case_Id IN (SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
-		cas.Case_Id IN (SELECT CaseID FROM @CaseSearch) or  cas.IndexOrAAA_Number IN (SELECT CaseId FROM @CaseSearch))
+		cas.Case_Id IN (SELECT CaseID FROM @CaseSearch) or  LTRIM(RTRIM(cas.IndexOrAAA_Number)) IN (SELECT LTRIM(RTRIM(CaseId)) FROM @CaseSearch))
 		AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
 		AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))	
 		AND (@s_a_CurrentStatusGroupSel ='' OR cas.Status IN (SELECT s FROM dbo.SplitString(@s_a_CurrentStatusGroupSel,',')))	
