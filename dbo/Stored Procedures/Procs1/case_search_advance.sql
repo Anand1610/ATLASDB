@@ -1,9 +1,10 @@
-﻿/*    ==Scripting Parameters==
+﻿
+/*    ==Scripting Parameters==
 
-    Changed by : Abhay W
-	Description : Added new column for Old_Status and WHO _CHANGE_TO_THE_CURRENT_STATUS
+    Changed by : Atul.J
+	Description : added multiple index number
 	Date: 05/21/2020
-	Last Change By: System
+	Last Change By: Abhay W
 */
 CREATE PROCEDURE [dbo].[case_search_advance] -- [case_search_advance]  @DomainID='amt',@s_a_MainDenialID='2'
 (
@@ -504,7 +505,7 @@ BEGIN
 		INNER JOIN @Case_Packet_Status CPS ON cas.DomainId = CPS.DomainId and cas.Status = CPS.Status 
 	WHERE
 		cas.DomainId = @DomainID
-		AND	(@s_a_MultipleCase_ID ='' OR cas.Case_Id IN (SELECT CaseId FROM @CaseSearch))
+		AND	(@s_a_MultipleCase_ID ='' OR cas.Case_Id IN (SELECT CaseId FROM @CaseSearch) or  cas.IndexOrAAA_Number IN (SELECT CaseId FROM @CaseSearch))
 		--(SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
 		AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
 		AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))	
@@ -841,7 +842,7 @@ BEGIN
 		LEFT OUTER JOIN @Settlements settlements    ON cas.DomainId= settlements.Domainid and cas.Case_Id = settlements.Case_Id
 	WHERE
 		cas.DomainId = @DomainID
-		AND	(@s_a_MultipleCase_ID ='' OR cas.Case_Id IN (SELECT CaseId FROM @CaseSearch))
+		AND	(@s_a_MultipleCase_ID ='' OR cas.Case_Id IN (SELECT CaseId FROM @CaseSearch) or  cas.IndexOrAAA_Number IN (SELECT CaseId FROM @CaseSearch))
 		--(SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
 		AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
 		AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))	
@@ -1172,7 +1173,7 @@ BEGIN
 	WHERE
 		cas.DomainId = @DomainID
 		AND	(@s_a_MultipleCase_ID ='' OR --cas.Case_Id IN (SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
-		cas.Case_Id IN (SELECT CaseID FROM @CaseSearch))
+		cas.Case_Id IN (SELECT CaseID FROM @CaseSearch) or  cas.IndexOrAAA_Number IN (SELECT CaseId FROM @CaseSearch) )
 		AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
 		AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))	
 		AND (@s_a_CurrentStatusGroupSel ='' OR cas.Status IN (SELECT s FROM dbo.SplitString(@s_a_CurrentStatusGroupSel,',')))	
@@ -1493,7 +1494,7 @@ BEGIN
 	WHERE
 		cas.DomainId = @DomainID
 		AND	(@s_a_MultipleCase_ID ='' OR --cas.Case_Id IN (SELECT s FROM dbo.SplitString(@s_a_MultipleCase_ID,',')))
-		cas.Case_Id IN (SELECT CaseID FROM @CaseSearch))
+		cas.Case_Id IN (SELECT CaseID FROM @CaseSearch) or  cas.IndexOrAAA_Number IN (SELECT CaseId FROM @CaseSearch))
 		AND (@s_a_ProviderSel  ='' OR cas.Provider_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_ProviderSel,',')))
 		AND (@s_a_InsuranceSel  ='' OR cas.InsuranceCompany_Id IN (SELECT items FROM dbo.SplitStringInt(@s_a_InsuranceSel,',')))	
 		AND (@s_a_CurrentStatusGroupSel ='' OR cas.Status IN (SELECT s FROM dbo.SplitString(@s_a_CurrentStatusGroupSel,',')))	
