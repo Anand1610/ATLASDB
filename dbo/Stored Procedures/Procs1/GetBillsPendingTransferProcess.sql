@@ -42,12 +42,6 @@ BEGIN
 			AppSource = GBB_Type
 	FROM	XN_TEMP_GBB_ALL a
 	WHERE	(@GbbType IS NULL OR GBB_Type = @GbbType)
-	AND		NOT EXISTS
-	(
-		SELECT 1
-		FROM	tbltreatment b
-		WHERE	b.BILL_NUMBER = a.BillNumber
-		AND		a.DomainId = b.DomainId
-	)
+	AND Transferd_Status = ''
 END
 
