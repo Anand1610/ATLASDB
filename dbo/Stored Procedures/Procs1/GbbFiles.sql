@@ -13,7 +13,7 @@ AS
 BEGIN
 
 			INSERT INTO tblGbbDocuments(FileName,	Path,	NodeType,	BasePathId,	BaseFilePath, BasePathType, BillNumber, Gbb_Type)
-			SELECT *,@BillNumber,@Gbb_Type FROM @BillDocs WHERE path NOT IN (SELECT path from tblGbbDocuments WHERE BillNumber = @BillNumber AND Gbb_Type= @Gbb_Type)
+			SELECT *,@BillNumber,@Gbb_Type FROM @BillDocs WHERE path NOT IN (SELECT path from tblGbbDocuments (nolock) WHERE BillNumber = @BillNumber AND Gbb_Type= @Gbb_Type)
 
 			UPDATE tbltreatment 
 			SET DocumentStatus = 'Imported'
