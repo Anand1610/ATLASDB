@@ -1,8 +1,7 @@
-﻿
-CREATE PROCEDURE [dbo].[getProviderDetaisForInvoice] --getProviderDetaisForInvoice '4042','AF'
+﻿CREATE PROCEDURE [dbo].[getProviderDetaisForInvoice] --getProviderDetaisForInvoice '4042','AF'
 	@provider_id INT
 	,@DomainId VARCHAR(10)
-	,@Months INT
+	,@Months INT=0
 AS
 BEGIN
 	--SELECT	
@@ -61,7 +60,7 @@ BEGIN
 					FROM tblclientaccount(NOLOCK)
 					WHERE tblclientaccount.domainid = @DomainId
 						AND tblclientaccount.provider_id = @provider_id
-						AND Datediff(m, Account_Date, getdate()) <= @Months
+						AND (@Months=0 OR Datediff(m, Account_Date, getdate()) <= @Months)
 					) - ISNULL((
 						SELECT sum(iSNULL(tblClientPayment.Payment_Amount, 0.00))
 						FROM tblClientPayment(NOLOCK)

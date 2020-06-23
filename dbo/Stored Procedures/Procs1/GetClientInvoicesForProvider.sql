@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[GetClientInvoicesForProvider] --GetClientInvoicesForProvider '4042','AF'
 @provider_id INT,
 @DomainId VARCHAR(10),
-@DateDiff int
+@DateDiff int=0
 AS
 BEGIN
 	SELECT 
@@ -21,7 +21,7 @@ BEGIN
 		tblprovider t2 (NOLOCK) 
 	WHERE   t1.provider_id=t2.provider_id 
 			and t1.provider_id=@provider_id
-			and DATEDIFF(m,Account_Date,GETDATE()) <= @DateDiff
+			and (@DateDiff =0 OR DATEDIFF(m,Account_Date,GETDATE()) <= @DateDiff)
 			and t1.DomainId= @DomainId
 	ORDER BY t1.account_date
 End
