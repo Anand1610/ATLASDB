@@ -27,7 +27,7 @@ BEGIN
     inner join tblprovider (NOLOCK) pro on cas.provider_id=pro.provider_id
     inner join tblinsurancecompany ins (NOLOCK) on cas.insurancecompany_id=ins.insurancecompany_id
     where cas_s.Case_Id =@s_a_CaseId and cas_s.DomainId = @s_a_DomainId
-	and  cas.CASE_ID NOT LIKE 'ACT%'
+	and  cas.CASE_ID NOT LIKE 'ACT%' and cas.isdeleted = 0
 	ORDER BY cas.Case_Id
 	OFFSET @i_a_PageSize * (@i_a_PageNumber - 1) ROWS
     FETCH NEXT @i_a_PageSize ROWS ONLY;
@@ -45,7 +45,7 @@ BEGIN
     inner join tblprovider (NOLOCK) pro on cas.provider_id=pro.provider_id
     inner join tblinsurancecompany ins (NOLOCK) on cas.insurancecompany_id = ins.insurancecompany_id
     where cas_s.Case_Id = @s_a_CaseId and cas_s.DomainId = @s_a_DomainId
-	and  cas.CASE_ID NOT LIKE 'ACT%'
+	and  cas.CASE_ID NOT LIKE 'ACT%' and cas.isdeleted = 0
 
 
 END

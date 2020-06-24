@@ -5,6 +5,11 @@
 -- Changed date: 4/9/2020
 -- Description: Added CptCodeC Change  
 -- =============================================  
+-- =============================================  
+-- Changed By: Priyanka Kale 
+-- Changed date: 06/23/2020
+-- Description: Added NOLOCK  
+-- =============================================  
 CREATE PROCEDURE [dbo].[TransferCasesLogic] -- TransferCasesLogic 'GYB'  
 (  
  @Gbb_Type VARCHAR(10)   
@@ -301,7 +306,7 @@ BEGIN
        @SZ_BILL_NUMBER,  
        CASE WHEN ISNUMERIC(@FLT_BILL_AMOUNT) = 0 THEN 0 ELSE CONVERT(NUMERIC(18, 2), @FLT_BILL_AMOUNT) END,  
        @POMStampDate,  
-       (SELECT TOP 1 DenialReasons_Id from tblDenialReasons WHERE DENIALREASONS_TYPE = @DenialReason1  and DomainId = @DOMAINID),  
+       (SELECT TOP 1 DenialReasons_Id from tblDenialReasons (NOLOCK) WHERE DENIALREASONS_TYPE = @DenialReason1  and DomainId = @DOMAINID),  
        @DOMAINID,  
        @Specialty,  
        'Document Pending',  
@@ -318,10 +323,10 @@ BEGIN
      IF((SELECT TOP 1 DenialReasons_Id FROM tblDenialReasons (NOLOCK) WHERE DENIALREASONS_TYPE = @DenialReason2 and DENIALREASONS_TYPE <> ''  and DomainId = @DOMAINID) is not null)  
      BEGIN  
       INSERT TXN_tblTreatment (Treatment_Id, DenialReasons_Id, DomainId)  
-      SELECT Treatment_Id,(SELECT TOP 1 DenialReasons_Id FROM tblDenialReasons   
+      SELECT Treatment_Id,(SELECT TOP 1 DenialReasons_Id FROM tblDenialReasons  (nolock)
       WHERE DENIALREASONS_TYPE = @DenialReason2 AND  domainId = @DOMAINID  
       ) AS DenialReasons_Id , @DOMAINID    
-      FROM TBLTREATMENT WHERE CASE_ID = @AtlasCaseID AND  
+      FROM TBLTREATMENT (nolock) WHERE CASE_ID = @AtlasCaseID AND  
       BILL_NUMBER = @SZ_BILL_NUMBER   
      END  
        
@@ -329,7 +334,7 @@ BEGIN
      DENIALREASONS_TYPE <> ''  and DomainId = @DOMAINID) is not null)  
      BEGIN  
       INSERT TXN_tblTreatment (Treatment_Id, DenialReasons_Id , DomainId)  
-      SELECT Treatment_Id,(SELECT TOP 1 DenialReasons_Id FROM tblDenialReasons WHERE   
+      SELECT Treatment_Id,(SELECT TOP 1 DenialReasons_Id FROM tblDenialReasons (nolock) WHERE   
       DENIALREASONS_TYPE = @DenialReason3  AND  domainId = @DOMAINID  
       ) AS   
       DenialReasons_Id , @DOMAINID    
@@ -338,12 +343,10 @@ BEGIN
       
      END  
 
-	  if exists(select top 1 * from tbltreatment where case_id=@AtlasCaseID and DenialReason_Id is not null)
-					 BEGIN
-					 EXEC Update_Denial_Case @Caseid =@AtlasCaseID
-					 END
-  
-	
+	  if exists(select top 1 * from tbltreatment (nolock) where case_id=@AtlasCaseID and DenialReason_Id is not null)
+		BEGIN
+		EXEC Update_Denial_Case @Caseid =@AtlasCaseID
+		END
   
     SET @NOTES = 'Bill added for DOS ' + convert(varchar(9),@DT_START_VISIT_DATE) + ' - ' + convert(varchar(9),@DT_END_VISIT_DATE)  
     exec LCJ_AddNotes @case_id=@AtlasCaseID,@notes_type='Activity',@Ndesc=@NOTES,@User_id='system',@Applytogroup=0 ,@DomainId = @DOMAINID  
@@ -446,7 +449,7 @@ BEGIN
 
 	 if @DOMAINID='AF' and (@providername!='' AND @providername is not null)
 	 BEGIN
-	 select top 1 @PortFolio_Id=PortFolio_Id from PortFolioProviderMapping 
+	 select top 1 @PortFolio_Id=PortFolio_Id from PortFolioProviderMapping (nolock)
 	 where Provider_Name like '%'+ replace(@providername,'#','') +'%'
 	 and active =1
 
@@ -510,12 +513,12 @@ BEGIN
      BEGIN  
       INSERT TXN_tblTreatment (Treatment_Id,DenialReasons_Id, DomainId)--  
       SELECT Treatment_Id,(SELECT TOP 1 DenialReasons_Id FROM  
-       tblDenialReasons where DENIALREASONS_TYPE = @DenialReason2) as DenialReasons_Id , @DOMAINID   
+       tblDenialReasons (nolock) where DENIALREASONS_TYPE = @DenialReason2) as DenialReasons_Id , @DOMAINID   
        FROM TBLTREATMENT (NOLOCK)  
        WHERE CASE_ID = @AtlasCaseID AND BILL_NUMBER = @SZ_BILL_NUMBER    
      END  
      
-     IF((SELECT TOP 1 DenialReasons_Id from tblDenialReasons WHERE DENIALREASONS_TYPE = @DenialReason3   
+     IF((SELECT TOP 1 DenialReasons_Id from tblDenialReasons (nolock) WHERE DENIALREASONS_TYPE = @DenialReason3   
      AND DENIALREASONS_TYPE <> ''   and DomainId = @DOMAINID) IS NOT NULL)  
      BEGIN  
       INSERT TXN_tblTreatment (Treatment_Id,DenialReasons_Id, DomainId) --  
@@ -526,7 +529,7 @@ BEGIN
      END  
 
 	
-	  if exists(select top 1 * from tbltreatment where case_id=@AtlasCaseID and DenialReason_Id is not null)
+	  if exists(select top 1 * from tbltreatment (nolock) where case_id=@AtlasCaseID and DenialReason_Id is not null)
 					 BEGIN
 					 EXEC Update_Denial_Case @Caseid =@AtlasCaseID
 					 END
@@ -543,21 +546,7 @@ BEGIN
      INSERT INTO tblCase_additional_info(DomainId, Case_Id)  
      VALUES ( @DomainID, @AtlasCaseID)  
   
-     EXEC sp_createDefaultDocTypesForTree  @DomainId,  @AtlasCaseID, @AtlasCaseID  
-  
-     --IF(@CASE_TYPE_NAME <> 'NoFault' AND @CASE_TYPE_NAME <> 'NO FAULT' AND @CASE_TYPE_NAME <> 'No-Fault' AND @CASE_TYPE_NAME <> 'NF'  AND @CASE_TYPE_NAME <> 'ARB' AND @CASE_TYPE_NAME <> 'SP')  
-     --BEGIN  
-     -- UPDATE TBLCASE   
-     -- SET status = 'AAA - REJECT - RETURN TO CLIENT - WC FILE', initial_status ='Closed'  
-     -- WHERE Case_Id=@AtlasCaseID        
-     -- exec LCJ_AddNotes @case_id=@AtlasCaseID,@notes_type='PROVIDER',@Ndesc='LawFirm cannot pursue a non no-fault case.',@User_id='system',@Applytogroup=0,@DomainId = @DOMAINID  
-     --END    
-       
-     --IF(@IsDuplicateCase = 1)  
-     --BEGIN  
-     -- EXEC LCJ_AddNotes @Case_Id = @AtlasCaseID,@Notes_Type='PROVIDER',@NDesc='cannot pursue this case because it’s  paid',@User_Id='System',@ApplyToGroup=0 ,@DomainId = @DOMAINID  
-     -- update tblcase set Status='CLOSED - RETURNED TO CLIENT',Initial_Status='CLOSED' where Case_Id =@AtlasCaseID   
-     --END       
+     EXEC sp_createDefaultDocTypesForTree  @DomainId,  @AtlasCaseID, @AtlasCaseID        
    END   
   
      
@@ -592,43 +581,9 @@ BEGIN
   ----START Record Case id  
   BEGIN  
        UPDATE XN_TEMP_GBB_ALL  
-    SET  Transferd_Status = T.Case_Id--,  
-      --AtlasCaseID =  T.Case_Id  
-    FROM XN_TEMP_GBB_ALL X  
-    INNER JOIN tblTreatment T ON X.BillNumber = T.BILL_NUMBER  AND X.DomainId = T.DomainId  
-      
-    --UPDATE XN_TEMP_GBB_ALL  
-    --SET  Transferd_Status = T.Case_Id--,  
-    --  --AtlasCaseID =  T.Case_Id  
-    --FROM XN_TEMP_GBB_ALL X  
-    --INNER JOIN tblTreatment T ON  X.BillNumber = T.Account_Number AND X.DomainId = T.DomainId  
-  END ---- END Record Case id  
-    
-    
-  ---START Closed Cases less than $25.  
-    
-   --insert into tblnotes (Notes_Desc,Notes_Type,Notes_Priority,Case_Id,Notes_Date,User_Id)   
-   --SELECT 'LawFirm is not pursuing a case less than $25.' AS Notes_Desc  
-   --  , 'PROVIDER' AS Notes_Type    
-   --  , 1 AS Notes_Priority   
-   --  , Case_Id   
-   --  , GETDATE() AS Notes_Date  
-   --  , 'System'  
-   --FROM tblCASE where GB_CASE_ID is not null and Date_Opened > CONVERT(DATE,GETDATE()) AND Initial_Status <> 'ACTIVE'  
-   --AND gbb_type = @Gbb_Type     --AND (convert(decimal(38,2),Claim_Amount)-convert(decimal(38,2),Paid_Amount))< 25   
-   --AND Status <>'GBB CLOSED-UNOPENED/RETURN TO CLIENT'  
-     
-     
-   --UPDATE tblCase  
-   --SET Status='GBB CLOSED-UNOPENED/RETURN TO CLIENT',Initial_Status='CLOSED'  
-   --FROM tblCASE where GB_CASE_ID is not null and Date_Opened > CONVERT(DATE,GETDATE()) AND Initial_Status <> 'ACTIVE'  
-   --AND gbb_type = @Gbb_Type  
-   --AND (convert(decimal(38,2),Claim_Amount)-convert(decimal(38,2),Paid_Amount))< 25   
-   --AND Status <>'GBB CLOSED-UNOPENED/RETURN TO CLIENT'  
-     
-  ---END Closed Cases less than $25.  
-    
-    
-   
-    
+		SET  Transferd_Status = T.Case_Id
+		FROM XN_TEMP_GBB_ALL X  (nolock)
+		INNER JOIN tblTreatment T (nolock) ON X.BillNumber = T.BILL_NUMBER  AND X.DomainId = T.DomainId  
+  END ---- END Record Case id     
 END  
+GO
