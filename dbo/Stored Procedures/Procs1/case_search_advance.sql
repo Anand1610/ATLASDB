@@ -1,4 +1,4 @@
-﻿/*    ==Scripting Parameters==
+﻿/*    ==Scripting Parameters== Production
 
     Changed by : Atul.J
 	Description : added multiple index number
@@ -361,7 +361,10 @@ BEGIN
 		Rebuttal_Status,
 		Policy_Number,
 		Voluntary_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK)  where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('PreC','PreCToP')),
+		Voluntary_Interest_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK)  where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('PreI','ID')),
 		Collection_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('C','I')),
+		Principal_Received=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('C')),
+		Interest_Received=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('I')),
 		bill_number=(select top 1 bill_number from tblTreatment (NOLOCK) where ISNULL(bill_number,'') <> '' and case_id = cas.case_id and domainid = cas.DomainId),
 		Date_Opened=convert(varchar, ISNULL(casDate.Date_Opened,''),101),
 		Similar_To_Case_ID=(Select top 1 a.Case_Id FROM  tblCase a (NOLOCK) WHERE a.Provider_Id =cas.Provider_Id  and a.InjuredParty_LastName =cas.InjuredParty_LastName    
@@ -477,7 +480,8 @@ BEGIN
 	SUM(ISNULL(tre.Claim_Amount,0.00)) - SUM(ISNULL(tre.Paid_Amount,0.00)) - SUM(ISNULL(tre.WriteOff,0.00)) As Total_Balance,
 	DefAttorneyFileNo,
 	Old_Status AS Old_Status,
-	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS]
+	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS],
+	convert(decimal(38,2),(select  ISNULL(sum(DISTINCT ISNULL(Settlement_AF,0.00)),0.00) FROM tblsettlements  (NOLOCK) WHERE Case_Id = cas.case_id)) as  [ATTORNEYFEE] 
 	FROM
 		@CaseData cas 
 		INNER JOIN @CaseAmounts casAmt ON cas.Case_Id = casAmt.Case_Id
@@ -698,8 +702,13 @@ BEGIN
 		PacketID=p.PacketID,
 		Rebuttal_Status,
 		Policy_Number,
+		
 		Voluntary_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK)  where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('PreC','PreCToP')),
+		Voluntary_Interest_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK)  where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('PreI','ID')),
 		Collection_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('C','I')),
+		Principal_Received=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('C')),
+		Interest_Received=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('I')),
+		
 		bill_number=(select top 1 bill_number from tblTreatment (NOLOCK) where ISNULL(bill_number,'') <> '' and case_id = cas.case_id and domainid = cas.DomainId),
 		Date_Opened=convert(varchar, ISNULL(casDate.Date_Opened,''),101),
 		Similar_To_Case_ID=(Select top 1 a.Case_Id FROM  tblCase a (NOLOCK) WHERE a.Provider_Id =cas.Provider_Id  and a.InjuredParty_LastName =cas.InjuredParty_LastName    
@@ -815,7 +824,8 @@ BEGIN
 	SUM(ISNULL(tre.Claim_Amount,0.00)) - SUM(ISNULL(tre.Paid_Amount,0.00)) - SUM(ISNULL(tre.WriteOff,0.00)) As Total_Balance,
 	DefAttorneyFileNo,
 	Old_Status AS Old_Status,
-	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS]
+	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS],
+	convert(decimal(38,2),(select  ISNULL(sum(DISTINCT ISNULL(Settlement_AF,0.00)),0.00) FROM tblsettlements  (NOLOCK) WHERE Case_Id = cas.case_id)) as  [ATTORNEYFEE] 
 	FROM
 		@CaseData cas 
 		INNER JOIN @CaseAmounts casAmt ON cas.Case_Id = casAmt.Case_Id
@@ -1029,8 +1039,13 @@ BEGIN
 		PacketID=p.PacketID,
 		Rebuttal_Status,
 		Policy_Number,
-		Voluntary_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK)  where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('PreC','PreCToP')),
+
+	    Voluntary_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK)  where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('PreC','PreCToP')),
+		Voluntary_Interest_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK)  where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('PreI','ID')),
 		Collection_Payment=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('C','I')),
+		Principal_Received=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('C')),
+		Interest_Received=(select convert(decimal(38,2),(convert(money,convert(float,sum(transactions_amount))))) from tblTransactions (NOLOCK) where tblTransactions.case_id=cas.Case_Id and DomainId=@DomainId and Transactions_Type in ('I')),
+		
 		bill_number=(select top 1 bill_number from tblTreatment (NOLOCK) where ISNULL(bill_number,'') <> '' and case_id = cas.case_id and domainid = cas.DomainId),
 		Date_Opened=convert(varchar, ISNULL(casDate.Date_Opened,''),101),
 		Similar_To_Case_ID=(Select top 1 a.Case_Id FROM  tblCase a (NOLOCK) WHERE a.Provider_Id =cas.Provider_Id  and a.InjuredParty_LastName =cas.InjuredParty_LastName    
@@ -1145,7 +1160,8 @@ BEGIN
 	SUM(ISNULL(tre.Claim_Amount,0.00)) - SUM(ISNULL(tre.Paid_Amount,0.00)) - SUM(ISNULL(tre.WriteOff,0.00)) As Total_Balance,
 	DefAttorneyFileNo,
 	Old_Status AS Old_Status,
-	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS]
+	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS],
+	convert(decimal(38,2),(select  ISNULL(sum(DISTINCT ISNULL(Settlement_AF,0.00)),0.00) FROM tblsettlements  (NOLOCK) WHERE Case_Id = cas.case_id)) as  [ATTORNEYFEE] 
 	FROM
 		@CaseData cas 
 		INNER JOIN @CaseAmounts casAmt ON cas.Case_Id = casAmt.Case_Id
@@ -1467,7 +1483,8 @@ BEGIN
 	SUM(ISNULL(tre.Claim_Amount,0.00)) - SUM(ISNULL(tre.Paid_Amount,0.00)) - SUM(ISNULL(tre.WriteOff,0.00)) As Total_Balance,
 	DefAttorneyFileNo,
 	Old_Status AS Old_Status,
-	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS]
+	(SELECT TOP 1 USER_ID FROM TBLNOTES WHERE CASE_ID = cas.CASE_ID AND NOTES_DESC LIKE 'STATUS CHANGED FROM%' ORDER BY NOTES_DATE DESC) [WHO_CHANGE_TO_THE_CURRENT_STATUS],
+	convert(decimal(38,2),(select  ISNULL(sum(DISTINCT ISNULL(Settlement_AF,0.00)),0.00) FROM tblsettlements  (NOLOCK) WHERE Case_Id = cas.case_id)) as  [ATTORNEYFEE] 
 	FROM
 		@CaseData cas 
 		INNER JOIN @CaseAmounts casAmt ON cas.Case_Id = casAmt.Case_Id
