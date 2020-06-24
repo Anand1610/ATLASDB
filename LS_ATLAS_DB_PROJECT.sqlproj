@@ -2639,5 +2639,6 @@
     <None Include="dbo\Stored Procedures\Procs2\display_column_retrieve_Case_Search.sql" />
     <None Include="dbo\Stored Procedures\Procs2\GetDefaultColumnList.sql" />
     <None Include="dbo\Stored Procedures\Procs2\GetProvideCaseBillDetails.sql" />
+    <None Include="dbo\Stored Procedures\Procs2\GetCasesFiles.sql" />
   </ItemGroup>
 </Project>
