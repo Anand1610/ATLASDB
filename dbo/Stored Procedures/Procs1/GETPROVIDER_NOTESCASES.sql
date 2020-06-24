@@ -53,7 +53,14 @@ BEGIN
    --(select  isnull(Date_BillSent,'') from tbltreatment where Case_Id=tblcase.Case_ID) as Date_BillSent
    convert(varchar(10),(select top 1  isnull(Date_BillSent,'') from tbltreatment where Case_Id=tblcase.Case_ID),101) as Date_BillSent,
    ISNULL(dbo.fncGetServiceType( TBLCASE.Case_ID),'') AS [ServiceType]
- --End of chenges New field added 02/06/2020
+ --End of chenges New field added 02/06/2020,
+  ,(  
+     SELECT TOP 1 bill_number  
+     FROM tblTreatment(NOLOCK)  
+     WHERE ISNULL(bill_number, '') <> ''  
+      AND case_id = tblcase.case_id  
+      AND domainid = tblcase.DomainId  
+     ) AS BillNumber  
  FROM  
    TBLCASE (NOLOCK)  
   INNER JOIN TBLPROVIDER (NOLOCK) AS TBLPROVIDER ON TBLCASE.PROVIDER_ID = TBLPROVIDER.Provider_Id and TBLCASE.DomainId=TBLPROVIDER.DomainId  
@@ -79,3 +86,6 @@ BEGIN
  END  
 END  
   
+GO
+
+
