@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[LCJ_GETCLIENTFILINGFEE]
+﻿ CREATE PROCEDURE [dbo].[LCJ_GETCLIENTFILINGFEE] -- [dbo].[LCJ_GETCLIENTFILINGFEE] 'BT','5340'
 	-- Add the parameters for the stored procedure here  
 	@DomainId NVARCHAR(50)
 	,@Client_id NVARCHAR(50)
@@ -19,7 +19,7 @@ BEGIN
 		, A.TRANSACTIONS_DATE
 		, A.TRANSACTIONS_dESCRIPTION   
 		, CONVERT(VARCHAR(10),B.DATEOFSERVICE_START,101) + ' - ' + CONVERT(VARCHAR(10),B.DATEOFSERVICE_END,101) [DOS]    
-	 from tbltransactions A 
+	 from tbltransactions A
 	 inner join tblcase B ON A.Case_Id = B.Case_Id   
 	 inner join tblprovider C on C.Provider_Id=B.Provider_Id 
 	 inner join tblInsuranceCompany ins on ins.InsuranceCompany_Id=B.InsuranceCompany_Id    
@@ -28,10 +28,8 @@ BEGIN
 	 AND
 	 (TRANSACTIONS_STATUS IS NULL or TRANSACTIONS_STATUS = 'CONFIRMED')      
 	 AND TRANSACTIONS_TYPE IN ('EXP')
-	 and B.DomainId=@DomainId
+	 and B.DomainId=@DomainId and A.case_id not in 
+     (select case_id from tbl_Case_Status_Hierarchy where domainid=@DomainId and status='CLOSED - ARB LOST')
 	 END
 
 	
-GO
-
-
