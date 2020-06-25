@@ -36,7 +36,7 @@ BEGIN
    TBLPROVIDER.Provider_Name,  
    INSURANCECOMPANY_NAME,  
    POLICY_NUMBER,  
-   INS_CLAIM_NUMBER,  
+   replace(INS_CLAIM_NUMBER,char(9),'') INS_CLAIM_NUMBER,  
    ISNULL(convert(varchar, tblCase.DateOfService_Start,101),'') as DateOfService_Start,  
    ISNULL(convert(varchar, tblCase.DateOfService_End,101),'') as DateOfService_End,     
    convert(nvarchar(12),tblcase.Accident_Date,101) as Accident_Date,  
@@ -53,14 +53,16 @@ BEGIN
    --(select  isnull(Date_BillSent,'') from tbltreatment where Case_Id=tblcase.Case_ID) as Date_BillSent
    convert(varchar(10),(select top 1  isnull(Date_BillSent,'') from tbltreatment where Case_Id=tblcase.Case_ID),101) as Date_BillSent,
    ISNULL(dbo.fncGetServiceType( TBLCASE.Case_ID),'') AS [ServiceType]
- --End of chenges New field added 02/06/2020
-    ,(  
-     SELECT TOP 1 bill_number  
-     FROM tblTreatment(NOLOCK)  
-     WHERE ISNULL(bill_number, '') <> ''  
-      AND case_id = tblcase.case_id  
-      AND domainid = tblcase.DomainId  
-     ) AS BillNumber  
+ --End of chenges New field added 02/06/2020,
+  		,STUFF(
+									(SELECT distinct ',' + BILL_NUMBER 
+										FROM tblTreatment(NOLOCK) T2
+										WHERE TBLCASE.Case_Id = T2.Case_Id 
+										--ORDER BY BILL_NUMBER 
+										FOR XML PATH(''))
+								, 1, 1, ''
+							) as BillNumber
+							
  FROM  
    TBLCASE (NOLOCK)  
   INNER JOIN TBLPROVIDER (NOLOCK) AS TBLPROVIDER ON TBLCASE.PROVIDER_ID = TBLPROVIDER.Provider_Id and TBLCASE.DomainId=TBLPROVIDER.DomainId  
