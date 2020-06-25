@@ -2628,6 +2628,8 @@
     <Build Include="dbo\Tables\tblCaseID_Age_Details.sql" />
     <Build Include="dbo\Tables\tblStatusWise_CaseID_CNT.sql" />
     <Build Include="dbo\Tables\tblStatusWise_Age_Details.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\Check_DOA_For_DemandLetterWithAOB_Batch.sql" />
+    <Build Include="dbo\Stored Procedures\Procs2\GetCasesFiles_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Stored Procedures\Procs2\MotionType_Add.sql" />
