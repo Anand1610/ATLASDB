@@ -142,10 +142,15 @@ BEGIN
 				,Provider_Name
 				,tblprovider.Provider_GroupName
 				,InsuranceCompany_Name
-				,(CASE	WHEN Accident_Date IS NULL OR Accident_Date = '' THEN ''
-						ELSE convert(varchar(10), Accident_Date,101)
-						END
-				) AS Accident_Date
+
+
+				--,(CASE	WHEN Accident_Date IS NULL OR Accident_Date = '' THEN ''
+				--		ELSE convert(varchar(10), Accident_Date,101)
+				--		END
+				--) AS Accident_Date
+
+				,convert(varchar(10), Accident_Date,101) AS Accident_Date
+
 				,(CASE	WHEN tblCase.DateOfService_Start IS NULL OR tblCase.DateOfService_Start = '' THEN ''
 						ELSE convert(varchar(10), tblCase.DateOfService_Start,101)
 						END
@@ -714,10 +719,14 @@ BEGIN
 			,REPLACE(Provider_Name, char(9), '')  as Provider_Name
 			,tblprovider.Provider_GroupName
 			,InsuranceCompany_Name
-			,(CASE	WHEN Accident_Date IS NULL OR Accident_Date = '' THEN ''
-					ELSE convert(varchar(10), Accident_Date,101)
-					END
-			) AS Accident_Date
+			--,(CASE	WHEN Accident_Date IS NULL OR Accident_Date = '' THEN ''
+			--		ELSE convert(varchar(10), Accident_Date,101)
+			--		END
+			--) AS Accident_Date
+
+				,convert(varchar(10), Accident_Date,101)
+					 AS Accident_Date
+
 			,(CASE	WHEN tblCase.DateOfService_Start IS NULL OR tblCase.DateOfService_Start = '' THEN ''
 					ELSE convert(varchar(10), tblCase.DateOfService_Start,101)
 					END
