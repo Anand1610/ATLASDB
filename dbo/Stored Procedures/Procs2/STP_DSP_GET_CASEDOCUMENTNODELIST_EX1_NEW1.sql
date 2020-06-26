@@ -1,5 +1,4 @@
-﻿
---STP_DSP_GET_CASEDOCUMENTNODELIST_EX1_NEW1 'AF','AF19-204245',0,0        
+﻿--STP_DSP_GET_CASEDOCUMENTNODELIST_EX1_NEW1 'AF','AF19-204245',0,0        
 CREATE PROCEDURE [dbo].[STP_DSP_GET_CASEDOCUMENTNODELIST_EX1_NEW1]  -- [STP_DSP_GET_CASEDOCUMENTNODELIST_NEW] 'GLF','GLF18-10001',0,1111    
 (      
  @DomainId NVARCHAR(50),    
@@ -18,7 +17,24 @@ DECLARE @tblCaseNodeList AS TABLE
  NodeLevel INT,  
  Expanded INT,  
  BT_UPDATE int,
- NodeType varchar(12))    
+ NodeType varchar(12))   
+ 
+
+  declare @tagscase table
+ (
+   NodeId int index idx_node clustered,
+   ParentId int,
+   NodeIcon nvarchar(100),
+   NodeLevel int,
+   Expanded bit,
+   NodeType nvarchar(12),
+   NodeName nvarchar(600)
+ )
+ Insert into @tagscase(NodeId, ParentId, NodeIcon, NodeLevel, Expanded, NodeType, NodeName)
+ select T.NodeID, T.ParentID, T.NodeIcon, T.NodeLevel, T.Expanded, T.NodeType , T.NodeName
+ FROM       
+ tblTags T WITH(NOLOCK) WHERE CaseID=@CASEID and DomainId=@DomainId 
+
     
 IF @ISARCHIVED='0'     
 INSERT INTO @tblCaseNodeList       
@@ -46,7 +62,7 @@ t.NodeType
 	FROM       
    TBLDOCIMAGES I WITH(NOLOCK) INNER JOIN       
    tblImageTag IT WITH(NOLOCK) ON IT.ImageID=i.ImageID INNER JOIN       
-   tblTags T WITH(NOLOCK) ON T.NodeID=IT.TagID AND T.CaseID=@CASEID LEFT JOIN      
+   @tagscase T  ON T.NodeID=IT.TagID  LEFT JOIN      
    tblBasePath B WITH(NOLOCK) ON B.BasePathId = I.BasePathId     
    --tblApplicationSettings s ON s.parametername='DocumentUploadLocation'      
     WHERE I.DomainId = @DomainId    
@@ -85,8 +101,8 @@ t.NodeType
  FROM       
   TBLDOCIMAGES I WITH(NOLOCK) INNER JOIN       
   tblImageTag IT WITH(NOLOCK) ON IT.ImageID=i.ImageID INNER JOIN       
-  tblTags T WITH(NOLOCK) ON T.NodeID=IT.TagID and T.CaseID=@CASEID LEFT JOIN     
-   tblBasePath B WITH(NOLOCK) ON B.BasePathId = I.BasePathId       
+  @tagscase T  ON T.NodeID=IT.TagID  LEFT JOIN     
+  tblBasePath B WITH(NOLOCK) ON B.BasePathId = I.BasePathId       
   --tblApplicationSettings s ON s.parametername='ArchivedDocumentUploadLocation'    
    WHERE I.DomainId=@DomainId   
      ---Start of  changes for LSS-470 done on 5 APRIL 2020  By Tushar Chandgude
