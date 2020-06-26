@@ -69,7 +69,13 @@ BEGIN
           , ISNULL(@i_case_age,'')[case_age]
 		  , (select  ISNULL(convert(nvarchar,sum((Total_Collection+Pre_Interest)-(Deductible+Voluntary_AF))),'N/A') from tblTransactions tr WITH(NOLOCK) LEFT JOIN tbl_Voluntary_Payment VP WITH(NOLOCK) ON tr.Case_Id=VP.Case_Id AND VP.Transactions_Id=tr.Transactions_Id where tr.Case_Id=cas.Case_Id and tr.DomainId=cas.DomainId and tr.Transactions_Type in ('PreC','PreCToP')and VP.Payment_Type='V')[Voluntary_Payment]
 		  , (select ISNULL(convert(nvarchar,sum((Litigated_Collection+Litigated_Interest)-(Litigation_Fees+Court_Fees))),'N/A') from tblTransactions tr WITH(NOLOCK) LEFT JOIN tbl_Voluntary_Payment VP WITH(NOLOCK) ON tr.Case_Id=VP.Case_Id AND VP.Transactions_Id=tr.Transactions_Id where tr.Case_Id=cas.Case_Id and tr.DomainId=cas.DomainId and tr.Transactions_Type in ('C','I') and VP.Payment_Type='L')[Collection_Payment]
-		  , (Convert(decimal(18,2),ISNULL(cas.Claim_Amount, '0')) - Convert(decimal(18,2),ISNULL(cas.Paid_Amount, '0'))) as Total_Balance
+		  --, (Convert(decimal(18,2),ISNULL(cas.Claim_Amount, '0')) - Convert(decimal(18,2),ISNULL(cas.Paid_Amount, '0'))) as Total_Balance
+		   , (Convert(decimal(18,2),ISNULL(cas.Claim_Amount, 0.00)) - (Convert(decimal(18,2),ISNULL(cas.Paid_Amount, 0.00))) -
+		     Convert(decimal(18,2),ISNULL(cas.writeoff, 0.00))-
+		     Convert(decimal(18,2),ISNULL((select ISNULL(sum(ISNULL(tblTransactions.Transactions_Amount,0.00)),0) from tblTransactions with(nolock) where tblTransactions.DomainId=cas.DomainId and tblTransactions.Case_Id=cas.Case_Id and tblTransactions.Transactions_Type in ('C','I')),0.00))
+		    )
+		   as Total_Balance
+
 		  --, @Balance as Total_Balance
 		 --,(isnull(SUM(trmt.Claim_Amount),0) - isnull(SUM(trmt.Paid_Amount),0) - (select ISNULL(sum(Transactions_Amount),0) from tblTransactions tr where tr.Case_Id=cas.Case_Id and tr.DomainId=cas.DomainId and tr.Transactions_Type in ('C','I')))[Total_Balance]
      from tblcase cas (NOLOCK)
@@ -88,6 +94,7 @@ BEGIN
 	 , cas.Claim_Amount
 	 , cas.Fee_Schedule
 	 , cas.Paid_Amount
+	  , cas.WriteOff
       END
 	 ELSE
 	 BEGIN
@@ -105,7 +112,17 @@ BEGIN
           , ISNULL(@i_case_age,'')[case_age]
 		  , (select  ISNULL(convert(nvarchar,sum((Transactions_Amount))),'N/A') from tblTransactions tr  where tr.Case_Id=cas.Case_Id and tr.DomainId=cas.DomainId and tr.Transactions_Type in ('PreC','PreCToP'))[Voluntary_Payment]
 		  , (select ISNULL(convert(nvarchar,sum((Transactions_Amount))),'N/A') from tblTransactions tr  where tr.Case_Id=cas.Case_Id and tr.DomainId=cas.DomainId and tr.Transactions_Type in ('C','I'))[Collection_Payment]
-		  , (Convert(decimal(18,2),ISNULL(cas.Claim_Amount, '0')) - Convert(decimal(18,2),ISNULL(cas.Paid_Amount, '0')) - SUM(ISNULL(trmt.DeductibleAmount,0.00))) as Total_Balance
+		
+		  , (Convert(decimal(18,2),ISNULL(cas.Claim_Amount, 0.00)) - (Convert(decimal(18,2),ISNULL(cas.Paid_Amount, 0.00))) -
+		     Convert(decimal(18,2),ISNULL(cas.writeoff, 0.00))-
+		     Convert(decimal(18,2),ISNULL((select ISNULL(sum(ISNULL(tblTransactions.Transactions_Amount,0.00)),0) from tblTransactions with(nolock) where 
+			 tblTransactions.DomainId=cas.DomainId and tblTransactions.Case_Id=cas.Case_Id and tblTransactions.Transactions_Type in ('C','I')),0.00))
+		    )
+		   as Total_Balance
+		
+		-- , (Convert(decimal(18,2),ISNULL(cas.Claim_Amount, '0')) - Convert(decimal(18,2),ISNULL(cas.Paid_Amount, '0')) - SUM(ISNULL(trmt.DeductibleAmount,0.00))) as Total_Balance
+
+
 		 --, @Balance as Total_Balance
 		 --,(isnull(SUM(trmt.Claim_Amount),0) - isnull(SUM(trmt.Paid_Amount),0) - (select ISNULL(sum(Transactions_Amount),0) from tblTransactions tr where tr.Case_Id=cas.Case_Id and tr.DomainId=cas.DomainId and tr.Transactions_Type in ('C','I')))[Total_Balance]
      from tblcase cas (NOLOCK)
@@ -124,6 +141,7 @@ BEGIN
 	 , cas.Claim_Amount
 	 , cas.Fee_Schedule
 	 , cas.Paid_Amount
+	  , cas.WriteOff
 	 END    
           
 END
