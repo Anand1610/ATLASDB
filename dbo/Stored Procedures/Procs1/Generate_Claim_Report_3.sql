@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[Generate_Claim_Report_3]  -- Generate_Claim_Report_3 'AF', 0,0,10,50
+﻿CREATE PROCEDURE [dbo].[Generate_Claim_Report_3]  -- Generate_Claim_Report_3 'AF', 0,0,10,50
 	-- Add the parameters for the stored procedure here
 	@DomainID      VARCHAR(50),
 	@startIndex int =0,
@@ -402,6 +401,7 @@ outer apply (select isnull(transactions_amount,0.00) as pamnt from @VoluntaryPay
 where  rownum=1) 
 
 select     
+row_number() over(order by [ProviderGroup]) as [rownumber],
 TotalRowCount =count(1) over(),
 [File No.],
 [Patient],
@@ -715,7 +715,7 @@ outer apply (select isnull(transactions_amount,0.00) as pamnt from @VoluntaryPay
 where  rownum=1) 
 
 select     
-row_number() over(order by [ProviderGroup]) as [SR NO],
+row_number() over(order by [ProviderGroup]) as [rownumber],
 [File No.],
 [Patient],
 [ProviderGroup],
