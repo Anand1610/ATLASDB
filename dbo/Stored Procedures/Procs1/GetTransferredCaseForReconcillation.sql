@@ -25,10 +25,9 @@ BEGIN
 			TransferAmount = SUM(tre.Claim_Amount)
 	FROM	tblcase cas (NOLOCK) 
 	JOIN	tblTreatment tre (NOLOCK) on cas.case_id = tre.case_id and cas.domainid = tre.domainid
-	JOIN	XN_TEMP_GBB_ALL xn (NOLOCK) on tre.BILL_NUMBER = xn.BillNumber and tre.DomainId = xn.DomainId
+	JOIN	XN_TEMP_GBB_ALL xn (NOLOCK) on tre.BILL_NUMBER = xn.BillNumber and tre.DomainId = xn.DomainId and tre.case_id =xn.Transferd_Status 
 	JOIN	DomainAccounts da (NOLOCK) ON da.LawFirmID = xn.AssignedLawFirmID
-	WHERE	cas.case_id like 'ACT%'
-	AND		xn.GBB_Type = @GYBApplicationName
+	WHERE	xn.GBB_Type = @GYBApplicationName
 	AND		CAST(xn.DateOfTransferred as DATE) BETWEEN @StartDate AND @EndDate
 	GROUP	BY xn.AssignedLawFirmID,
 			da.LawFirmName,
@@ -48,9 +47,8 @@ BEGIN
 			xn.DateOfTransferred
 	FROM	tblcase cas (NOLOCK) 
 	JOIN	tblTreatment tre (NOLOCK) on cas.case_id = tre.case_id and cas.domainid = tre.domainid
-	JOIN	XN_TEMP_GBB_ALL xn (NOLOCK) on tre.BILL_NUMBER = xn.BillNumber and tre.DomainId = xn.DomainId
+	JOIN	XN_TEMP_GBB_ALL xn (NOLOCK) on tre.BILL_NUMBER = xn.BillNumber and tre.DomainId = xn.DomainId and tre.case_id =xn.Transferd_Status
 	JOIN	DomainAccounts da (NOLOCK) ON da.LawFirmID = xn.AssignedLawFirmID
-	WHERE	cas.case_id like 'ACT%'
-	AND		xn.GBB_Type = @GYBApplicationName
+	WHERE	xn.GBB_Type = @GYBApplicationName
 	AND		CAST(xn.DateOfTransferred as DATE) BETWEEN @StartDate AND @EndDate
 END

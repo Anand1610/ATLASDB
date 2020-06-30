@@ -67,30 +67,30 @@ BEGIN
   )  
   SELECT DISTINCT  XN.CompanyId,   
     XN.provider_id,   
-    @Gbb_Type,XN.DomainId    
+     xn.GBB_Type,XN.DomainId    
   FROM XN_TEMP_GBB_ALL XN (nolock)
-  LEFT OUTER JOIN  GreenBillsProviders GB (nolock) ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.provider_id=GB.SZ_OFFICE_ID and GB.Gbb_Type = @Gbb_Type  and XN.DomainId = GB.DomainID  
+  LEFT OUTER JOIN  GreenBillsProviders GB (nolock) ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.provider_id=GB.SZ_OFFICE_ID and GB.Gbb_Type = xn.GBB_Type  and XN.DomainId = GB.DomainID  
   WHERE GB.PROVIDER_ID IS NULL AND GB.SZ_COMPANY_ID IS NULL  
   
-  ----SELECT DISTINCT  XN.CompanyId, XN.provider_id, @Gbb_Type  FROM XN_TEMP_GBB_ALL XN  
-  ----LEFT OUTER JOIN  GreenBillsProviders GB ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.provider_id=GB.SZ_OFFICE_ID and GB.Gbb_Type = @Gbb_Type  
+  ----SELECT DISTINCT  XN.CompanyId, XN.provider_id, Gbb_Type  FROM XN_TEMP_GBB_ALL XN  
+  ----LEFT OUTER JOIN  GreenBillsProviders GB ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.provider_id=GB.SZ_OFFICE_ID and GB.Gbb_Type = xn. xn.GBB_Type  
   ----WHERE GB.PROVIDER_ID IS NULL AND GB.SZ_COMPANY_ID IS NOT NULL  
     
   --- UPDATE Provider as per RFA data  
   UPDATE XN_TEMP_GBB_ALL  
   SET  AtlasProviderID =  GB.PROVIDER_ID  
   FROM XN_TEMP_GBB_ALL XN  (nolock)
-  LEFT OUTER JOIN  GreenBillsProviders GB (nolock) ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.provider_id=GB.SZ_OFFICE_ID and GB.Gbb_Type = @Gbb_Type and XN.DomainId = GB.DomainID  
+  LEFT OUTER JOIN  GreenBillsProviders GB (nolock) ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.provider_id=GB.SZ_OFFICE_ID and GB.Gbb_Type = xn.GBB_Type and XN.DomainId = GB.DomainID  
   WHERE ISNULL(AtlasProviderID,'') = '' AND  GB.PROVIDER_ID IS NOT NULL  
   
   -- INSERT GBB Insurance MAPPING IN MASTER  
   INSERT INTO GreenBillsInsurance (SZ_COMPANY_ID, SZ_INSURANCE_ID, Gbb_Type,DomainId)  
-  SELECT DISTINCT  XN.CompanyId, XN.insurancecompanyid, @Gbb_Type,XN.DomainId  FROM XN_TEMP_GBB_ALL XN (nolock)
-  LEFT OUTER JOIN  GreenBillsInsurance GB (nolock) ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.insurancecompanyid=GB.SZ_INSURANCE_ID and GB.Gbb_Type = @Gbb_Type AND XN.DomainId = GB.DomainID   
+  SELECT DISTINCT  XN.CompanyId, XN.insurancecompanyid, xn.GBB_Type,XN.DomainId  FROM XN_TEMP_GBB_ALL XN (nolock)
+  LEFT OUTER JOIN  GreenBillsInsurance GB (nolock) ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.insurancecompanyid=GB.SZ_INSURANCE_ID and GB.Gbb_Type = xn.GBB_Type AND XN.DomainId = GB.DomainID   
   WHERE GB.INSURANCECOMPANY_ID IS NULL AND GB.SZ_COMPANY_ID IS NULL   
   
-  ----SELECT DISTINCT  XN.CompanyId, XN.insurancecompanyid, @Gbb_Type  FROM XN_TEMP_GBB_ALL XN  
-  ----LEFT OUTER JOIN  GreenBillsInsurance GB ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.insurancecompanyid=GB.SZ_INSURANCE_ID and GB.Gbb_Type = @Gbb_Type  
+  ----SELECT DISTINCT  XN.CompanyId, XN.insurancecompanyid, xn.GBB_Type  FROM XN_TEMP_GBB_ALL XN  
+  ----LEFT OUTER JOIN  GreenBillsInsurance GB ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.insurancecompanyid=GB.SZ_INSURANCE_ID and GB.Gbb_Type = xn.GBB_Type  
   ----WHERE GB.INSURANCECOMPANY_ID IS NULL AND GB.SZ_COMPANY_ID IS NOT NULL   
   
   
@@ -98,7 +98,7 @@ BEGIN
   UPDATE XN_TEMP_GBB_ALL  
   SET  AtlasInsuranceId =  GB.INSURANCECOMPANY_ID  
   FROM XN_TEMP_GBB_ALL XN  (nolock)
-  LEFT OUTER JOIN  GreenBillsInsurance GB (nolock) ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.insurancecompanyid=GB.SZ_INSURANCE_ID  and GB.Gbb_Type = @Gbb_Type and XN.DomainId = GB.DomainID  
+  LEFT OUTER JOIN  GreenBillsInsurance GB (nolock) ON XN.CompanyId = GB.SZ_COMPANY_ID AND XN.insurancecompanyid=GB.SZ_INSURANCE_ID  and GB.Gbb_Type = xn.GBB_Type and XN.DomainId = GB.DomainID  
   WHERE ISNULL(AtlasInsuranceId,'') = '' AND  GB.INSURANCECOMPANY_ID IS NOT NULL  
   
   
@@ -107,7 +107,4 @@ BEGIN
      
     
  END
-
-GO
-
 
