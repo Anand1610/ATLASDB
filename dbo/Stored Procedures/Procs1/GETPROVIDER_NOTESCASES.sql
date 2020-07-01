@@ -9,20 +9,16 @@ AS
 BEGIN  
 
 
-IF @BIT_NOTES_CASES = 0   and @IsExport=1 and @DomainId='BT'
+IF @BIT_NOTES_CASES = 0  and @IsExport=1 and @DomainId='BT'
 BEGIN
 
 select distinct 
    TBLCASE.CASE_ID as [Case Id],  
    TBLPROVIDER.Provider_Name as Provider,
    ISNULL(DBO.TBLCASE.INJUREDPARTY_FIRSTNAME, N'') + N'  ' + ISNULL(DBO.TBLCASE.INJUREDPARTY_LASTNAME, N'') AS Patient, 
-   (select top 1 isnull(account_number,'') from tbltreatment where Case_Id=tblcase.Case_ID) as [Account No],
    INSURANCECOMPANY_NAME as Insurer,  
    convert(nvarchar(12),tblcase.Accident_Date,101) as [Accident Date],  
-
-   STUFF(
-									(SELECT distinct ',' + BILL_NUMBER 
-										FROM tblTreatment(NOLOCK) T2
+   STUFF((SELECT distinct ',' + BILL_NUMBER FROM tblTreatment(NOLOCK) T2
 										WHERE TBLCASE.Case_Id = T2.Case_Id 
 										--ORDER BY BILL_NUMBER 
 										FOR XML PATH(''))
@@ -30,55 +26,27 @@ select distinct
 							) as [Bill Number],
    ISNULL(convert(varchar, tblCase.DateOfService_Start,101),'') as [DOS START],  
    ISNULL(convert(varchar, tblCase.DateOfService_End,101),'') as [DOS END],     
-   convert(decimal(38,2),isnull(tblcase.CLAIM_AMOUNT,0)) as [Claim Amt], 
-   tblcase.Fee_Schedule as [Fee Schedule],
-  
+   tblcase.Status, 
+   convert(decimal(38,2),isnull(tblcase.CLAIM_AMOUNT,0)) as [Claim Amount], 
    (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where (Transactions_type='PreC' OR Transactions_type='PrecTop'  )
-   and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as [Voluntary Payment], 
-
+   and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as [Voluntary Principal Payment], 
+   (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where (Transactions_type='PreI' 
+   OR Transactions_type='ID') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as [Voluntary Interest Payment],  
    CONVERT(FLOAT, ISNULL(DBO.TBLCASE.CLAIM_AMOUNT,0)) - CONVERT(FLOAT,ISNULL(DBO.TBLCASE.PAID_AMOUNT,0)) AS [Balance Pre-Arb],  
-
+   convert(decimal(38,2),ISNULL(TBLSETTLEMENTS.SETTLEMENT_AMOUNT,0.00)) AS [Settlement Amount] ,
    (select convert(decimal(38,2),isnull(sum(transactions_amount),0))
    from tbltransactions where   Transactions_Type='C' and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId and tblcase.case_id in (select case_id from tblSettlements 
    where  Case_Id=tblcase.Case_ID))
-   as [Principal Settlement Amount], 
+   as [Principal Received], 
 
-   (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where (Transactions_type='PreI' 
-   OR Transactions_type='I' OR Transactions_type='D')
+   (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where (
+   Transactions_type='I')
    
-   and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as [Total Interest Received],  
-    
-   tblcase.Status, 
-   tblcase.initial_status [initial status], 
-      DATEDIFF(DD,DATE_STATUS_CHANGED,GETDATE()) AS [Age in Current Status] , 
-	   convert (varchar(10),date_opened,101) as [File Received] ,  
-	    (select MAX(convert(varchar,Event_Date,101)) from tblEvent E (NOLOCK)  
-   inner join tblEventType T (NOLOCK) on E.EventTypeId = T.EventTypeId  
-   inner join tblEventStatus S (NOLOCK) on E.EventStatusId = S.EventStatusId  
-   WHERE EventStatusName in('AAA HEARING SET','MOTION') and Case_id =tblcase.Case_Id) AS [HEARING SET/MOTION],  
-   Convert(varchar,settlement_date,101) as  [Date Settled],  
-   convert(decimal(38,2),ISNULL(TBLSETTLEMENTS.SETTLEMENT_AMOUNT,0.00)) AS [Settlement Amt] ,
-   --(select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type IN ('PriC','C') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Principal_Received,  
-   (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type IN ('PreC','C') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as [Principal Received],  
-     [dbo].[fncGetNotesDesc](TBLCASE.CASE_ID) AS [Client Notes],  
-	 convert(varchar(10),(select top 1  isnull(Date_BillSent,'') from tbltreatment where Case_Id=tblcase.Case_ID),101) as [Date Bill Sent],
-    
-       
-   ISNULL(dbo.fncGetServiceType( TBLCASE.Case_ID),'') AS [Service Type]
+   and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as [Interest Received],  
+   DATEDIFF(DD,DATE_STATUS_CHANGED,GETDATE()) AS [Age in Current Status] , 
+   Convert(varchar,settlement_date,101) as  [Date Settled]
    
- 
-
-   
-   
- 
-
-  
- 
-  
-  
-  	
-							
- FROM  
+   FROM  
    TBLCASE (NOLOCK)  
   INNER JOIN TBLPROVIDER (NOLOCK) AS TBLPROVIDER ON TBLCASE.PROVIDER_ID = TBLPROVIDER.Provider_Id and TBLCASE.DomainId=TBLPROVIDER.DomainId  
   INNER JOIN TBLINSURANCECOMPANY (NOLOCK) as TBLINSURANCECOMPANY ON TBLCASE.INSURANCECOMPANY_ID = TBLINSURANCECOMPANY.INSURANCECOMPANY_ID and TBLCASE.DomainId=TBLINSURANCECOMPANY.DomainId  
@@ -192,7 +160,7 @@ END
    --(select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type IN ('PriC','C') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Principal_Received,  
    (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type IN ('PreC','C') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Principal_Received,  
    (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where (Transactions_type='PreI' 
-   OR Transactions_type='I' OR Transactions_type='D')
+   OR Transactions_type='ID')
    
    and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Interest_Received,  
    --(select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type='I' and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Interest_Received,  
@@ -206,6 +174,13 @@ END
 	 where  Case_Id=tblcase.Case_ID))
    as Principal_Settlement_Amount, 
 
+    (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where Transactions_type IN ('C') and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Principal_Received_C,  
+
+
+    (select convert(decimal(38,2),isnull(sum(transactions_amount),0)) from tbltransactions (NOLOCK) where (Transactions_type='I' 
+    )
+   
+   and Case_Id=tblcase.Case_ID and DomainId= tblcase.DomainId ) as Interest_Received_I,  
 
    ISNULL(DBO.TBLCASE.INJUREDPARTY_FIRSTNAME, N'') + N'  ' + ISNULL(DBO.TBLCASE.INJUREDPARTY_LASTNAME, N'') AS INJUREDPARTY_NAME,  
    TBLPROVIDER.Provider_Name,  
